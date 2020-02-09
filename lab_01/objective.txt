@@ -1,0 +1,1 @@
+Design an AST for the language described in description.txt. An example program is given in input.txt. Then, the AST design must be implemented as an ast Java package.
