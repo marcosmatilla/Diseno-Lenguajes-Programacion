@@ -1,5 +1,7 @@
 package parser;
 
+import java.nio.charset.CharacterCodingException;
+
 public class LexerHelper {
 	
 	public static int lexemeToInt(String str) {
@@ -20,6 +22,16 @@ public class LexerHelper {
 			System.out.println(e);
 		}
 		return -1.0;
+	}
+
+	public static char lexemeToChar(String str){
+		try{
+			return str.charAt(0);
+		}
+		catch (IllegalArgumentException e){
+			System.out.print(e);
+		}
+		return ' ';
 	}
 	// TODO: Implement the lexemeToChar and lexemeToReal methods
 	
