@@ -17,7 +17,8 @@ public class PmmParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		INT_CONSTANT=1, REAL_CONSTANT=2, REAL=3;
+		INT_CONSTANT=1, REAL_CONSTANT=2, REAL=3, ID=4, CHAR_CONSTANT=5, COMMENT=6, 
+		MULTIPLE_COMMENT=7, WHITE_SPACE=8, TAB=9, NEW_LINE=10;
 	public static final int
 		RULE_program = 0;
 	private static String[] makeRuleNames() {
@@ -29,12 +30,14 @@ public class PmmParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
+			null, null, null, null, null, null, null, null, "' '", "'\t'", "'\n'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "INT_CONSTANT", "REAL_CONSTANT", "REAL"
+			null, "INT_CONSTANT", "REAL_CONSTANT", "REAL", "ID", "CHAR_CONSTANT", 
+			"COMMENT", "MULTIPLE_COMMENT", "WHITE_SPACE", "TAB", "NEW_LINE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -89,6 +92,7 @@ public class PmmParser extends Parser {
 	}
 
 	public static class ProgramContext extends ParserRuleContext {
+		public TerminalNode MULTIPLE_COMMENT() { return getToken(PmmParser.MULTIPLE_COMMENT, 0); }
 		public ProgramContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -114,6 +118,8 @@ public class PmmParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
+			setState(2);
+			match(MULTIPLE_COMMENT);
 			}
 		}
 		catch (RecognitionException re) {
@@ -128,8 +134,8 @@ public class PmmParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\5\7\4\2\t\2\3\2\3"+
-		"\2\3\2\2\2\3\2\2\2\2\5\2\4\3\2\2\2\4\5\3\2\2\2\5\3\3\2\2\2\2";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\f\7\4\2\t\2\3\2\3"+
+		"\2\3\2\2\2\3\2\2\2\2\5\2\4\3\2\2\2\4\5\7\t\2\2\5\3\3\2\2\2\2";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

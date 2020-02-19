@@ -25,13 +25,20 @@ public class LexerHelper {
 	}
 
 	public static char lexemeToChar(String str){
-		try{
-			return str.charAt(0);
+		if(str.length()==3){ //'a'
+			return str.toCharArray()[1];
 		}
-		catch (IllegalArgumentException e){
-			System.out.print(e);
+		else if(str.equals("'\\n'")){
+			return '\n';
 		}
-		return ' ';
+		else if(str.equals("'\\t'")){
+			return '\t';
+		}
+		else{ // '\123'
+			String cadena = str.substring(2,str.length()-1);
+			char[] character = Character.toChars(Integer.parseInt(cadena));
+			return character[0];
+		}
 	}
 	// TODO: Implement the lexemeToChar and lexemeToReal methods
 	

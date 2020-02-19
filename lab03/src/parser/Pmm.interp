@@ -3,16 +3,30 @@ null
 null
 null
 null
+null
+null
+null
+null
+' '
+'\t'
+'\n'
 
 token symbolic names:
 null
 INT_CONSTANT
 REAL_CONSTANT
 REAL
+ID
+CHAR_CONSTANT
+COMMENT
+MULTIPLE_COMMENT
+WHITE_SPACE
+TAB
+NEW_LINE
 
 rule names:
 program
 
 
 atn:
-[3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 5, 7, 4, 2, 9, 2, 3, 2, 3, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 5, 2, 4, 3, 2, 2, 2, 4, 5, 3, 2, 2, 2, 5, 3, 3, 2, 2, 2, 2]
+[3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 12, 7, 4, 2, 9, 2, 3, 2, 3, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 5, 2, 4, 3, 2, 2, 2, 4, 5, 7, 9, 2, 2, 5, 3, 3, 2, 2, 2, 2]
