@@ -1,7 +1,69 @@
 grammar Pmm;
 
-program:
+program:variable_definition
        ;
+
+/* Reglas Sintactico*/
+variable_definition: variables ':' type ';'
+		;
+
+variables: ID
+		| variables ',' ID
+		;
+
+type: simple_type
+        | array
+        | struct
+        ;
+
+simple_type: 'int'
+    | 'double'
+    | 'char'
+    ;
+
+array: '['INT_CONSTANT']' type
+    ;
+
+struct: STRUCT '{' struct_body '}'
+	;
+
+struct_body: variable_definition
+		| struct_body variable_definition
+		;
+
+expression: ID
+            | INT_CONSTANT
+            | CHAR_CONSTANT
+            | REAL_CONSTANT
+            | '(' expression ')'
+            | '[' expression ']'
+            | expression '[' expression ']'
+            | expression '.' ID
+            | expression ('*'|'/') expression
+            | expression ('+'|'-') expression
+            | expression ('>'|'>='|'<'|'<='|'!='|'==') expression
+            | expression ('&&'|'||') expression
+            ;
+
+expressions: expression
+		| expressions ',' expression
+		;
+
+sent: expressions '=' expression ';'
+      ;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Reglas Lexico*/
 INT_CONSTANT: '0'
