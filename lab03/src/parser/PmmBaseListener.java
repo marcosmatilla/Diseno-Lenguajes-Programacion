@@ -23,6 +23,18 @@ public class PmmBaseListener implements PmmListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitProgram(PmmParser.ProgramContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpression(PmmParser.ExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpression(PmmParser.ExpressionContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

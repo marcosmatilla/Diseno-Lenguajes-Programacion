@@ -17,4 +17,14 @@ public interface PmmListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitProgram(PmmParser.ProgramContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PmmParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpression(PmmParser.ExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PmmParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpression(PmmParser.ExpressionContext ctx);
 }

@@ -16,4 +16,10 @@ public interface PmmVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitProgram(PmmParser.ProgramContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PmmParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpression(PmmParser.ExpressionContext ctx);
 }
