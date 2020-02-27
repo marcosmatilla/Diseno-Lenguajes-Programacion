@@ -1,6 +1,6 @@
 grammar Pmm;
 
-program:variable_definition
+program: ifElse
        ;
 
 /* Reglas Sintactico*/
@@ -24,12 +24,40 @@ simple_type: 'int'
 array: '['INT_CONSTANT']' type
     ;
 
-struct: STRUCT '{' struct_body '}'
+struct: 'struct' '{' struct_body '}'
 	;
 
 struct_body: variable_definition
 		| struct_body variable_definition
 		;
+
+sentence: funtion_invocation_as_statement
+        | while
+        | ifElse
+        | read
+        | write
+        | return
+        ;
+
+read: 'print' expressions ';'
+        ;
+
+write:
+        ;
+
+return: 'return' expressions ';'
+        ;
+
+ifElse: 'if ' expressions ':' sentence
+        | 'if' expressions 'else'
+        ;
+
+funtion_invocation_as_statement: ID '('expressions')'
+        ;
+
+while : 'while' expression ':' '{' sentence '}'
+        | 'while' expression ':' sentence
+        ;
 
 expression: ID
             | INT_CONSTANT
@@ -37,10 +65,14 @@ expression: ID
             | REAL_CONSTANT
             | '(' expression ')'
             | '[' expression ']'
+            | '!' expression
+            |'(' simple_type ')' expression
             | expression '[' expression ']'
             | expression '.' ID
+            | expression'.'expression
             | expression ('*'|'/') expression
             | expression ('+'|'-') expression
+            | expression ('%') expression
             | expression ('>'|'>='|'<'|'<='|'!='|'==') expression
             | expression ('&&'|'||') expression
             ;
@@ -48,22 +80,6 @@ expression: ID
 expressions: expression
 		| expressions ',' expression
 		;
-
-sent: expressions '=' expression ';'
-      ;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* Reglas Lexico*/
 INT_CONSTANT: '0'
