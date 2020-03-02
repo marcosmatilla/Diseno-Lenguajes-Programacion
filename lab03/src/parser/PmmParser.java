@@ -1,5 +1,8 @@
-// Generated from C:/Users/Marcos/Desktop/INFORMATICA/TERCERO/2/DLP/lab/DLP_1920/lab03/src/parser\Pmm.g4 by ANTLR 4.8
+// Generated from C:/Users/Marcos/Desktop/INFORMATICA/TERCERO/2/DLP/lab/DLP_1920/lab05/src/parser\Pmm.g4 by ANTLR 4.8
 package parser;
+
+
+
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -117,6 +120,7 @@ public class PmmParser extends Parser {
 	}
 
 	public static class ProgramContext extends ParserRuleContext {
+		public Program ast;
 		public MainContext main() {
 			return getRuleContext(MainContext.class,0);
 		}
@@ -1705,6 +1709,7 @@ public class PmmParser extends Parser {
 	}
 
 	public static class ExpressionContext extends ParserRuleContext {
+		public Expression ast;
 		public TerminalNode ID() { return getToken(PmmParser.ID, 0); }
 		public TerminalNode INT_CONSTANT() { return getToken(PmmParser.INT_CONSTANT, 0); }
 		public TerminalNode CHAR_CONSTANT() { return getToken(PmmParser.CHAR_CONSTANT, 0); }
