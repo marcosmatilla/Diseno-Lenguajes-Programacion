@@ -1,6 +1,8 @@
 grammar Pmm;
+@header{
 
-program: (function_definition|variable_definition)* main EOF
+}
+program returns [Program ast]: (function_definition|variable_definition)* main EOF
         ;
 
 /* Reglas Sintactico*/
@@ -96,9 +98,9 @@ while_statement : 'while' expression ':' '{' statements '}'
         ;
 
 /*Expression */
-expression: ID
+expression returns [Expression ast]: ID
             | INT_CONSTANT
-            | CHAR_CONSTANT
+            | CHAR_CONSTANT {ast = new CharLiteral($CHAR_CONSTANT.getLine(),$CHAR_CONSTANT.getCharPositionInLine() + 1, LexerHelper.lexemeToChar($CHAR_CONSTANT.text));}
             | REAL_CONSTANT
             | '(' expression ')'
             | '[' expression ']'
@@ -139,6 +141,7 @@ REAL_CONSTANT:REAL[Ee][+|-]?INT_CONSTANT
 REAL: INT_CONSTANT?'.'INT_CONSTANT
             | INT_CONSTANT'.'INT_CONSTANT?
             ;
+
 fragment LETTER: [a-zA-Z];
 fragment DIGIT: [0-9];
 

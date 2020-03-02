@@ -1,6 +1,8 @@
 grammar Pmm;
+@header{
 
-program: (function_definition|variable_definition)* main EOF
+}
+program returns [Program ast]: (function_definition|variable_definition)* main EOF
         ;
 
 /* Reglas Sintactico*/
@@ -96,7 +98,7 @@ while_statement : 'while' expression ':' '{' statements '}'
         ;
 
 /*Expression */
-expression: ID
+expression returns [Expression ast]: ID
             | INT_CONSTANT
             | CHAR_CONSTANT
             | REAL_CONSTANT
@@ -139,6 +141,7 @@ REAL_CONSTANT:REAL[Ee][+|-]?INT_CONSTANT
 REAL: INT_CONSTANT?'.'INT_CONSTANT
             | INT_CONSTANT'.'INT_CONSTANT?
             ;
+
 fragment LETTER: [a-zA-Z];
 fragment DIGIT: [0-9];
 
