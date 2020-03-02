@@ -1,6 +1,6 @@
 grammar Pmm;
 @header{
-
+    import ast.*;
 }
 program returns [Program ast]: (function_definition|variable_definition)* main EOF
         ;
@@ -99,9 +99,9 @@ while_statement : 'while' expression ':' '{' statements '}'
 
 /*Expression */
 expression returns [Expression ast]: ID
-            | INT_CONSTANT
-            | CHAR_CONSTANT {ast = new CharLiteral($CHAR_CONSTANT.getLine(),$CHAR_CONSTANT.getCharPositionInLine() + 1, LexerHelper.lexemeToChar($CHAR_CONSTANT.text));}
-            | REAL_CONSTANT
+            | INT_CONSTANT {$ast = new IntLiteral($INT_CONSTANT.getLine(), $INT_CONSTANT.getCharPositionInLine() + 1, LexerHelper.lexemeToInt($INT_CONSTANT.text));}
+            | CHAR_CONSTANT {$ast = new CharLiteral($CHAR_CONSTANT.getLine(),$CHAR_CONSTANT.getCharPositionInLine() + 1, LexerHelper.lexemeToChar($CHAR_CONSTANT.text));}
+            | REAL_CONSTANT {$ast = new RealLiteral($REAL_CONSTANT.getLine(), $REAL_CONSTANT.getCharPositionInLine() + 1, LexerHelper.lexemeToReal($REAL_CONSTANT.text));}
             | '(' expression ')'
             | '[' expression ']'
             | '!' expression
