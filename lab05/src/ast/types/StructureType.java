@@ -3,12 +3,25 @@ package ast.types;
 import java.util.ArrayList;
 
 public class StructureType extends AbstractType {
-    private Type type;
     private ArrayList<StructureField> structureFields;
 
-    public StructureType(int line, int column, Type type, ArrayList<StructureField> structureFields) {
+    public StructureType(int line, int column, ArrayList<StructureField> structureFields) {
         super(line, column);
-        this.type = type;
         this.structureFields = structureFields;
+    }
+
+    public ArrayList<StructureField> getStructureFields() {
+        return structureFields;
+    }
+
+    public void setStructureFields(ArrayList<StructureField> structureFields) {
+        this.structureFields = structureFields;
+    }
+
+    @Override
+    public String toString() {
+        return "StructureType{" +
+                "structureFields=" + structureFields +
+                '}';
     }
 }

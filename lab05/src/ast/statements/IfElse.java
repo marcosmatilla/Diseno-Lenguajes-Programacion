@@ -15,4 +15,43 @@ public class IfElse extends AbstractStatement {
         this.ifs = ifs;
         this.elses = elses;
     }
+
+    public IfElse(int line, int column, Expresion expresion, ArrayList<Statement> ifs) {
+        super(line, column);
+        this.expresion = expresion;
+        this.ifs = ifs;
+    }
+
+    public Expresion getExpresion() {
+        return expresion;
+    }
+
+    public void setExpresion(Expresion expresion) {
+        this.expresion = expresion;
+    }
+
+    public ArrayList<Statement> getIfs() {
+        return ifs;
+    }
+
+    public void setIfs(ArrayList<Statement> ifs) {
+        this.ifs = ifs;
+    }
+
+    public ArrayList<Statement> getElses() {
+        return elses;
+    }
+
+    public void setElses(ArrayList<Statement> elses) {
+        this.elses = elses;
+    }
+
+    @Override
+    public String toString() {
+        return "IfElse{" +
+                "expresion=" + expresion +
+                ", ifs=" + ifs +
+                ", elses=" + elses +
+                '}';
+    }
 }

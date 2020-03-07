@@ -1,5 +1,7 @@
 package ast;
 
+import ast.definitions.Definition;
+
 import java.util.ArrayList;
 
 public class Program implements ASTNode {
@@ -22,5 +24,14 @@ public class Program implements ASTNode {
     @Override
     public int getColumn() {
         return column;
+    }
+
+    @Override
+    public String toString() {
+        return "Program{" +
+                "line=" + line +
+                ", column=" + column +
+                ", definitions=" + definitions +
+                '}';
     }
 }

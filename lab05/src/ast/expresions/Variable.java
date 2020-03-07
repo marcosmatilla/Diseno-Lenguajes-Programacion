@@ -1,10 +1,24 @@
 package ast.expresions;
 
 public class Variable extends AbstractExpresion {
-    private InvokeFunction invokeFunction;
-
-    public Variable(int line, int column, InvokeFunction invokeFunction) {
+    private String name;
+    public Variable(int line, int column, String name) {
         super(line, column);
-        this.invokeFunction = invokeFunction;
+        this.name=name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Variable{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

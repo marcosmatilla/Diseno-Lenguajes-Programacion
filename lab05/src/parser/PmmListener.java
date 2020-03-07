@@ -41,15 +41,15 @@ public interface PmmListener extends ParseTreeListener {
 	 */
 	void exitFunction_definition(PmmParser.Function_definitionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PmmParser#parameter}.
+	 * Enter a parse tree produced by {@link PmmParser#variable}.
 	 * @param ctx the parse tree
 	 */
-	void enterParameter(PmmParser.ParameterContext ctx);
+	void enterVariable(PmmParser.VariableContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PmmParser#parameter}.
+	 * Exit a parse tree produced by {@link PmmParser#variable}.
 	 * @param ctx the parse tree
 	 */
-	void exitParameter(PmmParser.ParameterContext ctx);
+	void exitVariable(PmmParser.VariableContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PmmParser#parameters}.
 	 * @param ctx the parse tree
@@ -61,16 +61,6 @@ public interface PmmListener extends ParseTreeListener {
 	 */
 	void exitParameters(PmmParser.ParametersContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PmmParser#function_body}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunction_body(PmmParser.Function_bodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PmmParser#function_body}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunction_body(PmmParser.Function_bodyContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link PmmParser#variable_definition}.
 	 * @param ctx the parse tree
 	 */
@@ -81,25 +71,15 @@ public interface PmmListener extends ParseTreeListener {
 	 */
 	void exitVariable_definition(PmmParser.Variable_definitionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PmmParser#variable_definitions}.
+	 * Enter a parse tree produced by {@link PmmParser#function_body}.
 	 * @param ctx the parse tree
 	 */
-	void enterVariable_definitions(PmmParser.Variable_definitionsContext ctx);
+	void enterFunction_body(PmmParser.Function_bodyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PmmParser#variable_definitions}.
+	 * Exit a parse tree produced by {@link PmmParser#function_body}.
 	 * @param ctx the parse tree
 	 */
-	void exitVariable_definitions(PmmParser.Variable_definitionsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PmmParser#variables}.
-	 * @param ctx the parse tree
-	 */
-	void enterVariables(PmmParser.VariablesContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PmmParser#variables}.
-	 * @param ctx the parse tree
-	 */
-	void exitVariables(PmmParser.VariablesContext ctx);
+	void exitFunction_body(PmmParser.Function_bodyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PmmParser#type}.
 	 * @param ctx the parse tree
@@ -141,25 +121,25 @@ public interface PmmListener extends ParseTreeListener {
 	 */
 	void exitArray(PmmParser.ArrayContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PmmParser#struct}.
+	 * Enter a parse tree produced by {@link PmmParser#struct_type}.
 	 * @param ctx the parse tree
 	 */
-	void enterStruct(PmmParser.StructContext ctx);
+	void enterStruct_type(PmmParser.Struct_typeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PmmParser#struct}.
+	 * Exit a parse tree produced by {@link PmmParser#struct_type}.
 	 * @param ctx the parse tree
 	 */
-	void exitStruct(PmmParser.StructContext ctx);
+	void exitStruct_type(PmmParser.Struct_typeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PmmParser#struct_body}.
+	 * Enter a parse tree produced by {@link PmmParser#struct_fields}.
 	 * @param ctx the parse tree
 	 */
-	void enterStruct_body(PmmParser.Struct_bodyContext ctx);
+	void enterStruct_fields(PmmParser.Struct_fieldsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PmmParser#struct_body}.
+	 * Exit a parse tree produced by {@link PmmParser#struct_fields}.
 	 * @param ctx the parse tree
 	 */
-	void exitStruct_body(PmmParser.Struct_bodyContext ctx);
+	void exitStruct_fields(PmmParser.Struct_fieldsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PmmParser#statement}.
 	 * @param ctx the parse tree
@@ -181,25 +161,25 @@ public interface PmmListener extends ParseTreeListener {
 	 */
 	void exitStatements(PmmParser.StatementsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PmmParser#read}.
+	 * Enter a parse tree produced by {@link PmmParser#print}.
 	 * @param ctx the parse tree
 	 */
-	void enterRead(PmmParser.ReadContext ctx);
+	void enterPrint(PmmParser.PrintContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PmmParser#read}.
+	 * Exit a parse tree produced by {@link PmmParser#print}.
 	 * @param ctx the parse tree
 	 */
-	void exitRead(PmmParser.ReadContext ctx);
+	void exitPrint(PmmParser.PrintContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PmmParser#write}.
+	 * Enter a parse tree produced by {@link PmmParser#input}.
 	 * @param ctx the parse tree
 	 */
-	void enterWrite(PmmParser.WriteContext ctx);
+	void enterInput(PmmParser.InputContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PmmParser#write}.
+	 * Exit a parse tree produced by {@link PmmParser#input}.
 	 * @param ctx the parse tree
 	 */
-	void exitWrite(PmmParser.WriteContext ctx);
+	void exitInput(PmmParser.InputContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PmmParser#return_statement}.
 	 * @param ctx the parse tree
@@ -260,16 +240,6 @@ public interface PmmListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitInvokeFunction(PmmParser.InvokeFunctionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PmmParser#parameter_list}.
-	 * @param ctx the parse tree
-	 */
-	void enterParameter_list(PmmParser.Parameter_listContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PmmParser#parameter_list}.
-	 * @param ctx the parse tree
-	 */
-	void exitParameter_list(PmmParser.Parameter_listContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PmmParser#expressions}.
 	 * @param ctx the parse tree

@@ -55,13 +55,13 @@ public class PmmBaseListener implements PmmListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterParameter(PmmParser.ParameterContext ctx) { }
+	@Override public void enterVariable(PmmParser.VariableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitParameter(PmmParser.ParameterContext ctx) { }
+	@Override public void exitVariable(PmmParser.VariableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -79,18 +79,6 @@ public class PmmBaseListener implements PmmListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunction_body(PmmParser.Function_bodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFunction_body(PmmParser.Function_bodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterVariable_definition(PmmParser.Variable_definitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -103,25 +91,13 @@ public class PmmBaseListener implements PmmListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVariable_definitions(PmmParser.Variable_definitionsContext ctx) { }
+	@Override public void enterFunction_body(PmmParser.Function_bodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVariable_definitions(PmmParser.Variable_definitionsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterVariables(PmmParser.VariablesContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitVariables(PmmParser.VariablesContext ctx) { }
+	@Override public void exitFunction_body(PmmParser.Function_bodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -175,25 +151,25 @@ public class PmmBaseListener implements PmmListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStruct(PmmParser.StructContext ctx) { }
+	@Override public void enterStruct_type(PmmParser.Struct_typeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStruct(PmmParser.StructContext ctx) { }
+	@Override public void exitStruct_type(PmmParser.Struct_typeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStruct_body(PmmParser.Struct_bodyContext ctx) { }
+	@Override public void enterStruct_fields(PmmParser.Struct_fieldsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStruct_body(PmmParser.Struct_bodyContext ctx) { }
+	@Override public void exitStruct_fields(PmmParser.Struct_fieldsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -223,25 +199,25 @@ public class PmmBaseListener implements PmmListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRead(PmmParser.ReadContext ctx) { }
+	@Override public void enterPrint(PmmParser.PrintContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRead(PmmParser.ReadContext ctx) { }
+	@Override public void exitPrint(PmmParser.PrintContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterWrite(PmmParser.WriteContext ctx) { }
+	@Override public void enterInput(PmmParser.InputContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitWrite(PmmParser.WriteContext ctx) { }
+	@Override public void exitInput(PmmParser.InputContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -314,18 +290,6 @@ public class PmmBaseListener implements PmmListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitInvokeFunction(PmmParser.InvokeFunctionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterParameter_list(PmmParser.Parameter_listContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitParameter_list(PmmParser.Parameter_listContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

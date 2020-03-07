@@ -13,8 +13,24 @@ public abstract class AbstractExpresion implements Expresion {
         return line;
     }
 
+    public void setLine(int line) {
+        this.line = line;
+    }
+
     @Override
     public int getColumn() {
         return column;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
+    @Override
+    public String toString() {
+        return "AbstractExpresion{" +
+                "line=" + line +
+                ", column=" + column +
+                '}';
     }
 }
