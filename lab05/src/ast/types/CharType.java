@@ -10,3 +10,4 @@ public class CharType extends AbstractType {
         return "CharType{}";
     }
 }
+

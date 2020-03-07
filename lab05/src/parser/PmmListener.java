@@ -2,6 +2,13 @@
 package parser;
 
     import ast.*;
+    import ast.Program;
+    import ast.definitions.Definition;
+    import ast.definitions.FunctionDefinition;
+    import ast.definitions.VariableDefinition;
+    import ast.expresions.*;
+    import ast.statements.*;
+    import ast.types.*;
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -40,6 +47,16 @@ public interface PmmListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunction_definition(PmmParser.Function_definitionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PmmParser#function_type}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction_type(PmmParser.Function_typeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PmmParser#function_type}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction_type(PmmParser.Function_typeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PmmParser#variable}.
 	 * @param ctx the parse tree

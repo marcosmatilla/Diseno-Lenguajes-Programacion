@@ -1,21 +1,10 @@
 package ast.statements;
 
-public abstract class AbstractStatement implements Statement {
-    private int line;
-    private int column;
+import ast.AbstractASTNode;
+
+public abstract class AbstractStatement extends AbstractASTNode implements Statement {
 
     public AbstractStatement(int line, int column) {
-        this.line = line;
-        this.column = column;
-    }
-
-    @Override
-    public int getLine() {
-        return line;
-    }
-
-    @Override
-    public int getColumn() {
-        return column;
+        super(line, column);
     }
 }

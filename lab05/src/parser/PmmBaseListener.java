@@ -2,6 +2,13 @@
 package parser;
 
     import ast.*;
+    import ast.Program;
+    import ast.definitions.Definition;
+    import ast.definitions.FunctionDefinition;
+    import ast.definitions.VariableDefinition;
+    import ast.expresions.*;
+    import ast.statements.*;
+    import ast.types.*;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -50,6 +57,18 @@ public class PmmBaseListener implements PmmListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunction_definition(PmmParser.Function_definitionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunction_type(PmmParser.Function_typeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunction_type(PmmParser.Function_typeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -1,10 +1,13 @@
 package ast.expresions;
 
+import ast.statements.Statement;
+
 import java.util.ArrayList;
 
-public class InvokeFunction extends AbstractExpresion {
+public class InvokeFunction extends AbstractExpresion implements Statement {
     private ArrayList<Expresion> expresions;
     private Variable variable;
+
     public InvokeFunction(int line, int column, ArrayList<Expresion> expresions, Variable variable) {
         super(line, column);
         this.expresions = expresions;

@@ -1,12 +1,16 @@
 package ast.expresions;
 
 public class RealLiteral extends AbstractExpresion {
-    public RealLiteral(int line, int column) {
+    private double value;
+    public RealLiteral(int line, int column, double value) {
         super(line, column);
+        this.value=value;
     }
 
     @Override
     public String toString() {
-        return "RealLiteral{}";
+        return "RealLiteral{" +
+                "value=" + value +
+                '}';
     }
 }

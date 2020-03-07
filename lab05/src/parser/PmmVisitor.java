@@ -2,6 +2,13 @@
 package parser;
 
     import ast.*;
+    import ast.Program;
+    import ast.definitions.Definition;
+    import ast.definitions.FunctionDefinition;
+    import ast.definitions.VariableDefinition;
+    import ast.expresions.*;
+    import ast.statements.*;
+    import ast.types.*;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -31,6 +38,12 @@ public interface PmmVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunction_definition(PmmParser.Function_definitionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PmmParser#function_type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunction_type(PmmParser.Function_typeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PmmParser#variable}.
 	 * @param ctx the parse tree

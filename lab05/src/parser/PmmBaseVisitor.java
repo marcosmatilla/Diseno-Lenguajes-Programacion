@@ -2,6 +2,13 @@
 package parser;
 
     import ast.*;
+    import ast.Program;
+    import ast.definitions.Definition;
+    import ast.definitions.FunctionDefinition;
+    import ast.definitions.VariableDefinition;
+    import ast.expresions.*;
+    import ast.statements.*;
+    import ast.types.*;
 
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -35,6 +42,13 @@ public class PmmBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Pm
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitFunction_definition(PmmParser.Function_definitionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFunction_type(PmmParser.Function_typeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

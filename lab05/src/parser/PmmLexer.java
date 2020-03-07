@@ -2,6 +2,13 @@
 package parser;
 
     import ast.*;
+    import ast.Program;
+    import ast.definitions.Definition;
+    import ast.definitions.FunctionDefinition;
+    import ast.definitions.VariableDefinition;
+    import ast.expresions.*;
+    import ast.statements.*;
+    import ast.types.*;
 
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
