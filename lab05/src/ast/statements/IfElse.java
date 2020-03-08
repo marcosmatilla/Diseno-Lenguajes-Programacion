@@ -20,6 +20,7 @@ public class IfElse extends AbstractStatement {
         super(line, column);
         this.expresion = expresion;
         this.ifs = ifs;
+        this.elses=new ArrayList<Statement>();
     }
 
     public Expresion getExpresion() {
