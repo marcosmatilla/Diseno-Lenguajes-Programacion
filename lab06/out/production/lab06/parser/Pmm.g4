@@ -66,8 +66,8 @@ struct_type returns [StructureType ast]: st='struct' '{' struct_fields '}'  {$as
         ;
 
 struct_fields returns [ArrayList<StructureField> ast = new ArrayList<StructureField>()]: (id1=ID {$ast.add(new StructureField($id1.getLine(), $id1.getCharPositionInLine()+1, $id1.text, null));}
-                    (',' id2=ID{$ast.add(new StructureField($id2.getLine(), $id2.getCharPositionInLine()+1, $id2.text, null));})* ':' type {for (StructureField i: $ast) {i.setType($type.ast);}} ';')*
-            ;
+                    (',' id2=ID{new StructureField($id2.getLine(), $id2.getCharPositionInLine()+1, $id2.text, null);})* ':' type {for (StructureField i: $ast) {i.setType($type.ast);}} ';')*
+                     ;
 
 /*Statement*/
 statement returns [ArrayList<Statement> ast = new ArrayList<Statement>()]: assigment {$ast.add($assigment.ast);}

@@ -1,4 +1,4 @@
-// Generated from C:/Users/Marcos/Desktop/INFORMATICA/TERCERO/2/DLP/lab/DLP_1920/lab05/src/parser\Pmm.g4 by ANTLR 4.8
+// Generated from C:/Users/Marcos/Desktop/INFORMATICA/TERCERO/2/DLP/lab/DLP_1920/lab06/src/parser\Pmm.g4 by ANTLR 4.8
 package parser;
 
     import ast.*;
@@ -1173,7 +1173,7 @@ public class PmmParser extends Parser {
 					match(T__8);
 					setState(212);
 					((Struct_fieldsContext)_localctx).id2 = match(ID);
-					_localctx.ast.add(new StructureField(((Struct_fieldsContext)_localctx).id2.getLine(), ((Struct_fieldsContext)_localctx).id2.getCharPositionInLine()+1, (((Struct_fieldsContext)_localctx).id2!=null?((Struct_fieldsContext)_localctx).id2.getText():null), null));
+					new StructureField(((Struct_fieldsContext)_localctx).id2.getLine(), ((Struct_fieldsContext)_localctx).id2.getCharPositionInLine()+1, (((Struct_fieldsContext)_localctx).id2!=null?((Struct_fieldsContext)_localctx).id2.getText():null), null);
 					}
 					}
 					setState(218);
