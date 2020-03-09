@@ -13,7 +13,7 @@ def f(n: int,r: double): int {
   	p(); # Invocation as a statement
   	return (int)c1;
 }
-
+ 
 def main(): {
 	# Record
   	pair: struct {
