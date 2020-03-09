@@ -1,10 +1,12 @@
-import parser.*;
-
-import org.antlr.v4.runtime.*;
-
 import ast.Program;
+import ast.errorhandler.ErrorHandler;
 import introspector.model.IntrospectorModel;
 import introspector.view.IntrospectorTree;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import parser.PmmLexer;
+import parser.PmmParser;
 
 public class Main {
 
@@ -23,8 +25,15 @@ public class Main {
 		PmmParser parser = new PmmParser(tokens);
 		Program ast = parser.program().ast;
 
-		// * The AST is shown
-		IntrospectorModel model=new IntrospectorModel("Program", ast);
-		new IntrospectorTree("Introspector", model);
+		// * Check errors
+		if(ErrorHandler.getEH().AnyError()){
+			// * Show errors
+			ErrorHandler.getEH().showErrors(System.err);
+		}
+		else{
+			// * The AST is shown
+			IntrospectorModel model=new IntrospectorModel("Program", ast);
+			new IntrospectorTree("Introspector", model);
+		}
 	}
 }
