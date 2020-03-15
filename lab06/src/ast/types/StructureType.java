@@ -29,9 +29,7 @@ public class StructureType extends AbstractType {
     public void setStructureFields(ArrayList<StructureField> structureFields) {
         this.structureFields = structureFields;
     }
-
-
-
+    
     @Override
     public String toString() {
         return "StructureType{" +

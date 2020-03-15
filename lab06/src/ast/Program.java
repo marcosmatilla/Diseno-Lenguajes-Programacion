@@ -1,6 +1,7 @@
 package ast;
 
 import ast.definitions.Definition;
+import ast.types.ErrorType;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,18 @@ public class Program implements ASTNode {
         this.line = line;
         this.column = column;
         this.definitions = definitions;
+        check();
+    }
 
+    private void check() {
+        ArrayList<String> aux = new ArrayList<String>();
+        for(Definition d: definitions) {
+            if (aux.contains(d.getName())) {
+                new ErrorType(getLine(), getColumn(), "The variable definition " + "'" + d.getName()+ "'" + " has already been defined");
+            } else {
+                aux.add(d.getName());
+            }
+        }
     }
 
     @Override
