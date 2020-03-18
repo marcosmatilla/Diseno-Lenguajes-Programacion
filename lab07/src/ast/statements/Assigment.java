@@ -1,6 +1,7 @@
 package ast.statements;
 
 import ast.expresions.Expresion;
+import ast.visitors.Visitor;
 
 public class Assigment extends AbstractStatement {
     private Expresion expresion1;
@@ -34,5 +35,10 @@ public class Assigment extends AbstractStatement {
                 "expresion1=" + expresion1 +
                 ", expresion2=" + expresion2 +
                 '}';
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
     }
 }

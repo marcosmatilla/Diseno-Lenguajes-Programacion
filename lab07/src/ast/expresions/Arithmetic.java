@@ -1,9 +1,11 @@
 package ast.expresions;
 
+import ast.visitors.Visitor;
+
 public class Arithmetic extends AbstractExpresion {
-    private Expresion expresion1;
-    private Expresion expresion2;
-    private String operador;
+    public Expresion expresion1;
+    public Expresion expresion2;
+    public String operador;
 
     public Arithmetic(int line, int column, Expresion expresion1, Expresion expresion2, String operador) {
         super(line, column);
@@ -43,5 +45,10 @@ public class Arithmetic extends AbstractExpresion {
                 ", expresion2=" + expresion2 +
                 ", operador='" + operador + '\'' +
                 '}';
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
     }
 }

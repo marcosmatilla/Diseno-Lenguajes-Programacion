@@ -1,5 +1,7 @@
 package ast.types;
 
+import ast.visitors.Visitor;
+
 import java.util.ArrayList;
 
 public class StructureType extends AbstractType {
@@ -35,5 +37,10 @@ public class StructureType extends AbstractType {
         return "StructureType{" +
                 "structureFields=" + structureFields +
                 '}';
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
     }
 }

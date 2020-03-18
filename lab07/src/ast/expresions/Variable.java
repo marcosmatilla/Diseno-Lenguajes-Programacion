@@ -1,5 +1,7 @@
 package ast.expresions;
 
+import ast.visitors.Visitor;
+
 public class Variable extends AbstractExpresion {
     private String name;
     public Variable(int line, int column, String name) {
@@ -20,5 +22,10 @@ public class Variable extends AbstractExpresion {
         return "Variable{" +
                 "name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
     }
 }

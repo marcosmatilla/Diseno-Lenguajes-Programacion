@@ -1,5 +1,7 @@
 package ast.expresions;
 
+import ast.visitors.Visitor;
+
 public class Comparation extends AbstractExpresion {
     private Expresion expresion1;
     private Expresion expresion2;
@@ -43,5 +45,10 @@ public class Comparation extends AbstractExpresion {
                 ", expresion2=" + expresion2 +
                 ", operador='" + operador + '\'' +
                 '}';
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
     }
 }

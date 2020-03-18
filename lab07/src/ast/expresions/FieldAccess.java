@@ -1,5 +1,7 @@
 package ast.expresions;
 
+import ast.visitors.Visitor;
+
 public class FieldAccess extends AbstractExpresion {
     private Expresion expresion;
     private String campo;
@@ -32,5 +34,10 @@ public class FieldAccess extends AbstractExpresion {
                 "expresion=" + expresion +
                 ", campo='" + campo + '\'' +
                 '}';
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
     }
 }

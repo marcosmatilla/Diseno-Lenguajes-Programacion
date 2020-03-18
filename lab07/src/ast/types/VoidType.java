@@ -1,5 +1,7 @@
 package ast.types;
 
+import ast.visitors.Visitor;
+
 public class VoidType extends AbstractType {
     public VoidType(int line, int column) {
         super(line, column);
@@ -8,5 +10,10 @@ public class VoidType extends AbstractType {
     @Override
     public String toString() {
         return "VoidType{}";
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
     }
 }

@@ -1,6 +1,7 @@
 package ast.expresions;
 
 import ast.types.Type;
+import ast.visitors.Visitor;
 
 public class Cast extends AbstractExpresion {
     private Expresion expresion;
@@ -34,5 +35,10 @@ public class Cast extends AbstractExpresion {
                 "expresion=" + expresion +
                 ", type=" + type +
                 '}';
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
     }
 }

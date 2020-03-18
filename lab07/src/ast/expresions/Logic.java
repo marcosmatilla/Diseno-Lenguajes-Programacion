@@ -1,5 +1,7 @@
 package ast.expresions;
 
+import ast.visitors.Visitor;
+
 public class Logic extends AbstractExpresion {
     private Expresion expresion1;
     private Expresion expresion2;
@@ -34,5 +36,10 @@ public class Logic extends AbstractExpresion {
                 "expresion1=" + expresion1 +
                 ", expresion2=" + expresion2 +
                 '}';
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
     }
 }

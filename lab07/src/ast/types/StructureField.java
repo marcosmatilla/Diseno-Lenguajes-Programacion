@@ -1,6 +1,7 @@
 package ast.types;
 
 import ast.ASTNode;
+import ast.visitors.Visitor;
 
 public class StructureField implements ASTNode {
     private int line;
@@ -49,5 +50,10 @@ public class StructureField implements ASTNode {
                 ", name='" + name + '\'' +
                 ", type=" + type +
                 '}';
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
     }
 }

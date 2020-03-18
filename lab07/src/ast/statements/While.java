@@ -1,6 +1,7 @@
 package ast.statements;
 
 import ast.expresions.Expresion;
+import ast.visitors.Visitor;
 
 import java.util.ArrayList;
 
@@ -36,5 +37,10 @@ public class While extends AbstractStatement {
                 "expresion=" + expresion +
                 ", statements=" + statements +
                 '}';
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
     }
 }

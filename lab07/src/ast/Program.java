@@ -2,6 +2,7 @@ package ast;
 
 import ast.definitions.Definition;
 import ast.types.ErrorType;
+import ast.visitors.Visitor;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,10 @@ public class Program implements ASTNode {
         this.column = column;
         this.definitions = definitions;
         check();
+    }
+
+    public ArrayList<Definition> getDefinitions() {
+        return definitions;
     }
 
     private void check() {
@@ -45,5 +50,10 @@ public class Program implements ASTNode {
                 ", column=" + column +
                 ", definitions=" + definitions +
                 '}';
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
     }
 }

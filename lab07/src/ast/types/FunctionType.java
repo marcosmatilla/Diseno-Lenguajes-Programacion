@@ -1,6 +1,7 @@
 package ast.types;
 
 import ast.definitions.VariableDefinition;
+import ast.visitors.Visitor;
 
 import java.util.List;
 
@@ -36,5 +37,10 @@ public class FunctionType extends AbstractType {
                 "variableDefinitions=" + variableDefinitions +
                 ", returnType=" + returnType +
                 '}';
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
     }
 }

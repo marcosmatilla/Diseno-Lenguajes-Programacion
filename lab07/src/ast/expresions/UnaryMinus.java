@@ -1,5 +1,7 @@
 package ast.expresions;
 
+import ast.visitors.Visitor;
+
 public class UnaryMinus extends AbstractExpresion {
     private Expresion expresion;
 
@@ -21,5 +23,10 @@ public class UnaryMinus extends AbstractExpresion {
         return "UnaryMinus{" +
                 "expresion=" + expresion +
                 '}';
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
     }
 }

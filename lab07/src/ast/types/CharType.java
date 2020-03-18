@@ -1,5 +1,7 @@
 package ast.types;
 
+import ast.visitors.Visitor;
+
 public class CharType extends AbstractType {
     public CharType(int line, int column) {
         super(line, column);
@@ -8,6 +10,11 @@ public class CharType extends AbstractType {
     @Override
     public String toString() {
         return "CharType{}";
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
     }
 }
 

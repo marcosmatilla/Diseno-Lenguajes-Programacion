@@ -10,46 +10,48 @@ import ast.types.*;
 public interface Visitor {
 
     /* Expressions */
-    Object visit(Arithmetic arithmetic, Object object);
-    Object visit(Cast cast, Object object);
-    Object visit(CharLiteral charLiteral, Object object);
-    Object visit(Comparation comparation, Object object);
-    Object visit(FieldAccess fieldAccess, Object object);
-    Object visit(Indexer indexer, Object object);
-    Object visit(Logic logic, Object object);
-    Object visit(Negation negation, Object object);
-    Object visit(RealLiteral realLiteral, Object object);
-    Object visit(UnaryMinus unaryMinus, Object object);
-    Object visit(Variable variable, Object object);
+    Object visit(Arithmetic arithmetic, Object param);
+    Object visit(Cast cast, Object param);
+    Object visit(CharLiteral charLiteral, Object param);
+    Object visit(Comparation comparation, Object param);
+    Object visit(FieldAccess fieldAccess, Object param);
+    Object visit(Indexer indexer, Object param);
+    Object visit(Logic logic, Object param);
+    Object visit(Negation negation, Object param);
+    Object visit(RealLiteral realLiteral, Object param);
+    Object visit(UnaryMinus unaryMinus, Object param);
+    Object visit(Variable variable, Object param);
 
     /* Statement-Expression */
-    Object visit(InvokeFunction invokeFunction, Object object);
+    Object visit(InvokeFunction invokeFunction, Object param);
 
     /* Statement */
-    Object visit(Assigment assigment, Object object);
-    Object visit(IfElse ifElse, Object object);
-    Object visit(Input input, Object object);
-    Object visit(Print print, Object object);
-    Object visit(Return _return, Object object);
-    Object visit(While _while, Object object);
+    Object visit(Assigment assigment, Object param);
+    Object visit(IfElse ifElse, Object param);
+    Object visit(Input input, Object param);
+    Object visit(Print print, Object param);
+    Object visit(Return _return, Object param);
+    Object visit(While _while, Object param);
 
     /* Type */
-    Object visit(ArrayType arrayType, Object object);
-    Object visit(CharType charType, Object object);
-    Object visit(FunctionType functionType, Object object);
-    Object visit(IntType intType, Object object);
-    Object visit(RealType realType, Object object);
-    Object visit(StructureField structureField, Object object);
-    Object visit(StructureType structureType, Object object);
-    Object visit(VoidType voidType, Object object);
+    Object visit(ArrayType arrayType, Object param);
+    Object visit(CharType charType, Object param);
+    Object visit(FunctionType functionType, Object param);
+    Object visit(IntType intType, Object param);
+    Object visit(RealType realType, Object param);
+    Object visit(StructureField structureField, Object param);
+    Object visit(StructureType structureType, Object param);
+    Object visit(VoidType voidType, Object param);
 
     /* Error */
-    Object visit(ErrorType errorType, Object object);
+    Object visit(ErrorType errorType, Object param);
 
     /* Definition */
-    Object visit(FunctionDefinition functionDefinition, Object object);
-    Object visit(VariableDefinition variableDefinition, Object object);
+    Object visit(FunctionDefinition functionDefinition, Object param);
+    Object visit(VariableDefinition variableDefinition, Object param);
 
     /* Program */
-    Object visit(Program program, Object object);
+    Object visit(Program program, Object param);
+
+    Object visit(IntLiteral intLiteral, Object param);
 }

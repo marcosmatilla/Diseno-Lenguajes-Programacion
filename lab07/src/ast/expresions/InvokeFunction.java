@@ -1,6 +1,7 @@
 package ast.expresions;
 
 import ast.statements.Statement;
+import ast.visitors.Visitor;
 
 import java.util.ArrayList;
 
@@ -36,5 +37,10 @@ public class InvokeFunction extends AbstractExpresion implements Statement {
                 "expresions=" + expresions +
                 ", variable=" + variable +
                 '}';
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
     }
 }
