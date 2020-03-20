@@ -1,5 +1,6 @@
 import ast.Program;
 import ast.errorhandler.ErrorHandler;
+import ast.visitors.TypeVisitor;
 import introspector.model.IntrospectorModel;
 import introspector.view.IntrospectorTree;
 import org.antlr.v4.runtime.CharStream;
@@ -25,6 +26,8 @@ public class Main {
 		PmmParser parser = new PmmParser(tokens);
 		Program ast = parser.program().ast;
 
+		ast.accept(new TypeVisitor(), null);
+
 		// * Check errors
 		if(ErrorHandler.getEH().AnyError()){
 			// * Show errors
@@ -34,6 +37,7 @@ public class Main {
 			// * The AST is shown
 			IntrospectorModel model=new IntrospectorModel("Program", ast);
 			new IntrospectorTree("Introspector", model);
+
 		}
 	}
 }

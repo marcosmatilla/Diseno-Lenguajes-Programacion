@@ -31,7 +31,7 @@ public class ErrorHandler {
 
     public void showErrors(PrintStream ps){
         for(ErrorType e: errors){
-            ps.print(e.toString());
+            ps.print(e.toString() + "\n");
         }
     }
 

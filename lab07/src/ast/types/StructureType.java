@@ -17,7 +17,7 @@ public class StructureType extends AbstractType {
         ArrayList<String> aux = new ArrayList<String>();
         for(StructureField sf: structureFields) {
             if (aux.contains(sf.getName())) {
-                new ErrorType(getLine(), getColumn(), "The struct fild " + "'" + sf.getName()+ "'" + " has already been defined in the struct");
+                new ErrorType(getLine(), getColumn(), "The struct field " + "'" + sf.getName()+ "'" + " has already been defined in the struct");
             } else {
                 aux.add(sf.getName());
             }

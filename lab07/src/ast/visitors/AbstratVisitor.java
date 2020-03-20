@@ -50,6 +50,11 @@ public abstract class AbstratVisitor implements Visitor{
     }
 
     @Override
+    public Object visit(IntLiteral intLiteral, Object param) {
+        return null;
+    }
+
+    @Override
     public Object visit(Logic logic, Object param) {
         logic.getExpresion1().accept(this, param);
         logic.getExpresion2().accept(this, param);

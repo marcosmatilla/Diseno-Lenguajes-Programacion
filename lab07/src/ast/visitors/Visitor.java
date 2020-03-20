@@ -16,6 +16,7 @@ public interface Visitor {
     Object visit(Comparation comparation, Object param);
     Object visit(FieldAccess fieldAccess, Object param);
     Object visit(Indexer indexer, Object param);
+    Object visit(IntLiteral intLiteral, Object param);
     Object visit(Logic logic, Object param);
     Object visit(Negation negation, Object param);
     Object visit(RealLiteral realLiteral, Object param);
@@ -53,5 +54,4 @@ public interface Visitor {
     /* Program */
     Object visit(Program program, Object param);
 
-    Object visit(IntLiteral intLiteral, Object param);
 }

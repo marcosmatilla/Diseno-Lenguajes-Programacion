@@ -49,6 +49,8 @@ public class Arithmetic extends AbstractExpresion {
 
     @Override
     public Object accept(Visitor v, Object param) {
+
         return v.visit(this, param);
     }
+
 }
