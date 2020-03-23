@@ -1,7 +1,9 @@
 package symboltable;
 
-import java.util.*;
-import ast.Definition;
+import ast.definitions.Definition;
+
+import java.util.List;
+import java.util.Map;
 
 public class SymbolTable {
 	
@@ -17,11 +19,14 @@ public class SymbolTable {
 	}
 	
 	public boolean insert(Definition definition) {
+		return false;
 	}
 	
 	public Definition find(String id) {
+		return null;
 	}
 
 	public Definition findInCurrentScope(String id) {
+		return null;
 	}
 }
