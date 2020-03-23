@@ -1,6 +1,6 @@
 import ast.Program;
-import ast.errorhandler.ErrorHandler;
-import ast.visitors.TypeVisitor;
+import errorhandler.ErrorHandler;
+import ast.semantic.TypeVisitor;
 import introspector.model.IntrospectorModel;
 import introspector.view.IntrospectorTree;
 import org.antlr.v4.runtime.CharStream;
