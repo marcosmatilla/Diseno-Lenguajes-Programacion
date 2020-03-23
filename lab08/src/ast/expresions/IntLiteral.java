@@ -1,6 +1,6 @@
 package ast.expresions;
 
-import ast.visitors.Visitor;
+import visitors.Visitor;
 
 public class IntLiteral extends AbstractExpresion {
     private int value;

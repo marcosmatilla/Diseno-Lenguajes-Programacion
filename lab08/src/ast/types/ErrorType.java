@@ -1,7 +1,8 @@
 package ast.types;
 
+import ast.ASTNode;
 import errorhandler.ErrorHandler;
-import ast.visitors.Visitor;
+import visitors.Visitor;
 
 public class ErrorType extends AbstractType {
     private String message;
@@ -12,11 +13,16 @@ public class ErrorType extends AbstractType {
         ErrorHandler.getEH().AddError(this);
     }
 
+    public ErrorType(ASTNode node, String message) {
+        this(node.getLine(), node.getColumn(), message);
+    }
+
+
+
     @Override
     public String toString() {
-        return "ErrorType{" + "line=" + getLine() + " column=" + getColumn() +
-                " message='" + message + '\'' +
-                '}';
+        return "line=" + getLine() + " column=" + getColumn() +
+                " message='" + message + '\'' ;
     }
 
     @Override

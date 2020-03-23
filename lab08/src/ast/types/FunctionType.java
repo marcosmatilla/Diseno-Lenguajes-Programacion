@@ -1,7 +1,7 @@
 package ast.types;
 
 import ast.definitions.VariableDefinition;
-import ast.visitors.Visitor;
+import visitors.Visitor;
 
 import java.util.List;
 

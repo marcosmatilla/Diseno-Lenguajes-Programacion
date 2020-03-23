@@ -1,7 +1,7 @@
 package ast.expresions;
 
 import ast.statements.Statement;
-import ast.visitors.Visitor;
+import visitors.Visitor;
 
 import java.util.ArrayList;
 

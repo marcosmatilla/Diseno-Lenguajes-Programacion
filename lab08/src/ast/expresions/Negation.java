@@ -1,6 +1,6 @@
 package ast.expresions;
 
-import ast.visitors.Visitor;
+import visitors.Visitor;
 
 public class Negation extends AbstractExpresion {
     private Expresion expresion;

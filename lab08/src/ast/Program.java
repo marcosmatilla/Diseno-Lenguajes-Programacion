@@ -2,7 +2,7 @@ package ast;
 
 import ast.definitions.Definition;
 import ast.types.ErrorType;
-import ast.visitors.Visitor;
+import visitors.Visitor;
 
 import java.util.ArrayList;
 

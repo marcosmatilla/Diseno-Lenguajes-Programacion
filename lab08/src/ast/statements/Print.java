@@ -1,7 +1,7 @@
 package ast.statements;
 
 import ast.expresions.Expresion;
-import ast.visitors.Visitor;
+import visitors.Visitor;
 
 public class Print extends AbstractStatement {
     private Expresion expresion;

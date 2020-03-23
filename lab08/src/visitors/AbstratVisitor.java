@@ -1,4 +1,4 @@
-package ast.visitors;
+package visitors;
 
 import ast.Program;
 import ast.definitions.Definition;

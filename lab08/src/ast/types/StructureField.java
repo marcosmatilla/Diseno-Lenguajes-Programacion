@@ -1,7 +1,7 @@
 package ast.types;
 
 import ast.ASTNode;
-import ast.visitors.Visitor;
+import visitors.Visitor;
 
 public class StructureField implements ASTNode {
     private int line;

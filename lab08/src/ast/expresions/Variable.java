@@ -1,9 +1,11 @@
 package ast.expresions;
 
-import ast.visitors.Visitor;
+import ast.definitions.Definition;
+import visitors.Visitor;
 
 public class Variable extends AbstractExpresion {
-    private String name;
+    public String name;
+    public Definition definition;
     public Variable(int line, int column, String name) {
         super(line, column);
         this.name=name;

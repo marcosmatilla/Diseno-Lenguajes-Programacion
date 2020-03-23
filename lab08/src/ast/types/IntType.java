@@ -1,6 +1,6 @@
 package ast.types;
 
-import ast.visitors.Visitor;
+import visitors.Visitor;
 
 public class IntType extends AbstractType {
 

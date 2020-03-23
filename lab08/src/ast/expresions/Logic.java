@@ -1,6 +1,6 @@
 package ast.expresions;
 
-import ast.visitors.Visitor;
+import visitors.Visitor;
 
 public class Logic extends AbstractExpresion {
     private Expresion expresion1;

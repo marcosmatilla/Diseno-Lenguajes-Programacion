@@ -2,7 +2,7 @@ package ast.definitions;
 
 import ast.statements.Statement;
 import ast.types.Type;
-import ast.visitors.Visitor;
+import visitors.Visitor;
 
 import java.util.List;
 

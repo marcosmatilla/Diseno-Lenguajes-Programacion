@@ -2,7 +2,7 @@ package ast.definitions;
 
 import ast.statements.Statement;
 import ast.types.Type;
-import ast.visitors.Visitor;
+import visitors.Visitor;
 
 public class VariableDefinition extends AbstractDefinition implements Statement {
     private int line;

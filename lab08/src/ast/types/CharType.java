@@ -1,6 +1,6 @@
 package ast.types;
 
-import ast.visitors.Visitor;
+import visitors.Visitor;
 
 public class CharType extends AbstractType {
     public CharType(int line, int column) {

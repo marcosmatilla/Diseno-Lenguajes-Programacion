@@ -1,7 +1,7 @@
 package ast;
 
 
-import ast.visitors.Visitor;
+import visitors.Visitor;
 
 public interface ASTNode {
     int getLine();

@@ -1,6 +1,6 @@
 package ast.expresions;
 
-import ast.visitors.Visitor;
+import visitors.Visitor;
 
 public class Indexer extends AbstractExpresion {
     private Expresion expresion1;

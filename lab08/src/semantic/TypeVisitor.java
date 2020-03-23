@@ -1,10 +1,10 @@
-package ast.semantic;
+package semantic;
 
 import ast.expresions.*;
 import ast.statements.Assigment;
 import ast.statements.Input;
 import ast.types.ErrorType;
-import ast.visitors.AbstratVisitor;
+import visitors.AbstratVisitor;
 
 public class TypeVisitor extends AbstratVisitor {
     @Override
