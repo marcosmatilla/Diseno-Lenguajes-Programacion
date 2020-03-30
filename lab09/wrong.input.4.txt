@@ -3,7 +3,7 @@ i:int;
 
 def f(a:int):int {
   a:double;						# Error 1
-  return (int)34.5;				# Error 2
+  return 34.5;				# Error 2
 }
 
 def g(b:int, b:double): {	# Error 3
