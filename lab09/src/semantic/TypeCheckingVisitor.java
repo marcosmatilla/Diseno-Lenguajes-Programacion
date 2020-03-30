@@ -6,7 +6,7 @@ import ast.statements.Input;
 import ast.types.ErrorType;
 import visitors.AbstratVisitor;
 
-public class TypeVisitor extends AbstratVisitor {
+public class TypeCheckingVisitor extends AbstratVisitor {
     @Override
     public Object visit(Arithmetic arithmetic, Object param) {
         super.visit(arithmetic, param);
