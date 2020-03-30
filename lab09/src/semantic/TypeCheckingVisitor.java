@@ -1,15 +1,47 @@
 package semantic;
 
 import ast.expresions.*;
-import ast.statements.Assigment;
-import ast.statements.Input;
+import ast.statements.*;
+import ast.types.CharType;
 import ast.types.ErrorType;
+import ast.types.IntType;
+import ast.types.RealType;
 import visitors.AbstratVisitor;
 
 public class TypeCheckingVisitor extends AbstratVisitor {
     @Override
+    public Object visit(IfElse ifElse, Object param) {
+        ifElse.getExpresion().accept(this, param);
+        if(!ifElse.getExpresion().getType().isLogical())
+            ifElse.getExpresion().setType(new ErrorType(ifElse.getExpresion().getLine(), ifElse.getExpresion().getColumn(), "Logical Type Expected"));
+        ifElse.getIfs().forEach(x -> x.accept(this, param));
+
+        ifElse.getElses().forEach(x->x.accept(this, param));
+        return null;
+    }
+
+    @Override
+    public Object visit(While _while, Object param) {
+        _while.getExpresion().accept(this, param); //condicion
+
+        if(!_while.getExpresion().getType().isLogical())
+            _while.getExpresion().setType(new ErrorType( _while.getExpresion().getLine(), _while.getExpresion().getColumn(),"Logical Type Expected"));
+        for(Statement s: _while.getStatements()){ //cuerpo
+            s.accept(this, param);
+        }
+        return null;
+    }
+
+    @Override
     public Object visit(Arithmetic arithmetic, Object param) {
-        super.visit(arithmetic, param);
+        arithmetic.getExpresion1().accept(this, param);
+        arithmetic.getExpresion2().accept(this, param);
+
+        arithmetic.setType(arithmetic.getExpresion1().getType().arithmetic(arithmetic.getExpresion2().getType()));
+        if(arithmetic.getType()==null){
+            arithmetic.setType(new ErrorType(arithmetic.getLine(), arithmetic.getColumn(),"Uncompatible Types"));
+        }
+
         arithmetic.setLValue(false);
         return null;
     }
@@ -43,6 +75,7 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     public Object visit(CharLiteral charLiteral, Object param) {
         super.visit(charLiteral, param);
         charLiteral.setLValue(false);
+        charLiteral.setType(CharType.getInstance());
         return null;
     }
 
@@ -62,7 +95,8 @@ public class TypeCheckingVisitor extends AbstratVisitor {
 
     @Override
     public Object visit(Indexer indexer, Object param) {
-        super.visit(indexer, param);
+        indexer.getExpresion1().accept(this, param);
+        indexer.getExpresion2().accept(this, param);
         indexer.setLValue(true);
         return null;
     }
@@ -71,6 +105,7 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     public Object visit(IntLiteral intLiteral, Object param) {
         super.visit(intLiteral, param);
         intLiteral.setLValue(false);
+        intLiteral.setType(IntType.getInstance());
         return null;
     }
 
@@ -92,6 +127,7 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     public Object visit(RealLiteral realLiteral, Object param) {
         super.visit(realLiteral, param);
         realLiteral.setLValue(false);
+        realLiteral.setType(RealType.getInstance());
         return null;
     }
 
@@ -106,6 +142,7 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     public Object visit(Variable variable, Object param) {
         super.visit(variable, param);
         variable.setLValue(true);
+        variable.setType(variable.definition.getType());
         return null;
     }
 

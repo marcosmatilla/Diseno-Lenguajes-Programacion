@@ -4,9 +4,10 @@ import visitors.Visitor;
 
 public class IntLiteral extends AbstractExpresion {
     private int value;
+
     public IntLiteral(int line, int column, int value) {
         super(line, column);
-        this.value=value;
+        this.value = value;
     }
 
     @Override

@@ -27,7 +27,7 @@ public class Main {
 		Program ast = parser.program().ast;
 
 		ast.accept(new IdentificationVisitor(), null);
-		//ast.accept(new TypeVisitor(), null);
+		//ast.accept(new TypeCheckingVisitor(), null);
 
 		// * Check errors
 		if(ErrorHandler.getEH().AnyError()){
