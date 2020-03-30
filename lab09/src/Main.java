@@ -1,7 +1,5 @@
 import ast.Program;
 import errorhandler.ErrorHandler;
-import semantic.IdentificationVisitor;
-import semantic.TypeVisitor;
 import introspector.model.IntrospectorModel;
 import introspector.view.IntrospectorTree;
 import org.antlr.v4.runtime.CharStream;
@@ -9,6 +7,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import parser.PmmLexer;
 import parser.PmmParser;
+import semantic.IdentificationVisitor;
 
 public class Main {
 
@@ -28,7 +27,7 @@ public class Main {
 		Program ast = parser.program().ast;
 
 		ast.accept(new IdentificationVisitor(), null);
-		ast.accept(new TypeVisitor(), null);
+		//ast.accept(new TypeVisitor(), null);
 
 		// * Check errors
 		if(ErrorHandler.getEH().AnyError()){
