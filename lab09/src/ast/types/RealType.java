@@ -8,6 +8,10 @@ public class RealType extends AbstractType {
         super(0, 0);
     }
 
+    public RealType(int line, int column) {
+        super(line, column);
+    }
+
     private static RealType instance = new RealType();
     public static RealType getInstance() { return instance; }
 

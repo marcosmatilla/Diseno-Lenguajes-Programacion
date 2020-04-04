@@ -7,6 +7,10 @@ public class CharType extends AbstractType {
         super(0, 0);
     }
 
+    public CharType(int line, int column) {
+        super(line, column);
+    }
+
     private static CharType instance = new CharType();
     public static CharType getInstance() { return instance; }
 

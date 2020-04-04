@@ -1,4 +1,4 @@
-// Generated from C:/Users/Marcos/Desktop/INFORMATICA/TERCERO/2/DLP/lab/DLP_1920/lab08/src/parser\Pmm.g4 by ANTLR 4.8
+// Generated from C:/Users/Marcos/Desktop/INFORMATICA/TERCERO/2/DLP/lab/Diseno-Lenguajes-Programacion/lab09/src/parser\Pmm.g4 by ANTLR 4.8
 package parser;
 
     import ast.*;

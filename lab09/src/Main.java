@@ -8,6 +8,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import parser.PmmLexer;
 import parser.PmmParser;
 import semantic.IdentificationVisitor;
+import semantic.TypeCheckingVisitor;
 
 public class Main {
 
@@ -27,7 +28,7 @@ public class Main {
 		Program ast = parser.program().ast;
 
 		ast.accept(new IdentificationVisitor(), null);
-		//ast.accept(new TypeCheckingVisitor(), null);
+		ast.accept(new TypeCheckingVisitor(), null);
 
 		// * Check errors
 		if(ErrorHandler.getEH().AnyError()){
