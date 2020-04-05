@@ -50,7 +50,11 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     public Object visit(Assigment assigment, Object param) {
         super.visit(assigment, param);
         if(!assigment.getExpresion1().getLValue()){
-            new ErrorType(assigment.getLine(), assigment.getColumn(), "Expression " + assigment.getExpresion1().toString() + "is not lvalue");
+            new ErrorType(assigment.getLine(), assigment.getColumn(), "Expression " + assigment.getExpresion1().toString() + " is not lvalue");
+        }
+        assigment.getExpresion1().setType(assigment.getExpresion1().getType().promotesTo(assigment.getExpresion2().getType()));
+        if(assigment.getExpresion1().getType() == null){
+            assigment.getExpresion1().setType(new ErrorType(assigment.getLine(), assigment.getColumn(), "Right expression " + assigment.getExpresion2() + " can not be assigned for left expression "+ assigment.getExpresion1()+ " because their types"));
         }
         return null;
     }
@@ -59,7 +63,7 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     public Object visit(Input input, Object param) {
         super.visit(input, param);
         if(!input.getExpresion().getLValue()){
-            new ErrorType(input.getLine(), input.getColumn(), "Expression " + input.getExpresion().toString() + "is not lvalue");
+            new ErrorType(input.getLine(), input.getColumn(), "Expression " + input.getExpresion().toString() + " is not lvalue");
         }
         return null;
     }
@@ -140,9 +144,9 @@ public class TypeCheckingVisitor extends AbstratVisitor {
 
     @Override
     public Object visit(Variable variable, Object param) {
-        super.visit(variable, param);
         variable.setLValue(true);
-        variable.setType(variable.definition.getType());
+        if(variable.definition.getType()!=null)
+            variable.setType(variable.definition.getType());
         return null;
     }
 

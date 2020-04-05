@@ -14,6 +14,9 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     }
 
     @Override
+    public Type promotesTo(Type type) { return null; }
+
+    @Override
     public Type arithmetic(Type type) {
         return null;
     }

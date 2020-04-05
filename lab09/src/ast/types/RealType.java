@@ -28,6 +28,13 @@ public class RealType extends AbstractType {
     }
 
     @Override
+    public Type promotesTo(Type type) {
+        if(type instanceof ErrorType || type instanceof RealType)
+            return type;
+        return null;
+    }
+
+    @Override
     public Object accept(Visitor v, Object param) {
         return v.visit(this, param);
     }

@@ -7,6 +7,8 @@ public class CharType extends AbstractType {
         super(0, 0);
     }
 
+
+
     public CharType(int line, int column) {
         super(line, column);
     }
@@ -22,6 +24,13 @@ public class CharType extends AbstractType {
     @Override
     public Type arithmetic(Type type) {
         if(type.equals(CharType.getInstance()) || type instanceof ErrorType)
+            return type;
+        return null;
+    }
+
+    @Override
+    public Type promotesTo(Type type) {
+        if(type instanceof CharType || type instanceof ErrorType)
             return type;
         return null;
     }
