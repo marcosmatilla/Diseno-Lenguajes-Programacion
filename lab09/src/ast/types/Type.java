@@ -7,4 +7,6 @@ public interface Type extends ASTNode {
     Type arithmetic(Type type);
 
     Type promotesTo(Type type);
+
+    Type dot(String campo);
 }

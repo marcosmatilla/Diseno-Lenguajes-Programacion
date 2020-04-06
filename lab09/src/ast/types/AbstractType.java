@@ -20,4 +20,7 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     public Type arithmetic(Type type) {
         return null;
     }
+
+    @Override
+    public Type dot(String campo) { return null; }
 }

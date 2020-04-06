@@ -42,6 +42,8 @@ public class StructureField implements ASTNode {
         this.type = type;
     }
 
+
+
     @Override
     public String toString() {
         return "StructureField{" +

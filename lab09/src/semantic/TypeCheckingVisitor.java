@@ -93,6 +93,9 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     @Override
     public Object visit(FieldAccess fieldAccess, Object param) {
         super.visit(fieldAccess, param);
+        fieldAccess.getExpresion().setType(fieldAccess.getExpresion().getType().dot(fieldAccess.getCampo()));
+        if(fieldAccess.getType() == null)
+            fieldAccess.getExpresion().setType(new ErrorType(fieldAccess.getLine(), fieldAccess.getColumn(), "Field " + "'" + fieldAccess.getCampo()  + "'" + " not defined"));
         fieldAccess.setLValue(true);
         return null;
     }

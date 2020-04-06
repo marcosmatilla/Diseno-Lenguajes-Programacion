@@ -9,5 +9,4 @@ public interface Expresion extends ASTNode {
     boolean getLValue();
     void setType(Type type);
     Type getType();
-
 }
