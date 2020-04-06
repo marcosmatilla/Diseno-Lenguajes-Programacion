@@ -52,9 +52,13 @@ public class TypeCheckingVisitor extends AbstratVisitor {
         if (!assigment.getExpresion1().getLValue()) {
             new ErrorType(assigment.getLine(), assigment.getColumn(), "Expression " + assigment.getExpresion1().toString() + " is not lvalue");
         }
-        assigment.getExpresion1().setType(assigment.getExpresion1().getType().promotesTo(assigment.getExpresion2().getType()));
-        if (assigment.getExpresion1().getType() == null) {
-            assigment.getExpresion1().setType(new ErrorType(assigment.getLine(), assigment.getColumn(), "Right expression " + assigment.getExpresion2() + " can not be assigned for left expression " + assigment.getExpresion1() + " because their types"));
+        if (assigment.getExpresion1().getType().promotesTo(assigment.getExpresion2().getType()) == null) {
+            if (assigment.getExpresion1().getType() instanceof ErrorType) {
+
+            } else {
+                assigment.getExpresion1().setType(new ErrorType(assigment.getLine(), assigment.getColumn(), "Could not perform assignment of types " + assigment.getExpresion1().getType() + " and " + assigment.getExpresion2().getType()));
+
+            }
         }
         return null;
     }
@@ -73,7 +77,7 @@ public class TypeCheckingVisitor extends AbstratVisitor {
         super.visit(cast, param);
         cast.setLValue(false);
         cast.setType(cast.getExpresion().getType().canBeCastTo(cast.getType()));
-        if(cast.getType() == null)
+        if (cast.getType() == null)
             cast.setType(new ErrorType(cast.getLine(), cast.getColumn(), "The expression " + "'" + cast.getExpresion() + "'" + " can not be casted to " + "'" + cast.getType() + "'"));
         return null;
     }
@@ -110,7 +114,12 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     public Object visit(Indexer indexer, Object param) {
         indexer.getExpresion1().accept(this, param);
         indexer.getExpresion2().accept(this, param);
+
         indexer.setLValue(true);
+
+        indexer.setType(indexer.getExpresion1().getType().squareBrackets(indexer.getExpresion2().getType()));
+        if (indexer.getType() == null)
+            indexer.setType(new ErrorType(indexer.getLine(), indexer.getColumn(), "Invalid access array"));
         return null;
     }
 
@@ -156,7 +165,7 @@ public class TypeCheckingVisitor extends AbstratVisitor {
         super.visit(unaryMinus, param);
         unaryMinus.setLValue(false);
         unaryMinus.setType(unaryMinus.getExpresion().getType().arithmetic());
-        if(unaryMinus.getType() == null)
+        if (unaryMinus.getType() == null)
             unaryMinus.setType(new ErrorType(unaryMinus.getLine(), unaryMinus.getColumn(), "Expression " + "'" + unaryMinus.getExpresion() + "'" + " can not use unary minus"));
         return null;
     }
@@ -183,10 +192,10 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     @Override
     public Object visit(Return _return, Object returnType) { //param -> returnType
         super.visit(_return, returnType);
-        if(_return.getExpresion().getType().getClass() != returnType.getClass()){
-            new ErrorType(_return.getLine(), _return.getColumn(), "Return type does not coincide was expected " + "'" + returnType + "'" + " and received " + "'" +_return.getExpresion().getType() + "'");
+        if (_return.getExpresion().getType().getClass() != returnType.getClass()) {
+            new ErrorType(_return.getLine(), _return.getColumn(), "Return type does not coincide was expected " + "'" + returnType + "'" + " and received " + "'" + _return.getExpresion().getType() + "'");
         }
-        if(!_return.getExpresion().getType().isBuiltInType()){
+        if (!_return.getExpresion().getType().isBuiltInType()) {
             new ErrorType(_return.getLine(), _return.getColumn(), "Return type must be built in type");
         }
         return null;

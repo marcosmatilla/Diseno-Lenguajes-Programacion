@@ -29,6 +29,14 @@ public class ArrayType extends AbstractType {
     }
 
     @Override
+    public Type squareBrackets(Type type) {
+        if(type instanceof IntType){
+            return this.getType();
+        }
+        return null;
+    }
+
+    @Override
     public String toString() {
         return "ArrayType{" +
                 "type=" + type +

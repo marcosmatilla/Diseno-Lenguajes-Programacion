@@ -17,8 +17,6 @@ public class ErrorType extends AbstractType {
         this(node.getLine(), node.getColumn(), message);
     }
 
-
-
     @Override
     public String toString() {
         return "line=" + getLine() + " column=" + getColumn() +
