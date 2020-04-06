@@ -1,8 +1,10 @@
 package ast.types;
 
 import ast.definitions.VariableDefinition;
+import ast.expresions.Expresion;
 import visitors.Visitor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FunctionType extends AbstractType {
@@ -29,6 +31,22 @@ public class FunctionType extends AbstractType {
 
     public void setReturnType(Type returnType) {
         this.returnType = returnType;
+    }
+
+    @Override
+    public Type parenthesis(ArrayList<Expresion> expressions) {
+        int sizeExpressions =  expressions.size();
+        int sizeVariableDefinitions = variableDefinitions.size();
+        if(sizeExpressions!=sizeVariableDefinitions){ //Comprobamos que los el numero de parametros que pasamos coincida
+            return null;
+        }
+        for(int i=0; i < expressions.size(); i++) {
+            if(expressions.get(i).getType()!=variableDefinitions.get(i).getType()) {
+                return null;
+            }
+        }
+        return this;
+
     }
 
     @Override

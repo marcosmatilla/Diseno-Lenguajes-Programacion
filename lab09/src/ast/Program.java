@@ -15,13 +15,14 @@ public class Program implements ASTNode {
         this.line = line;
         this.column = column;
         this.definitions = definitions;
-        check();
+        //check();
     }
 
     public ArrayList<Definition> getDefinitions() {
         return definitions;
     }
 
+    /*
     private void check() {
         ArrayList<String> aux = new ArrayList<String>();
         for(Definition d: definitions) {
@@ -32,6 +33,7 @@ public class Program implements ASTNode {
             }
         }
     }
+    */
 
     @Override
     public int getLine() {

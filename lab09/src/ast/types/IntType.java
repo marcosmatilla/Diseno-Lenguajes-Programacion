@@ -16,16 +16,6 @@ public class IntType extends AbstractType {
     public static IntType getInstance() { return instance; }
 
     @Override
-    public String toString() {
-        return "int";
-    }
-
-    @Override
-    public Object accept(Visitor v, Object param) {
-        return v.visit(this, param);
-    }
-
-    @Override
     public boolean isLogical() {
         return true;
     }
@@ -50,4 +40,44 @@ public class IntType extends AbstractType {
             return type;
         return null;
     }
+
+    @Override
+    public Type comparasion(Type type) {
+        if(type instanceof IntType)
+            return type;
+        return null;
+    }
+
+    @Override
+    public Type logic() {
+        return IntType.getInstance();
+    }
+
+    @Override
+    public boolean isBuiltInType() {
+        return true;
+    }
+
+    @Override
+    public Type canBeCastTo(Type type) {
+        if(type.isBuiltInType())
+            return type;
+        return null;
+    }
+
+    @Override
+    public Type arithmetic() {
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "int";
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
+    }
+
 }

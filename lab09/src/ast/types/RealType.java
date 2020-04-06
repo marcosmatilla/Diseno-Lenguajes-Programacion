@@ -35,6 +35,30 @@ public class RealType extends AbstractType {
     }
 
     @Override
+    public Type comparasion(Type type) {
+        if(type instanceof RealType)
+            return IntType.getInstance();
+        return null;
+    }
+
+    @Override
+    public boolean isBuiltInType() {
+        return true;
+    }
+
+    @Override
+    public Type canBeCastTo(Type type) {
+        if(type.isBuiltInType())
+            return type;
+        return null;
+    }
+
+    @Override
+    public Type arithmetic() {
+        return this;
+    }
+
+    @Override
     public Object accept(Visitor v, Object param) {
         return v.visit(this, param);
     }

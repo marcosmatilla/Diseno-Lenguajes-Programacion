@@ -7,8 +7,6 @@ public class CharType extends AbstractType {
         super(0, 0);
     }
 
-
-
     public CharType(int line, int column) {
         super(line, column);
     }
@@ -31,6 +29,18 @@ public class CharType extends AbstractType {
     @Override
     public Type promotesTo(Type type) {
         if(type instanceof CharType || type instanceof ErrorType)
+            return type;
+        return null;
+    }
+
+    @Override
+    public boolean isBuiltInType() {
+        return true;
+    }
+
+    @Override
+    public Type canBeCastTo(Type type) {
+        if(type.isBuiltInType())
             return type;
         return null;
     }
