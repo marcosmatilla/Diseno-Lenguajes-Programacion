@@ -39,7 +39,7 @@ public class TypeCheckingVisitor extends AbstratVisitor {
 
         arithmetic.setType(arithmetic.getExpresion1().getType().arithmetic(arithmetic.getExpresion2().getType()));
         if(arithmetic.getType()==null){
-            arithmetic.setType(new ErrorType(arithmetic.getLine(), arithmetic.getColumn(),"Uncompatible Types"));
+            arithmetic.setType(new ErrorType(arithmetic.getLine(), arithmetic.getColumn(),"Incompatible types"));
         }
 
         arithmetic.setLValue(false);
@@ -120,6 +120,10 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     public Object visit(Logic logic, Object param) {
         super.visit(logic, param);
         logic.setLValue(false);
+        logic.getExpresion1().setType(logic.getExpresion1().getType().logic(logic.getExpresion2().getType()));
+        if(logic.getExpresion1().getType() == null){
+            logic.getExpresion1().setType(new ErrorType(logic.getLine(), logic.getColumn(), "Incompatible types"));
+        }
         return null;
     }
 

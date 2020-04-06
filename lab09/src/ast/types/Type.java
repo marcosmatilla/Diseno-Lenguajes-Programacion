@@ -9,4 +9,6 @@ public interface Type extends ASTNode {
     Type promotesTo(Type type);
 
     Type dot(String campo);
+
+    Type logic(Type type);
 }

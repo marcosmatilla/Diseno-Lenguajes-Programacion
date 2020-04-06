@@ -23,4 +23,9 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
 
     @Override
     public Type dot(String campo) { return null; }
+
+    @Override
+    public Type logic(Type type) {
+        return null;
+    }
 }
