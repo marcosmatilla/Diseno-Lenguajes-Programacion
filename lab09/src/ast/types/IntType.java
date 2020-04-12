@@ -22,7 +22,7 @@ public class IntType extends AbstractType {
 
     @Override
     public Type arithmetic(Type type) {
-        if(type.equals(IntType.getInstance()) || type instanceof ErrorType)
+        if(type instanceof IntType || type instanceof ErrorType)
             return type;
         return null;
     }

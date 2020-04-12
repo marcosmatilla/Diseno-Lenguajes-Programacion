@@ -24,6 +24,11 @@ public class ErrorType extends AbstractType {
     }
 
     @Override
+    public Type promotesTo(Type type) {
+        return this;
+    }
+
+    @Override
     public Object accept(Visitor v, Object param) {
         return v.visit(this, param);
     }

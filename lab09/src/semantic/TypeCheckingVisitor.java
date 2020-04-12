@@ -48,17 +48,14 @@ public class TypeCheckingVisitor extends AbstratVisitor {
 
     @Override
     public Object visit(Assigment assigment, Object param) {
-        super.visit(assigment, param);
+        assigment.getExpresion1().accept(this,param);
+        assigment.getExpresion2().accept(this,param);
         if (!assigment.getExpresion1().getLValue()) {
             new ErrorType(assigment.getLine(), assigment.getColumn(), "Expression " + assigment.getExpresion1().toString() + " is not lvalue");
         }
-        if (assigment.getExpresion1().getType().promotesTo(assigment.getExpresion2().getType()) == null) {
-            if (assigment.getExpresion1().getType() instanceof ErrorType) {
 
-            } else {
-                assigment.getExpresion1().setType(new ErrorType(assigment.getLine(), assigment.getColumn(), "Could not perform assignment of types " + assigment.getExpresion1().getType() + " and " + assigment.getExpresion2().getType()));
-
-            }
+        if (assigment.getExpresion2().getType().promotesTo(assigment.getExpresion1().getType()) == null) {
+            assigment.getExpresion1().setType(new ErrorType(assigment.getLine(), assigment.getColumn(), "Could not perform assignment of types " + assigment.getExpresion1().getType() + " and " + assigment.getExpresion2().getType()));
         }
         return null;
     }
