@@ -903,7 +903,7 @@ public class PmmParser extends Parser {
 				{
 				setState(184);
 				((Simple_typeContext)_localctx).i = match(T__9);
-				((Simple_typeContext)_localctx).ast =  IntType.getInstance();
+				((Simple_typeContext)_localctx).ast =  new IntType(((Simple_typeContext)_localctx).i.getLine(), ((Simple_typeContext)_localctx).i.getCharPositionInLine() + 1);
 				}
 				break;
 			case T__10:
@@ -911,7 +911,7 @@ public class PmmParser extends Parser {
 				{
 				setState(186);
 				((Simple_typeContext)_localctx).d = match(T__10);
-				((Simple_typeContext)_localctx).ast =  RealType.getInstance();
+				((Simple_typeContext)_localctx).ast =  new RealType(((Simple_typeContext)_localctx).d.getLine(), ((Simple_typeContext)_localctx).d.getCharPositionInLine() + 1);
 				}
 				break;
 			case T__11:
@@ -919,7 +919,7 @@ public class PmmParser extends Parser {
 				{
 				setState(188);
 				((Simple_typeContext)_localctx).c = match(T__11);
-				((Simple_typeContext)_localctx).ast =  CharType.getInstance();
+				((Simple_typeContext)_localctx).ast =  new CharType(((Simple_typeContext)_localctx).c.getLine(), ((Simple_typeContext)_localctx).c.getCharPositionInLine() + 1);
 				}
 				break;
 			default:
@@ -1151,7 +1151,7 @@ public class PmmParser extends Parser {
 			{
 			setState(211);
 			((Struct_fieldsContext)_localctx).f1 = field();
-			 _localctx.ast.addAll(((Struct_fieldsContext)_localctx).f1.ast);
+			 _localctx.ast.addAll(f1);
 			                                                                                                    
 			setState(218);
 			_errHandler.sync(this);
@@ -1161,7 +1161,7 @@ public class PmmParser extends Parser {
 				{
 				setState(213);
 				((Struct_fieldsContext)_localctx).f2 = field();
-				_localctx.ast.addAll(((Struct_fieldsContext)_localctx).f2.ast);
+				_localctx.ast.addAll(f2)
 				}
 				}
 				setState(220);
@@ -1222,9 +1222,9 @@ public class PmmParser extends Parser {
 			setState(221);
 			((FieldContext)_localctx).id1 = match(ID);
 			_localctx.ast.add(new StructureField(((FieldContext)_localctx).id1.getLine(),
-			                                                    ((FieldContext)_localctx).id1.getCharPositionInLine()+1,
+			                                                    ((FieldContext)_localctx).id1.getCharPositionInLine()+1),
 			                                                    (((FieldContext)_localctx).id1!=null?((FieldContext)_localctx).id1.getText():null),
-			                                                    null));
+			                                                    null)
 			setState(228);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -1236,9 +1236,9 @@ public class PmmParser extends Parser {
 				setState(224);
 				((FieldContext)_localctx).id2 = match(ID);
 				_localctx.ast.add(new StructureField(((FieldContext)_localctx).id2.getLine(),
-				                                                                                                    ((FieldContext)_localctx).id2.getCharPositionInLine()+1,
+				                                                                                                    ((FieldContext)_localctx).id2.getCharPositionInLine()+1),
 				                                                                                                    (((FieldContext)_localctx).id2!=null?((FieldContext)_localctx).id2.getText():null),
-				                                                                                                    null));
+				                                                                                                    null)
 				}
 				}
 				setState(230);

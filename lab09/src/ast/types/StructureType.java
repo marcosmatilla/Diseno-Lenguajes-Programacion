@@ -35,19 +35,11 @@ public class StructureType extends AbstractType {
     @Override
     public Type dot(String campo) {
         for(StructureField sf: structureFields) {
-            if(sf.getName().equals(campo)){
+            if(!sf.getType().equals(campo)){
                 return sf.getType();
             }
         }
         return null;
-    }
-
-    @Override
-    public int numberOfBytes() {
-        int nB = 0;
-        for (StructureField sf: structureFields)
-            nB += sf.getType().numberOfBytes();
-        return nB;
     }
 
     @Override

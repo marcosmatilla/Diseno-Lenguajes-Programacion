@@ -29,6 +29,4 @@ public interface Type extends ASTNode {
     Type canBeCastTo(Type type);
 
     Type squareBrackets(Type type);
-
-    int numberOfBytes();
 }

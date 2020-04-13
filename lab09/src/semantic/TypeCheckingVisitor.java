@@ -50,7 +50,6 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     public Object visit(Assigment assigment, Object param) {
         assigment.getExpresion1().accept(this,param);
         assigment.getExpresion2().accept(this,param);
-
         if (!assigment.getExpresion1().getLValue()) {
             new ErrorType(assigment.getLine(), assigment.getColumn(), "Expression " + assigment.getExpresion1().toString() + " is not lvalue");
         }
@@ -100,11 +99,10 @@ public class TypeCheckingVisitor extends AbstratVisitor {
 
     @Override
     public Object visit(FieldAccess fieldAccess, Object param) {
-        fieldAccess.getExpresion().accept(this, param);
-
-        fieldAccess.setType(fieldAccess.getExpresion().getType().dot(fieldAccess.getCampo()));
+        super.visit(fieldAccess, param);
+        fieldAccess.getExpresion().setType(fieldAccess.getExpresion().getType().dot(fieldAccess.getCampo()));
         if (fieldAccess.getType() == null)
-            fieldAccess.setType(new ErrorType(fieldAccess.getLine(), fieldAccess.getColumn(), "Field " + "'" + fieldAccess.getCampo() + "'" + " not defined"));
+            fieldAccess.getExpresion().setType(new ErrorType(fieldAccess.getLine(), fieldAccess.getColumn(), "Field " + "'" + fieldAccess.getCampo() + "'" + " not defined"));
         fieldAccess.setLValue(true);
         return null;
     }
@@ -179,9 +177,7 @@ public class TypeCheckingVisitor extends AbstratVisitor {
 
     @Override
     public Object visit(InvokeFunction invokeFunction, Object param) {
-        invokeFunction.getVariable().accept(this, param);
-        invokeFunction.getExpresions().forEach(x -> x.accept(this, param));
-
+        super.visit(invokeFunction, param);
         invokeFunction.setLValue(false);
         invokeFunction.setType(invokeFunction.getVariable().getType().parenthesis(invokeFunction.getExpresions()));
         if (invokeFunction.getType() == null) {
@@ -206,13 +202,6 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     public Object visit(FunctionDefinition functionDefinition, Object param) {
         functionDefinition.getType().accept(this, param);
         functionDefinition.getStatements().forEach(x -> x.accept(this, ((FunctionType) functionDefinition.getType()).getReturnType()));
-        return null;
-    }
-
-    @Override
-    public Object visit(FunctionType functionType, Object param) {
-        functionType.getVariableDefinitions().forEach(x -> x.accept(this, param));
-        functionType.getReturnType().accept(this, param);
         return null;
     }
 }

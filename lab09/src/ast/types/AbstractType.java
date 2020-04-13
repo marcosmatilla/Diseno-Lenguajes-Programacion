@@ -65,9 +65,4 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     public Type squareBrackets(Type type) {
         return null;
     }
-
-    @Override
-    public int numberOfBytes() {
-        return 0;
-    }
 }
