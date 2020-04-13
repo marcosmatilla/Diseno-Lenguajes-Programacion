@@ -158,6 +158,16 @@ public interface PmmListener extends ParseTreeListener {
 	 */
 	void exitStruct_fields(PmmParser.Struct_fieldsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PmmParser#field}.
+	 * @param ctx the parse tree
+	 */
+	void enterField(PmmParser.FieldContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PmmParser#field}.
+	 * @param ctx the parse tree
+	 */
+	void exitField(PmmParser.FieldContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PmmParser#statement}.
 	 * @param ctx the parse tree
 	 */

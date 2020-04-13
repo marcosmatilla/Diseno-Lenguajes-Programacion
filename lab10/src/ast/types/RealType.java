@@ -54,6 +54,11 @@ public class RealType extends AbstractType {
     }
 
     @Override
+    public int numberOfBytes() {
+        return 4;
+    }
+
+    @Override
     public Type arithmetic() {
         return this;
     }

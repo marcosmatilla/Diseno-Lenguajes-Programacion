@@ -8,6 +8,7 @@ public class StructureField implements ASTNode {
     private int column;
     private String name;
     private Type type;
+    public int offset;
 
     public StructureField(int line, int column, String name, Type type) {
         this.line=line;
@@ -42,6 +43,9 @@ public class StructureField implements ASTNode {
         this.type = type;
     }
 
+    public void setOffset(int offset) { this.offset = offset; }
+
+    public int getOffset() { return offset; }
 
 
     @Override

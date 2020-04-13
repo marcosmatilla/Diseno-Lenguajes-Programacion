@@ -46,7 +46,6 @@ public class FunctionType extends AbstractType {
             }
         }
         return this;
-
     }
 
     @Override
