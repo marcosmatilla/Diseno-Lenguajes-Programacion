@@ -50,9 +50,9 @@ type returns [Type ast]: simple_type {$ast = $simple_type.ast;}
         | struct_type {$ast = $struct_type.ast;}
         ;
 
-simple_type returns [Type ast]: i='int' {$ast = new IntType($i.getLine(), $i.getCharPositionInLine() + 1);}
-            | d='double' {$ast = new RealType($d.getLine(), $d.getCharPositionInLine() + 1);}
-            | c='char' {$ast = new CharType($c.getLine(), $c.getCharPositionInLine() + 1);}
+simple_type returns [Type ast]: i='int' {$ast = IntType.getInstance();}
+            | d='double' {$ast = RealType.getInstance();}
+            | c='char' {$ast = CharType.getInstance();}
             ;
 
 return_type returns [Type ast]: simple_type {$ast = $simple_type.ast;}
@@ -65,9 +65,21 @@ array returns [ArrayType ast]: c='['INT_CONSTANT']' type {$ast = new ArrayType($
 struct_type returns [StructureType ast]: st='struct' '{' struct_fields '}'  {$ast = new StructureType($st.getLine(), $st.getCharPositionInLine() + 1 , $struct_fields.ast);}
         ;
 
-struct_fields returns [ArrayList<StructureField> ast = new ArrayList<StructureField>()]: (id1=ID {$ast.add(new StructureField($id1.getLine(), $id1.getCharPositionInLine()+1, $id1.text, null));}
-                    (',' id2=ID{new StructureField($id2.getLine(), $id2.getCharPositionInLine()+1, $id2.text, null);})* ':' type {for (StructureField i: $ast) {i.setType($type.ast);}} ';')*
-                     ;
+struct_fields returns [ArrayList<StructureField> ast = new ArrayList<StructureField>()]: f1=field  { $ast.addAll($f1.ast);
+                                                                                                    }  (f2=field {$ast.addAll($f2.ast);})*
+                                                                                                        ;
+
+field returns [ArrayList<StructureField> ast = new ArrayList<StructureField>()]:
+               id1=ID {$ast.add(new StructureField($id1.getLine(),
+                                                    $id1.getCharPositionInLine()+1,
+                                                    $id1.text,
+                                                    null));} (',' id2=ID  {$ast.add(new StructureField($id2.getLine(),
+                                                                                                    $id2.getCharPositionInLine()+1,
+                                                                                                    $id2.text,
+                                                                                                    null));})* ':' type {for(StructureField f : $ast){
+                                                                                                                            f.setType($type.ast);
+                                                                                                    }} ';'
+                   ;
 
 /*Statement*/
 statement returns [ArrayList<Statement> ast = new ArrayList<Statement>()]: assigment {$ast.add($assigment.ast);}

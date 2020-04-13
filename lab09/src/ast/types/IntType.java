@@ -8,10 +8,6 @@ public class IntType extends AbstractType {
         super(0, 0);
     }
 
-    public IntType(int line, int column) {
-        super(line, column);
-    }
-
     private static IntType instance = new IntType();
     public static IntType getInstance() { return instance; }
 
@@ -68,6 +64,11 @@ public class IntType extends AbstractType {
     @Override
     public Type arithmetic() {
         return this;
+    }
+
+    @Override
+    public int numberOfBytes() {
+        return 2;
     }
 
     @Override

@@ -14,10 +14,7 @@ public class CharType extends AbstractType {
     private static CharType instance = new CharType();
     public static CharType getInstance() { return instance; }
 
-    @Override
-    public String toString() {
-        return "char";
-    }
+
 
     @Override
     public Type arithmetic(Type type) {
@@ -43,6 +40,16 @@ public class CharType extends AbstractType {
         if(type.isBuiltInType())
             return type;
         return null;
+    }
+
+    @Override
+    public int numberOfBytes() {
+        return 1;
+    }
+
+    @Override
+    public String toString() {
+        return "char";
     }
 
     @Override

@@ -1,4 +1,5 @@
 import ast.Program;
+import codegenerator.OffSetVisitor;
 import errorhandler.ErrorHandler;
 import introspector.model.IntrospectorModel;
 import introspector.view.IntrospectorTree;
@@ -29,6 +30,7 @@ public class Main {
 
 		ast.accept(new IdentificationVisitor(), null);
 		ast.accept(new TypeCheckingVisitor(), null);
+		ast.accept(new OffSetVisitor(), null);
 
 		// * Check errors
 		if(ErrorHandler.getEH().AnyError()){

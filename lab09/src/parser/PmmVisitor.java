@@ -105,6 +105,12 @@ public interface PmmVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStruct_fields(PmmParser.Struct_fieldsContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PmmParser#field}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitField(PmmParser.FieldContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PmmParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
