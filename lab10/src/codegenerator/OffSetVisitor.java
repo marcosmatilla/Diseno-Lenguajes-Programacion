@@ -11,7 +11,6 @@ public class OffSetVisitor extends AbstratVisitor {
 
     int globalOffset;
     int localOffset;
-    int structOffset;
 
     @Override
     public Object visit(VariableDefinition variableDefinition, Object param) {
@@ -47,16 +46,13 @@ public class OffSetVisitor extends AbstratVisitor {
 
     @Override
     public Object visit(StructureType structureType, Object param) {
-        super.visit(structureType, param);
-        structOffset = 0;
+        int offset = 0;
+        for(StructureField r : structureType.getStructureFields()){
+            r.accept(this,param);
+            r.setOffset(offset);
+            offset += r.getType().numberOfBytes();
+        }
         return null;
     }
 
-    @Override
-    public Object visit(StructureField structureField, Object param) {
-        structureField.setOffset(structOffset);
-        structOffset+=structureField.getType().numberOfBytes();
-        super.visit(structureField, param);
-        return null;
-    }
 }
