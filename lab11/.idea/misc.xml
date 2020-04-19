@@ -6,7 +6,7 @@
         <PerGrammarGenerationSettings>
           <option name="fileName" value="$PROJECT_DIR$/src/parser/Pmm.g4" />
           <option name="autoGen" value="true" />
-          <option name="outputDir" value="C:\Users\Marcos\Desktop\INFORMATICA\TERCERO\2\DLP\lab\Diseno-Lenguajes-Programacion\lab10\src" />
+          <option name="outputDir" value="C:\Users\Marcos\Desktop\INFORMATICA\TERCERO\2\DLP\lab\Diseno-Lenguajes-Programacion\lab11\src" />
           <option name="libDir" value="" />
           <option name="encoding" value="" />
           <option name="pkg" value="parser" />
