@@ -42,4 +42,8 @@ public class Logic extends AbstractExpresion {
     public Object accept(Visitor v, Object param) {
         return v.visit(this, param);
     }
+
+    public String getOperador() {
+        return operador;
+    }
 }

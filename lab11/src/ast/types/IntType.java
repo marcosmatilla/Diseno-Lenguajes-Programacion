@@ -9,7 +9,10 @@ public class IntType extends AbstractType {
     }
 
     private static IntType instance = new IntType();
-    public static IntType getInstance() { return instance; }
+
+    public static IntType getInstance() {
+        return instance;
+    }
 
     @Override
     public boolean isLogical() {
@@ -18,28 +21,33 @@ public class IntType extends AbstractType {
 
     @Override
     public Type arithmetic(Type type) {
-        if(type instanceof IntType || type instanceof ErrorType)
+        if (type instanceof ErrorType ||
+                type instanceof RealType ||
+                type instanceof IntType)
             return type;
+
+        if (type instanceof CharType)
+            return this;
         return null;
     }
 
     @Override
     public Type promotesTo(Type type) {
-        if(type instanceof IntType || type instanceof ErrorType)
+        if (type.isBuiltInType() || type instanceof ErrorType)
             return type;
         return null;
     }
 
     @Override
     public Type logic(Type type) {
-        if(type instanceof IntType)
+        if (type instanceof IntType)
             return type;
         return null;
     }
 
     @Override
     public Type comparasion(Type type) {
-        if(type instanceof IntType)
+        if (type instanceof IntType)
             return type;
         return null;
     }
@@ -56,7 +64,7 @@ public class IntType extends AbstractType {
 
     @Override
     public Type canBeCastTo(Type type) {
-        if(type.isBuiltInType())
+        if (type.isBuiltInType())
             return type;
         return null;
     }
@@ -69,6 +77,11 @@ public class IntType extends AbstractType {
     @Override
     public int numberOfBytes() {
         return 2;
+    }
+
+    @Override
+    public char suffix() {
+        return 'i';
     }
 
     @Override

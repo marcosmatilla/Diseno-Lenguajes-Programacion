@@ -37,19 +37,21 @@ public class TypeCheckingVisitor extends AbstratVisitor {
         arithmetic.getExpresion1().accept(this, param);
         arithmetic.getExpresion2().accept(this, param);
 
+        arithmetic.setLValue(false);
+
         arithmetic.setType(arithmetic.getExpresion1().getType().arithmetic(arithmetic.getExpresion2().getType()));
         if (arithmetic.getType() == null) {
             arithmetic.setType(new ErrorType(arithmetic.getLine(), arithmetic.getColumn(), "Incompatible types"));
         }
 
-        arithmetic.setLValue(false);
+
         return null;
     }
 
     @Override
     public Object visit(Assigment assigment, Object param) {
-        assigment.getExpresion1().accept(this,param);
-        assigment.getExpresion2().accept(this,param);
+        assigment.getExpresion1().accept(this, param);
+        assigment.getExpresion2().accept(this, param);
 
         if (!assigment.getExpresion1().getLValue()) {
             new ErrorType(assigment.getLine(), assigment.getColumn(), "Expression " + assigment.getExpresion1().toString() + " is not lvalue");
@@ -92,9 +94,9 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     public Object visit(Comparation comparation, Object param) {
         super.visit(comparation, param);
         comparation.setLValue(false);
-        comparation.getExpresion1().setType(comparation.getExpresion1().getType().comparasion(comparation.getExpresion2().getType()));
+        comparation.setType(comparation.getExpresion1().getType().comparasion(comparation.getExpresion2().getType()));
         if (comparation.getExpresion1().getType() == null)
-            comparation.getExpresion1().setType(new ErrorType(comparation.getLine(), comparation.getColumn(), "Incompatible types for comparation"));
+            comparation.setType(new ErrorType(comparation.getLine(), comparation.getColumn(), "Incompatible types for comparation"));
         return null;
     }
 
@@ -134,9 +136,9 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     public Object visit(Logic logic, Object param) {
         super.visit(logic, param);
         logic.setLValue(false);
-        logic.getExpresion1().setType(logic.getExpresion1().getType().logic(logic.getExpresion2().getType()));
+        logic.setType(logic.getExpresion1().getType().logic(logic.getExpresion2().getType()));
         if (logic.getExpresion1().getType() == null) {
-            logic.getExpresion1().setType(new ErrorType(logic.getLine(), logic.getColumn(), "Incompatible types expected"));
+            logic.setType(new ErrorType(logic.getLine(), logic.getColumn(), "Incompatible types expected"));
         }
         return null;
     }
@@ -145,9 +147,9 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     public Object visit(Negation negation, Object param) {
         super.visit(negation, param);
         negation.setLValue(false);
-        negation.getExpresion().setType(negation.getExpresion().getType().logic());
+        negation.setType(negation.getExpresion().getType().logic());
         if (negation.getExpresion().getType() == null)
-            negation.getExpresion().setType(new ErrorType(negation.getLine(), negation.getColumn(), "You can only deny integers"));
+            negation.setType(new ErrorType(negation.getLine(), negation.getColumn(), "You can only deny integers"));
         return null;
     }
 

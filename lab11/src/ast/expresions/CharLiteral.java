@@ -3,10 +3,11 @@ package ast.expresions;
 import visitors.Visitor;
 
 public class CharLiteral extends AbstractExpresion {
-    private char value;
+    public char value;
+
     public CharLiteral(int line, int column, char value) {
         super(line, column);
-        this.value=value;
+        this.value = value;
     }
 
     @Override

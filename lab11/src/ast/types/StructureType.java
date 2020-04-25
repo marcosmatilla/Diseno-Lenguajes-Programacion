@@ -51,6 +51,15 @@ public class StructureType extends AbstractType {
     }
 
     @Override
+    public StructureField get(String fieldName) {
+        for (StructureField field : structureFields) {
+            if(field.getName().equals(fieldName))
+                return field;
+        }
+        return null;
+    }
+
+    @Override
     public String toString() {
         return "StructureType{" +
                 "structureFields=" + structureFields +

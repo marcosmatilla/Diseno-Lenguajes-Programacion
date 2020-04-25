@@ -70,4 +70,14 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     public int numberOfBytes() {
         return 0;
     }
+
+    @Override
+    public StructureField get(String string) {
+        return null;
+    }
+
+    @Override
+    public char suffix() {
+        return  ' ';
+    }
 }

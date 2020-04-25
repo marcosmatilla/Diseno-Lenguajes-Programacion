@@ -31,4 +31,8 @@ public interface Type extends ASTNode {
     Type squareBrackets(Type type);
 
     int numberOfBytes();
+
+    StructureField get(String string);
+
+    char suffix();
 }

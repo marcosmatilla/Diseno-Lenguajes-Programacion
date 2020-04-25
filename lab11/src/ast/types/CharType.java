@@ -12,20 +12,27 @@ public class CharType extends AbstractType {
     }
 
     private static CharType instance = new CharType();
-    public static CharType getInstance() { return instance; }
 
+    public static CharType getInstance() {
+        return instance;
+    }
 
 
     @Override
     public Type arithmetic(Type type) {
-        if(type.equals(CharType.getInstance()) || type instanceof ErrorType)
+        if (type instanceof ErrorType ||
+                type instanceof RealType ||
+                type instanceof IntType)
             return type;
+
+        if (type instanceof CharType)
+            return IntType.getInstance();
         return null;
     }
 
     @Override
     public Type promotesTo(Type type) {
-        if(type instanceof CharType || type instanceof ErrorType)
+        if (type.isBuiltInType() || type instanceof ErrorType)
             return type;
         return null;
     }
@@ -37,7 +44,7 @@ public class CharType extends AbstractType {
 
     @Override
     public Type canBeCastTo(Type type) {
-        if(type.isBuiltInType())
+        if (type.isBuiltInType())
             return type;
         return null;
     }
@@ -45,6 +52,11 @@ public class CharType extends AbstractType {
     @Override
     public int numberOfBytes() {
         return 1;
+    }
+
+    @Override
+    public char suffix() {
+        return 'b';
     }
 
     @Override

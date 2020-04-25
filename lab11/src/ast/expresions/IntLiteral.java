@@ -3,7 +3,7 @@ package ast.expresions;
 import visitors.Visitor;
 
 public class IntLiteral extends AbstractExpresion {
-    private int value;
+    public int value;
 
     public IntLiteral(int line, int column, int value) {
         super(line, column);

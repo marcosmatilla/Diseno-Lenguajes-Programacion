@@ -3,10 +3,11 @@ package ast.expresions;
 import visitors.Visitor;
 
 public class RealLiteral extends AbstractExpresion {
-    private double value;
+    public double value;
+
     public RealLiteral(int line, int column, double value) {
         super(line, column);
-        this.value=value;
+        this.value = value;
     }
 
     @Override

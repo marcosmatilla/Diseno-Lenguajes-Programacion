@@ -1,16 +1,29 @@
 package visitors.codegenerator;
 
 import ast.expresions.*;
+import ast.types.IntType;
+import codegenerator.CodeGenerator;
 
-public class ValueCGVisitor extends AbstractCGVisitor{
+public class ValueCGVisitor extends AbstractCGVisitor {
+    private CodeGenerator cg;
+    private AddressCGVisitor addressCGVisitor;
+
+    public ValueCGVisitor(CodeGenerator cg) {
+        this.cg = cg;
+    }
+
+    public void setAddressCGVisitor(AddressCGVisitor addressCGVisitor) {
+        this.addressCGVisitor = addressCGVisitor;
+    }
 
     @Override
     public Object visit(IntLiteral intLiteral, Object param) {
         /*
-        * value[[IntLiteral: expression -> INT_CONSTANT]]() =
-        *   <pushi> expression.value
-        */
-        return super.visit(intLiteral, param);
+         * value[[IntLiteral: expression -> INT_CONSTANT]]() =
+         *   <pushi> expression.value
+         */
+        cg.push(intLiteral.value);
+        return null;
     }
 
     @Override
@@ -19,7 +32,8 @@ public class ValueCGVisitor extends AbstractCGVisitor{
          * value[[RealLiteral: expression -> REAL_CONSTANT]]() =
          *   <pushf> expression.value
          */
-        return super.visit(realLiteral, param);
+        cg.push(realLiteral.value);
+        return null;
     }
 
     @Override
@@ -28,7 +42,8 @@ public class ValueCGVisitor extends AbstractCGVisitor{
          * value[[CharLiteral: expression -> CHAR_CONSTANT]]() =
          *   <pushb> expression.value
          */
-        return super.visit(charLiteral, param);
+        cg.push(charLiteral.value);
+        return null;
     }
 
     @Override
@@ -36,37 +51,66 @@ public class ValueCGVisitor extends AbstractCGVisitor{
         /*
          * value[[Cast: expression1 -> type expression2]]() =
          *      value[[expression2]]
-         *      expression2.type.suffix to expression1.type.suffix //
+         *      expression2.type.suffix to expression1.type.suffix
          *
          */
-        return super.visit(cast, param);
+        cast.getExpresion().accept(this, param);
+        cg.convert(cast.getExpresion().getType(), cast.getType());
+        return null;
     }
 
     @Override
     public Object visit(UnaryMinus unaryMinus, Object param) {
         /*
-         *
-         *
+         *  value[[UnaryMinus: expression -> expressionR]]() =
+         *      value[[expressionR]]
+         *      <push> -1
+         *      <mul> expression.type.suffix()
          */
-        return super.visit(unaryMinus, param);
+        unaryMinus.getExpresion().accept(this, param);
+        cg.push(-1);
+        cg.convert(IntType.getInstance(), unaryMinus.getType());
+        cg.mul(unaryMinus.getType());
+        return null;
+    }
+
+    @Override
+    public Object visit(Negation negation, Object param) {
+        /*
+         *  value[[Negation: expression -> expressionR]]() =
+         *      value[[expressionR]]
+         *      <not>
+         */
+        negation.getExpresion().accept(this, param);
+
+        cg.convert(negation.getExpresion().getType(), negation.getType());
+        cg.not();
+        return null;
     }
 
     @Override
     public Object visit(FieldAccess fieldAccess, Object param) {
         /*
-         *
-         *
+         *  value[[FieldAccess: expression -> expressionR campo]]
+         *      address[[expression]]()
+         *      <load> expression.type.suffix()
          */
-        return super.visit(fieldAccess, param);
+        fieldAccess.accept(addressCGVisitor, param);
+        cg.load(fieldAccess.getType());
+
+        return null;
     }
 
     @Override
     public Object visit(Indexer indexer, Object param) {
         /*
-         *
-         *
+         *  value[[Indexer: expression -> expressionL expressionR]]
+         *      address[[expression]]()
+         *      <load> expression.type.suffix()
          */
-        return super.visit(indexer, param);
+        indexer.accept(addressCGVisitor, param);
+        cg.load(indexer.getType());
+        return null;
     }
 
     @Override
@@ -76,7 +120,9 @@ public class ValueCGVisitor extends AbstractCGVisitor{
          *   address[[expression]]()
          *   <load> expression.type.suffix()
          */
-        return super.visit(variable, param);
+        variable.accept(addressCGVisitor, param);
+        cg.load(variable.getType());
+        return null;
     }
 
     @Override
@@ -88,10 +134,18 @@ public class ValueCGVisitor extends AbstractCGVisitor{
          *      switch(expression.operator):
          *          case("+"): <add> expresssion.type.suffix()
          *          case("-"): <sub> expresssion.type.suffix()
-         *          case("*"): <mul> expresssion.type.suffix()
+         *          case("*"): <mul>
          *          case("/"): <div> expresssion.type.suffix()
+         *          case("&"): <mod> expression.type.suffix()
          */
-        return super.visit(arithmetic, param);
+        arithmetic.getExpresion1().accept(this, param);
+        cg.convert(arithmetic.getExpresion1().getType(), arithmetic.getType());
+
+        arithmetic.getExpresion2().accept(this, param);
+        cg.convert(arithmetic.getExpresion2().getType(), arithmetic.getType());
+
+        cg.arithmetic(arithmetic.getType(), arithmetic.getOperador());
+        return null;
     }
 
     @Override
@@ -108,7 +162,14 @@ public class ValueCGVisitor extends AbstractCGVisitor{
          *          case("=="): <ne> expresssion.type.suffix()
          *          case("!="): <e> expresssion.type.suffix()
          */
-        return super.visit(comparation, param);
+        comparation.getExpresion1().accept(this, param);
+        cg.convert(comparation.getExpresion1().getType(), comparation.getExpresion2().getType());
+
+        comparation.getExpresion2().accept(this, param);
+        cg.convert(comparation.getExpresion2().getType(), comparation.getExpresion2().getType());
+
+        cg.comparasion(comparation.getType(), comparation.getOperador());
+        return null;
     }
 
     @Override
@@ -121,7 +182,16 @@ public class ValueCGVisitor extends AbstractCGVisitor{
          *          case("&&"): and
          *          case("||"): or
          */
-        return super.visit(logic, param);
+        logic.getExpresion1().accept(this, param);
+
+        cg.convert(logic.getExpresion1().getType(), logic.getType());
+
+
+        logic.getExpresion2().accept(this, param);
+        cg.convert(logic.getExpresion2().getType(), logic.getType());
+
+        cg.logical(logic.getOperador());
+        return null;
     }
 
 }

@@ -13,7 +13,10 @@ public class RealType extends AbstractType {
     }
 
     private static RealType instance = new RealType();
-    public static RealType getInstance() { return instance; }
+
+    public static RealType getInstance() {
+        return instance;
+    }
 
     @Override
     public String toString() {
@@ -22,21 +25,26 @@ public class RealType extends AbstractType {
 
     @Override
     public Type arithmetic(Type type) {
-        if(type.equals(RealType.getInstance()) || type instanceof ErrorType)
+        if (type instanceof ErrorType ||
+                type instanceof RealType)
             return type;
+
+        if (type instanceof IntType ||
+                type instanceof CharType)
+            return this;
         return null;
     }
 
     @Override
     public Type promotesTo(Type type) {
-        if(type instanceof ErrorType || type instanceof RealType)
+        if (type instanceof ErrorType || type.isBuiltInType())
             return type;
         return null;
     }
 
     @Override
     public Type comparasion(Type type) {
-        if(type instanceof RealType)
+        if (type instanceof RealType)
             return IntType.getInstance();
         return null;
     }
@@ -48,7 +56,7 @@ public class RealType extends AbstractType {
 
     @Override
     public Type canBeCastTo(Type type) {
-        if(type.isBuiltInType())
+        if (type.isBuiltInType())
             return type;
         return null;
     }
@@ -56,6 +64,11 @@ public class RealType extends AbstractType {
     @Override
     public int numberOfBytes() {
         return 4;
+    }
+
+    @Override
+    public char suffix() {
+        return 'f';
     }
 
     @Override
