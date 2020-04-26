@@ -1,0 +1,5 @@
+Generar codigo para:
+- While statements
+- If statements
+- Function invocations
+- Return statements
