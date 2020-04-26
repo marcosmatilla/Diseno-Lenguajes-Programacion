@@ -7,10 +7,31 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class CodeGenerator {
-    private FileWriter out;
 
-    public CodeGenerator(FileWriter out) {
-        this.out = out;
+    public String inputFileName;
+    public String outputFileName;
+    protected FileWriter fileWriter;
+
+    public CodeGenerator(String inputFileName, String outputFileName) {
+        this.inputFileName = inputFileName;
+        this.outputFileName = outputFileName;
+
+        try {
+            fileWriter = new FileWriter(outputFileName);
+        } catch (IOException io) {
+            System.err.println("The output file " + outputFileName + " cant be open.");
+            return;
+        }
+    }
+
+    public void closeWriter() {
+        if (fileWriter != null) {
+            try {
+                fileWriter.close();
+            } catch (IOException e) {
+                System.err.println("Error closing the output file: " + outputFileName);
+            }
+        }
     }
 
     private void printlnt(String str) {
@@ -19,7 +40,7 @@ public class CodeGenerator {
 
     private void println(String str) {
         try {
-            out.write(str + "\n");
+            fileWriter.write(str + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }

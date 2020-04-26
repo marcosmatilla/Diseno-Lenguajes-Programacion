@@ -16,43 +16,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ExecuteCGVisitor extends AbstractCGVisitor {
-    private String inputFileName;
-    private String outputFileName;
-    private FileWriter fileWriter;
-
     private CodeGenerator cg;
     private ValueCGVisitor valueCGVisitor;
     private AddressCGVisitor addressCGVisitor;
 
     public ExecuteCGVisitor(String inputFileName, String outputFileName) {
-        this.inputFileName = inputFileName;
-        this.outputFileName = outputFileName;
-
-        try {
-            fileWriter = new FileWriter(outputFileName);
-        } catch (IOException io) {
-            System.err.println("The output file " + outputFileName + " cant be open.");
-            return;
-        }
-
-        cg = new CodeGenerator(fileWriter);
+        cg = new CodeGenerator(inputFileName, outputFileName);
 
         valueCGVisitor = new ValueCGVisitor(cg);
         addressCGVisitor = new AddressCGVisitor(cg);
 
         valueCGVisitor.setAddressCGVisitor(addressCGVisitor);
         addressCGVisitor.setValueCGVisitor(valueCGVisitor);
-    }
-
-
-    private void closeWriter() {
-        if (fileWriter != null) {
-            try {
-                fileWriter.close();
-            } catch (IOException e) {
-                System.err.println("Error closing the output file: " + outputFileName);
-            }
-        }
     }
 
     @Override
@@ -70,7 +45,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
          *          if(!(d instanceof VariableDefinition))
          *              execute[[d]]()
          */
-        cg.principalDirective(inputFileName);
+        cg.principalDirective(cg.inputFileName);
 
         for (Definition d : program.getDefinitions()) {
             if (d instanceof VariableDefinition) {
@@ -87,7 +62,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
             }
         }
 
-        closeWriter();
+        cg.closeWriter();
 
         return null;
     }
@@ -127,7 +102,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         cg.enter(numberOfBytesLocal);
 
         for (Statement st : functionDefinition.getStatements()) {
-            if(!(st instanceof VariableDefinition))
+            if (!(st instanceof VariableDefinition))
                 st.accept(this, param);
         }
 
@@ -198,6 +173,4 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 
         return null;
     }
-
-
 }
