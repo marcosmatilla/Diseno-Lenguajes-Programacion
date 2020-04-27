@@ -2,6 +2,7 @@ package codegenerator;
 
 import ast.definitions.VariableDefinition;
 import ast.types.Type;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -62,15 +63,15 @@ public class CodeGenerator {
         println_tab("mul" + type.suffix());
     }
 
-    public void subtract(Type type){
+    public void subtract(Type type) {
         println_tab("sub" + type.suffix());
     }
 
-    public void div(Type type){
+    public void div(Type type) {
         println_tab("div" + type.suffix());
     }
 
-    public void mod(Type type){
+    public void mod(Type type) {
         println_tab("mod" + type.suffix());
     }
 
@@ -254,7 +255,9 @@ public class CodeGenerator {
         println("\n " + name + ":");
     }
 
-    public void principalDirective(String inputFileName) { println("\n#source " + "'" + inputFileName + "'" + "\n"); }
+    public void principalDirective(String inputFileName) {
+        println("\n#source " + "'" + inputFileName + "'" + "\n");
+    }
 
     public void lineDirective(int line) {
         println("\n#line " + line);

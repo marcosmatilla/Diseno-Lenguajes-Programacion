@@ -1,4 +1,4 @@
-package semantic;
+package visitors.semantic;
 
 import ast.definitions.FunctionDefinition;
 import ast.definitions.VariableDefinition;
@@ -11,28 +11,27 @@ import visitors.AbstratVisitor;
 public class IdentificationVisitor extends AbstratVisitor {
     SymbolTable st;
 
-    public IdentificationVisitor(){
+    public IdentificationVisitor() {
         this.st = new SymbolTable();
     }
 
     @Override
     public Object visit(Variable variable, Object param) {
         variable.definition = st.find(variable.getName());
-        if(variable.definition == null){
-            variable.definition = new VariableDefinition(variable.getLine(), variable.getColumn(), variable.getName(), new ErrorType(variable,"Semantical error: " + variable.getName() + " has not been declared"));
+        if (variable.definition == null) {
+            variable.definition = new VariableDefinition(variable.getLine(), variable.getColumn(), variable.getName(), new ErrorType(variable, "Semantical error: " + variable.getName() + " has not been declared"));
         }
         return null;
     }
 
     @Override
     public Object visit(FunctionDefinition functionDefinition, Object param) {
-        if(!st.insert(functionDefinition)){
-            new ErrorType(functionDefinition,"Semantical error: " + functionDefinition.getName() + " identificator already defined in this scope");
-        }
-        else{
+        if (!st.insert(functionDefinition)) {
+            new ErrorType(functionDefinition, "Semantical error: " + functionDefinition.getName() + " identificator already defined in this scope");
+        } else {
             st.set();
             functionDefinition.getType().accept(this, param);
-            for(Statement s: functionDefinition.getStatements()){
+            for (Statement s : functionDefinition.getStatements()) {
                 s.accept(this, null);
             }
             st.reset();
@@ -42,8 +41,8 @@ public class IdentificationVisitor extends AbstratVisitor {
 
     @Override
     public Object visit(VariableDefinition variableDefinition, Object param) {
-        if(!st.insert(variableDefinition)){
-            new ErrorType(variableDefinition,  "Semantical error: " + "'" + variableDefinition.getName() + "'" + " identificator already declared");
+        if (!st.insert(variableDefinition)) {
+            new ErrorType(variableDefinition, "Semantical error: " + "'" + variableDefinition.getName() + "'" + " identificator already declared");
         }
         return null;
     }

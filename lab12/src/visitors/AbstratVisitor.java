@@ -8,7 +8,7 @@ import ast.expresions.*;
 import ast.statements.*;
 import ast.types.*;
 
-public abstract class AbstratVisitor implements Visitor{
+public abstract class AbstratVisitor implements Visitor {
 
     @Override
     public Object visit(Arithmetic arithmetic, Object param) {
@@ -86,7 +86,7 @@ public abstract class AbstratVisitor implements Visitor{
     @Override
     public Object visit(InvokeFunction invokeFunction, Object param) {
         invokeFunction.getVariable().accept(this, param);
-        invokeFunction.getExpresions().forEach( x -> x.accept(this, param));
+        invokeFunction.getExpresions().forEach(x -> x.accept(this, param));
         return null;
     }
 
@@ -197,7 +197,7 @@ public abstract class AbstratVisitor implements Visitor{
 
     @Override
     public Object visit(Program program, Object param) {
-        for(Definition d: program.getDefinitions())
+        for (Definition d : program.getDefinitions())
             d.accept(this, param);
         return null;
     }

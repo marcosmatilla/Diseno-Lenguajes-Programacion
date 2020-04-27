@@ -22,7 +22,7 @@ class LexicalInfo {
 			.append(", column ").append(this.column)
 			.append(", lexeme '").append(this.lexeme).append("'")
 			.append(", token key ").append(this.tokenKey)
-			.append(", semantic value ").append(this.semanticValue)
+			.append(", visitors.semantic value ").append(this.semanticValue)
 			.append(")");
 		return sb.toString();
 	}

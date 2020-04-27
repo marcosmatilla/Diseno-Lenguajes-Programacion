@@ -1,4 +1,4 @@
-package semantic;
+package visitors.semantic;
 
 import ast.definitions.FunctionDefinition;
 import ast.expresions.*;

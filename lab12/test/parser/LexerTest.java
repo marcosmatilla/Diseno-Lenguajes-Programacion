@@ -16,7 +16,7 @@ public class LexerTest {
 		Token token;
 		int i = 0;
 		while ((token = lexer.nextToken()).getType() != PmmLexer.EOF) {
-			// We get the semantic value of the token
+			// We get the visitors.semantic value of the token
 			Object semanticValue = null;
 			switch (token.getType()) {
 				case PmmLexer.INT_CONSTANT:

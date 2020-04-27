@@ -1,4 +1,5 @@
 package visitors.codegenerator;
+
 import ast.expresions.*;
 import ast.types.IntType;
 import codegenerator.CodeGenerator;
@@ -22,6 +23,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          *   <pushi> expression.value
          */
         cg.push(intLiteral.value);
+
         return null;
     }
 
@@ -32,6 +34,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          *   <pushf> expression.value
          */
         cg.push(realLiteral.value);
+
         return null;
     }
 
@@ -42,6 +45,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          *   <pushb> expression.value
          */
         cg.push(charLiteral.value);
+
         return null;
     }
 
@@ -55,6 +59,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          */
         cast.getExpresion().accept(this, param);
         cg.convert(cast.getExpresion().getType(), cast.getType());
+
         return null;
     }
 
@@ -70,6 +75,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
         cg.push(-1);
         cg.convert(IntType.getInstance(), unaryMinus.getType());
         cg.mul(unaryMinus.getType());
+
         return null;
     }
 
@@ -84,6 +90,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
 
         cg.convert(negation.getExpresion().getType(), negation.getType());
         cg.not();
+
         return null;
     }
 
@@ -109,6 +116,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          */
         indexer.accept(addressCGVisitor, param);
         cg.load(indexer.getType());
+
         return null;
     }
 
@@ -121,6 +129,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          */
         variable.accept(addressCGVisitor, param);
         cg.load(variable.getType());
+
         return null;
     }
 
@@ -144,6 +153,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
         cg.convert(arithmetic.getExpresion2().getType(), arithmetic.getType());
 
         cg.arithmetic(arithmetic.getType(), arithmetic.getOperador());
+
         return null;
     }
 
@@ -168,6 +178,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
         cg.convert(comparation.getExpresion2().getType(), comparation.getExpresion2().getType());
 
         cg.comparasion(comparation.getType(), comparation.getOperador());
+
         return null;
     }
 
@@ -190,6 +201,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
         cg.convert(logic.getExpresion2().getType(), logic.getType());
 
         cg.logical(logic.getOperador());
+
         return null;
     }
 
@@ -203,6 +215,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          */
         invokeFunction.getExpresions().forEach(expr -> expr.accept(addressCGVisitor, null));
         cg.call(invokeFunction.getVariable().getName());
+
         return null;
     }
 }

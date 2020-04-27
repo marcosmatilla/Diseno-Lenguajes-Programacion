@@ -106,7 +106,6 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         if (functionType.getReturnType() instanceof VoidType) {
             cg.ret(0, numberOfBytesLocal, numberOfBytesParam);
         }
-
         return null;
     }
 
@@ -156,6 +155,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 
         cg.in(input.getExpresion().getType());
         cg.store(input.getExpresion().getType());
+
         return null;
     }
 
@@ -183,8 +183,8 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
          *          <pop> expression.type.suffix()
          */
         invokeFunction.getExpresions().forEach(exp -> exp.accept(valueCGVisitor, null));
-        if(!(((FunctionType)invokeFunction.getVariable().getType()).getReturnType() instanceof VoidType)){
-            cg.pop(((FunctionType)invokeFunction.getVariable().getType()).getReturnType());
+        if (!(((FunctionType) invokeFunction.getVariable().getType()).getReturnType() instanceof VoidType)) {
+            cg.pop(((FunctionType) invokeFunction.getVariable().getType()).getReturnType());
         }
         return null;
     }
@@ -223,16 +223,17 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         ifElse.getExpresion().accept(valueCGVisitor, null);
         cg.jz("else" + labelCondition);
 
-        for(Statement st2: ifElse.getIfs()){
+        for (Statement st2 : ifElse.getIfs()) {
             st2.accept(this, null);
         }
         cg.jmp("end_else" + labelCondition);
 
         cg.label("else" + labelCondition);
-        for(Statement st3: ifElse.getElses()){
+        for (Statement st3 : ifElse.getElses()) {
             st3.accept(this, null);
         }
         cg.label("end_else" + labelCondition);
+
         return null;
     }
 
@@ -253,7 +254,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         cg.lineDirective(_while.getLine());
         cg.comment("While");
 
-        int labelCondition =  cg.getLabel();
+        int labelCondition = cg.getLabel();
         int labelEnd = cg.getLabel();
 
         cg.label("while" + labelCondition);
@@ -262,7 +263,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         cg.jz("while_end" + labelEnd);
 
         cg.comment("Body");
-        for(Statement st: _while.getStatements()){
+        for (Statement st : _while.getStatements()) {
             st.accept(this, param);
         }
         cg.jmp("while" + labelCondition);

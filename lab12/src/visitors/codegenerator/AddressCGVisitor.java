@@ -5,7 +5,7 @@ import ast.expresions.*;
 import ast.types.*;
 import codegenerator.CodeGenerator;
 
-public class AddressCGVisitor extends AbstractCGVisitor{
+public class AddressCGVisitor extends AbstractCGVisitor {
 
     private CodeGenerator cg;
     private ValueCGVisitor valueCGVisitor;
@@ -21,19 +21,18 @@ public class AddressCGVisitor extends AbstractCGVisitor{
     @Override
     public Object visit(Variable variable, Object param) {
         /*
-        * address[[Variable: expression -> ID]]() =
-        *   if(expression.definition.scope == 0)
-        *       <pusha> expression.definition.offset
-        *   else
-        *       <push bp>
-        *       <pushi> expression.definition.offset
-        *       <addi>
-        */
+         * address[[Variable: expression -> ID]]() =
+         *   if(expression.definition.scope == 0)
+         *       <pusha> expression.definition.offset
+         *   else
+         *       <push bp>
+         *       <pushi> expression.definition.offset
+         *       <addi>
+         */
         VariableDefinition varDef = (VariableDefinition) variable.getDefinition();
-        if(varDef.getScope() == 0){
+        if (varDef.getScope() == 0) {
             cg.pusha(varDef.getOffset());
-        }
-        else{
+        } else {
             cg.pushbp();
             cg.push(varDef.getOffset());
             cg.add(IntType.getInstance());
@@ -44,13 +43,13 @@ public class AddressCGVisitor extends AbstractCGVisitor{
     @Override
     public Object visit(FieldAccess fieldAccess, Object param) {
         /*
-        *   address[[FieldAcess: expression -> expr name]]() =
-        *       address[[expr]]
-        *       <push> expr.type.get(name).offset
-        *       <add>
-        */
+         *   address[[FieldAcess: expression -> expr name]]() =
+         *       address[[expr]]
+         *       <push> expr.type.get(name).offset
+         *       <add>
+         */
         fieldAccess.getExpresion().accept(this, param);
-        StructureType structureType = (StructureType)fieldAccess.getExpresion().getType();
+        StructureType structureType = (StructureType) fieldAccess.getExpresion().getType();
         cg.push(structureType.get(fieldAccess.getCampo()).getOffset());
         cg.add(IntType.getInstance());
 
