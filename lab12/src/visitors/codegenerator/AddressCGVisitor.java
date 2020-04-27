@@ -1,13 +1,9 @@
 package visitors.codegenerator;
 
-import ast.Program;
-import ast.definitions.FunctionDefinition;
 import ast.definitions.VariableDefinition;
 import ast.expresions.*;
-import ast.statements.*;
 import ast.types.*;
 import codegenerator.CodeGenerator;
-import visitors.Visitor;
 
 public class AddressCGVisitor extends AbstractCGVisitor{
 

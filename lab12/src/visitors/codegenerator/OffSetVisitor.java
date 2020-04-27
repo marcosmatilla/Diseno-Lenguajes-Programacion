@@ -1,4 +1,4 @@
-package codegenerator;
+package visitors.codegenerator;
 
 import ast.definitions.FunctionDefinition;
 import ast.definitions.VariableDefinition;

@@ -1,8 +1,6 @@
 import ast.Program;
-import codegenerator.OffSetVisitor;
+import visitors.codegenerator.OffSetVisitor;
 import errorhandler.ErrorHandler;
-import introspector.model.IntrospectorModel;
-import introspector.view.IntrospectorTree;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -13,7 +11,6 @@ import semantic.TypeCheckingVisitor;
 import visitors.codegenerator.ExecuteCGVisitor;
 
 import java.io.FileReader;
-import java.io.IOException;
 
 public class Main {
 
@@ -24,20 +21,8 @@ public class Main {
 		}
 
 		String inputFileName = args[0];
-		FileReader fr = null;
-		try{
-			fr = new FileReader(inputFileName);
-		}
-		catch(Exception e){
-			System.err.print("Could not open file " + inputFileName);
-		}
+		String outputFileName = args[1];
 
-		String outputFileName;
-		if(args.length >= 2) {
-			outputFileName = args[1];
-		} else {
-			outputFileName = "output.txt";
-		}
 
 		// create a lexer that feeds off of input CharStream
 		CharStream input = CharStreams.fromFileName(inputFileName);

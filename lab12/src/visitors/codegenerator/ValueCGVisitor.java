@@ -1,5 +1,4 @@
 package visitors.codegenerator;
-
 import ast.expresions.*;
 import ast.types.IntType;
 import codegenerator.CodeGenerator;
@@ -134,7 +133,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          *      switch(expression.operator):
          *          case("+"): <add> expresssion.type.suffix()
          *          case("-"): <sub> expresssion.type.suffix()
-         *          case("*"): <mul>
+         *          case("*"): <mul> expression.type.suffix()
          *          case("/"): <div> expresssion.type.suffix()
          *          case("&"): <mod> expression.type.suffix()
          */
@@ -194,4 +193,16 @@ public class ValueCGVisitor extends AbstractCGVisitor {
         return null;
     }
 
+    @Override
+    public Object visit(InvokeFunction invokeFunction, Object param) {
+        /*
+         * value[[InvokeFunction: expression1 -> expression2 expression*]]() =
+         *      for(Expression exp: expression*)
+         *          value[[exp]]
+         *      <call> expression2.name
+         */
+        invokeFunction.getExpresions().forEach(expr -> expr.accept(addressCGVisitor, null));
+        cg.call(invokeFunction.getVariable().getName());
+        return null;
+    }
 }
