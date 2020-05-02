@@ -213,7 +213,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          *          value[[exp]]
          *      <call> expression2.name
          */
-        invokeFunction.getExpresions().forEach(expr -> expr.accept(addressCGVisitor, null));
+        invokeFunction.getExpresions().forEach(expr -> expr.accept(this, null));
         cg.call(invokeFunction.getVariable().getName());
 
         return null;

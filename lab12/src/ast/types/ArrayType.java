@@ -30,8 +30,11 @@ public class ArrayType extends AbstractType {
 
     @Override
     public Type squareBrackets(Type type) {
-        if(type instanceof IntType){
+        if(type instanceof IntType || type instanceof CharType){
             return this.getType();
+        }
+        if (type instanceof ErrorType){
+            return type;
         }
         return null;
     }
@@ -47,6 +50,11 @@ public class ArrayType extends AbstractType {
                 "type=" + type +
                 ", size=" + size +
                 '}';
+    }
+
+    @Override
+    public char suffix() {
+        return type.suffix();
     }
 
     @Override

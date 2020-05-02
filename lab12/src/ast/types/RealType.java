@@ -56,7 +56,7 @@ public class RealType extends AbstractType {
 
     @Override
     public Type canBeCastTo(Type type) {
-        if (type.isBuiltInType())
+        if (type.isBuiltInType() || type instanceof ErrorType)
             return type;
         return null;
     }

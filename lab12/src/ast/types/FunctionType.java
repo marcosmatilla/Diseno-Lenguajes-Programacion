@@ -49,6 +49,11 @@ public class FunctionType extends AbstractType {
     }
 
     @Override
+    public char suffix() {
+        return returnType.suffix();
+    }
+
+    @Override
     public String toString() {
         return "FunctionType{" +
                 "variableDefinitions=" + variableDefinitions +

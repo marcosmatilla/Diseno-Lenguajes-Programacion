@@ -130,12 +130,12 @@ expression returns [Expresion ast]: ID {$ast = new Variable($ID.getLine(), $ID.g
             | '(' expression ')' {$ast = $expression.ast;}
             | op='!' expression {$ast = new Negation($op.getLine(), $op.getCharPositionInLine() + 1, $expression.ast);}
             | e1=expression '['e2=expression']' {$ast = new Indexer($e1.start.getLine(), $e1.start.getCharPositionInLine() + 1,$e1.ast, $e2.ast);}
+            | op='('simple_type')' expression {$ast = new Cast($op.getLine(), $op.getCharPositionInLine() + 1, $expression.ast, $simple_type.ast);}
             | e1=expression '.' ID {$ast = new FieldAccess($e1.start.getLine(), $e1.start.getCharPositionInLine() + 1, $e1.ast, $ID.text);}
             | e1=expression op=('*'|'/'|'%') e2=expression {$ast = new Arithmetic($e1.start.getLine(), $e1.start.getCharPositionInLine() + 1, $e1.ast, $e2.ast, $op.text);}
             | e1=expression op=('+'|'-') e2=expression {$ast = new Arithmetic($e1.start.getLine(), $e1.start.getCharPositionInLine() + 1, $e1.ast, $e2.ast, $op.text);}
             | e1=expression op=('>'|'>='|'<'|'<='|'!='|'==') e2=expression {$ast = new Comparation($e1.start.getLine(), $e1.start.getCharPositionInLine() + 1, $e1.ast, $e2.ast, $op.text);}
             | e1=expression op=('&&'|'||') e2=expression {$ast = new Logic($e1.start.getLine(), $e1.start.getCharPositionInLine() + 1, $e1.ast, $e2.ast, $op.text);}
-            | op='('simple_type')' expression {$ast = new Cast($op.getLine(), $op.getCharPositionInLine() + 1, $expression.ast, $simple_type.ast);}
             | op='-' expression {$ast = new UnaryMinus($op.getLine(), $op.getCharPositionInLine() + 1, $expression.ast);}
             | invokeFunction {$ast = $invokeFunction.ast;}
             ;

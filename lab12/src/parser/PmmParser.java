@@ -1,4 +1,4 @@
-// Generated from C:/Users/Marcos/Desktop/INFORMATICA/TERCERO/2/DLP/lab/Diseno-Lenguajes-Programacion/lab11/src/parser\Pmm.g4 by ANTLR 4.8
+// Generated from C:/Users/Marcos/Desktop/INFORMATICA/TERCERO/2/DLP/lab/Diseno-Lenguajes-Programacion/lab12/src/parser\Pmm.g4 by ANTLR 4.8
 package parser;
 
     import ast.*;
@@ -2105,7 +2105,7 @@ public class PmmParser extends Parser {
 				setState(398);
 				match(T__4);
 				setState(399);
-				((ExpressionContext)_localctx).expression = expression(3);
+				((ExpressionContext)_localctx).expression = expression(8);
 				((ExpressionContext)_localctx).ast =  new Cast(((ExpressionContext)_localctx).op.getLine(), ((ExpressionContext)_localctx).op.getCharPositionInLine() + 1, ((ExpressionContext)_localctx).expression.ast, ((ExpressionContext)_localctx).simple_type.ast);
 				}
 				break;
@@ -2145,7 +2145,7 @@ public class PmmParser extends Parser {
 						_localctx.e1 = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(411);
-						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
+						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
 						setState(412);
 						((ExpressionContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
@@ -2158,7 +2158,7 @@ public class PmmParser extends Parser {
 							consume();
 						}
 						setState(413);
-						((ExpressionContext)_localctx).e2 = ((ExpressionContext)_localctx).expression = expression(8);
+						((ExpressionContext)_localctx).e2 = ((ExpressionContext)_localctx).expression = expression(7);
 						((ExpressionContext)_localctx).ast =  new Arithmetic((((ExpressionContext)_localctx).e1!=null?(((ExpressionContext)_localctx).e1.start):null).getLine(), (((ExpressionContext)_localctx).e1!=null?(((ExpressionContext)_localctx).e1.start):null).getCharPositionInLine() + 1, ((ExpressionContext)_localctx).e1.ast, ((ExpressionContext)_localctx).e2.ast, (((ExpressionContext)_localctx).op!=null?((ExpressionContext)_localctx).op.getText():null));
 						}
 						break;
@@ -2169,7 +2169,7 @@ public class PmmParser extends Parser {
 						_localctx.e1 = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(416);
-						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
+						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
 						setState(417);
 						((ExpressionContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
@@ -2182,7 +2182,7 @@ public class PmmParser extends Parser {
 							consume();
 						}
 						setState(418);
-						((ExpressionContext)_localctx).e2 = ((ExpressionContext)_localctx).expression = expression(7);
+						((ExpressionContext)_localctx).e2 = ((ExpressionContext)_localctx).expression = expression(6);
 						((ExpressionContext)_localctx).ast =  new Arithmetic((((ExpressionContext)_localctx).e1!=null?(((ExpressionContext)_localctx).e1.start):null).getLine(), (((ExpressionContext)_localctx).e1!=null?(((ExpressionContext)_localctx).e1.start):null).getCharPositionInLine() + 1, ((ExpressionContext)_localctx).e1.ast, ((ExpressionContext)_localctx).e2.ast, (((ExpressionContext)_localctx).op!=null?((ExpressionContext)_localctx).op.getText():null));
 						}
 						break;
@@ -2193,7 +2193,7 @@ public class PmmParser extends Parser {
 						_localctx.e1 = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(421);
-						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
+						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
 						setState(422);
 						((ExpressionContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
@@ -2206,7 +2206,7 @@ public class PmmParser extends Parser {
 							consume();
 						}
 						setState(423);
-						((ExpressionContext)_localctx).e2 = ((ExpressionContext)_localctx).expression = expression(6);
+						((ExpressionContext)_localctx).e2 = ((ExpressionContext)_localctx).expression = expression(5);
 						((ExpressionContext)_localctx).ast =  new Comparation((((ExpressionContext)_localctx).e1!=null?(((ExpressionContext)_localctx).e1.start):null).getLine(), (((ExpressionContext)_localctx).e1!=null?(((ExpressionContext)_localctx).e1.start):null).getCharPositionInLine() + 1, ((ExpressionContext)_localctx).e1.ast, ((ExpressionContext)_localctx).e2.ast, (((ExpressionContext)_localctx).op!=null?((ExpressionContext)_localctx).op.getText():null));
 						}
 						break;
@@ -2217,7 +2217,7 @@ public class PmmParser extends Parser {
 						_localctx.e1 = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(426);
-						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
+						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
 						setState(427);
 						((ExpressionContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
@@ -2230,7 +2230,7 @@ public class PmmParser extends Parser {
 							consume();
 						}
 						setState(428);
-						((ExpressionContext)_localctx).e2 = ((ExpressionContext)_localctx).expression = expression(5);
+						((ExpressionContext)_localctx).e2 = ((ExpressionContext)_localctx).expression = expression(4);
 						((ExpressionContext)_localctx).ast =  new Logic((((ExpressionContext)_localctx).e1!=null?(((ExpressionContext)_localctx).e1.start):null).getLine(), (((ExpressionContext)_localctx).e1!=null?(((ExpressionContext)_localctx).e1.start):null).getCharPositionInLine() + 1, ((ExpressionContext)_localctx).e1.ast, ((ExpressionContext)_localctx).e2.ast, (((ExpressionContext)_localctx).op!=null?((ExpressionContext)_localctx).op.getText():null));
 						}
 						break;
@@ -2258,7 +2258,7 @@ public class PmmParser extends Parser {
 						_localctx.e1 = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(437);
-						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
+						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
 						setState(438);
 						match(T__24);
 						setState(439);
@@ -2441,17 +2441,17 @@ public class PmmParser extends Parser {
 	private boolean expression_sempred(ExpressionContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
-			return precpred(_ctx, 7);
-		case 1:
 			return precpred(_ctx, 6);
-		case 2:
+		case 1:
 			return precpred(_ctx, 5);
-		case 3:
+		case 2:
 			return precpred(_ctx, 4);
+		case 3:
+			return precpred(_ctx, 3);
 		case 4:
 			return precpred(_ctx, 9);
 		case 5:
-			return precpred(_ctx, 8);
+			return precpred(_ctx, 7);
 		}
 		return true;
 	}
@@ -2597,20 +2597,20 @@ public class PmmParser extends Parser {
 		"\u0186\u0187\5\60\31\2\u0187\u0188\7\7\2\2\u0188\u0189\b\31\1\2\u0189"+
 		"\u019c\3\2\2\2\u018a\u018b\7\32\2\2\u018b\u018c\5\60\31\f\u018c\u018d"+
 		"\b\31\1\2\u018d\u019c\3\2\2\2\u018e\u018f\7\6\2\2\u018f\u0190\5\24\13"+
-		"\2\u0190\u0191\7\7\2\2\u0191\u0192\5\60\31\5\u0192\u0193\b\31\1\2\u0193"+
+		"\2\u0190\u0191\7\7\2\2\u0191\u0192\5\60\31\n\u0192\u0193\b\31\1\2\u0193"+
 		"\u019c\3\2\2\2\u0194\u0195\7 \2\2\u0195\u0196\5\60\31\4\u0196\u0197\b"+
 		"\31\1\2\u0197\u019c\3\2\2\2\u0198\u0199\5\62\32\2\u0199\u019a\b\31\1\2"+
 		"\u019a\u019c\3\2\2\2\u019b\u017c\3\2\2\2\u019b\u017f\3\2\2\2\u019b\u0181"+
 		"\3\2\2\2\u019b\u0183\3\2\2\2\u019b\u0185\3\2\2\2\u019b\u018a\3\2\2\2\u019b"+
 		"\u018e\3\2\2\2\u019b\u0194\3\2\2\2\u019b\u0198\3\2\2\2\u019c\u01bd\3\2"+
-		"\2\2\u019d\u019e\f\t\2\2\u019e\u019f\t\2\2\2\u019f\u01a0\5\60\31\n\u01a0"+
-		"\u01a1\b\31\1\2\u01a1\u01bc\3\2\2\2\u01a2\u01a3\f\b\2\2\u01a3\u01a4\t"+
-		"\3\2\2\u01a4\u01a5\5\60\31\t\u01a5\u01a6\b\31\1\2\u01a6\u01bc\3\2\2\2"+
-		"\u01a7\u01a8\f\7\2\2\u01a8\u01a9\t\4\2\2\u01a9\u01aa\5\60\31\b\u01aa\u01ab"+
-		"\b\31\1\2\u01ab\u01bc\3\2\2\2\u01ac\u01ad\f\6\2\2\u01ad\u01ae\t\5\2\2"+
-		"\u01ae\u01af\5\60\31\7\u01af\u01b0\b\31\1\2\u01b0\u01bc\3\2\2\2\u01b1"+
+		"\2\2\u019d\u019e\f\b\2\2\u019e\u019f\t\2\2\2\u019f\u01a0\5\60\31\t\u01a0"+
+		"\u01a1\b\31\1\2\u01a1\u01bc\3\2\2\2\u01a2\u01a3\f\7\2\2\u01a3\u01a4\t"+
+		"\3\2\2\u01a4\u01a5\5\60\31\b\u01a5\u01a6\b\31\1\2\u01a6\u01bc\3\2\2\2"+
+		"\u01a7\u01a8\f\6\2\2\u01a8\u01a9\t\4\2\2\u01a9\u01aa\5\60\31\7\u01aa\u01ab"+
+		"\b\31\1\2\u01ab\u01bc\3\2\2\2\u01ac\u01ad\f\5\2\2\u01ad\u01ae\t\5\2\2"+
+		"\u01ae\u01af\5\60\31\6\u01af\u01b0\b\31\1\2\u01b0\u01bc\3\2\2\2\u01b1"+
 		"\u01b2\f\13\2\2\u01b2\u01b3\7\20\2\2\u01b3\u01b4\5\60\31\2\u01b4\u01b5"+
-		"\7\21\2\2\u01b5\u01b6\b\31\1\2\u01b6\u01bc\3\2\2\2\u01b7\u01b8\f\n\2\2"+
+		"\7\21\2\2\u01b5\u01b6\b\31\1\2\u01b6\u01bc\3\2\2\2\u01b7\u01b8\f\t\2\2"+
 		"\u01b8\u01b9\7\33\2\2\u01b9\u01ba\7,\2\2\u01ba\u01bc\b\31\1\2\u01bb\u019d"+
 		"\3\2\2\2\u01bb\u01a2\3\2\2\2\u01bb\u01a7\3\2\2\2\u01bb\u01ac\3\2\2\2\u01bb"+
 		"\u01b1\3\2\2\2\u01bb\u01b7\3\2\2\2\u01bc\u01bf\3\2\2\2\u01bd\u01bb\3\2"+

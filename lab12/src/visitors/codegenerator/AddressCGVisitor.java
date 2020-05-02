@@ -67,7 +67,7 @@ public class AddressCGVisitor extends AbstractCGVisitor {
          *      <add>
          */
         indexer.getExpresion1().accept(this, param);
-        indexer.getExpresion2().accept(this, valueCGVisitor);
+        indexer.getExpresion2().accept(valueCGVisitor, param);
 
         cg.convert(indexer.getExpresion2().getType(), IntType.getInstance());
 

@@ -136,7 +136,7 @@ public class CodeGenerator {
     }
 
     public void call(String name) {
-        println("call" + name);
+        println_tab("call " + name);
     }
 
     public void halt() {

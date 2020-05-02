@@ -11,6 +11,8 @@ import ast.types.IntType;
 import ast.types.VoidType;
 import codegenerator.CodeGenerator;
 
+import java.util.ArrayList;
+
 public class ExecuteCGVisitor extends AbstractCGVisitor {
     private CodeGenerator cg;
 
@@ -83,9 +85,12 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         int numberOfBytesLocal = 0;
         int numberOfBytesParam = 0;
 
+        int numberOfBytesRet = ((FunctionType)functionDefinition.getType()).getReturnType().numberOfBytes();
+
         cg.comment("Parametros");
         for (VariableDefinition v : functionType.getVariableDefinitions()) {
             numberOfBytesParam += v.getType().numberOfBytes();
+            v.accept(this, param);
         }
 
         cg.comment("Variables Locales");
@@ -96,16 +101,46 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
             }
         }
 
+
+        ArrayList<Integer> pass = new ArrayList<Integer>();
+        pass.add(numberOfBytesRet);
+        pass.add(numberOfBytesLocal);
+        pass.add(numberOfBytesParam);
+
         cg.enter(numberOfBytesLocal);
 
         for (Statement st : functionDefinition.getStatements()) {
             if (!(st instanceof VariableDefinition))
-                st.accept(this, param);
+                st.accept(this, pass);//aqui
         }
 
         if (functionType.getReturnType() instanceof VoidType) {
             cg.ret(0, numberOfBytesLocal, numberOfBytesParam);
         }
+        return null;
+    }
+
+    @Override
+    public Object visit(FunctionType functionType, Object param) {
+        functionType.getVariableDefinitions().forEach(p -> p.accept(this, null));
+        return null;
+    }
+
+    @Override
+    public Object visit(Return _return, Object param) {
+        /*
+         * execute[[Return: statement -> statement]]() =
+         *      value[[expression]]()
+         *      <ret> expression.type.numberOfByte()<,>funcDef.bytesLocalSum<,>funcDef.type.bytesParamsSum
+         */
+        cg.lineDirective(_return.getLine());
+        cg.comment("Return");
+
+        ArrayList passed = (ArrayList)param;
+
+        _return.getExpresion().accept(valueCGVisitor, param);
+        cg.ret((int)passed.get(0), (int)passed.get(1), (int)passed.get(2));
+
         return null;
     }
 
@@ -135,6 +170,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         assigment.getExpresion2().accept(valueCGVisitor, param);
 
         cg.convert(assigment.getExpresion2().getType(), assigment.getExpresion1().getType());
+
         cg.store(assigment.getExpresion1().getType());
 
         return null;
@@ -168,6 +204,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
          */
         cg.lineDirective(print.getLine());
         cg.comment("Write");
+
         print.getExpresion().accept(valueCGVisitor, param);
         cg.out(print.getExpresion().getType());
 
@@ -182,22 +219,17 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
          *      if(!((Expression)statement).type instanceof VoidType))
          *          <pop> expression.type.suffix()
          */
-        invokeFunction.getExpresions().forEach(exp -> exp.accept(valueCGVisitor, null));
+
+        cg.lineDirective(invokeFunction.getLine());
+
+        invokeFunction.getExpresions().forEach(exp -> exp.accept(valueCGVisitor, param));
+        cg.call(invokeFunction.getVariable().getName());
         if (!(((FunctionType) invokeFunction.getVariable().getType()).getReturnType() instanceof VoidType)) {
             cg.pop(((FunctionType) invokeFunction.getVariable().getType()).getReturnType());
         }
         return null;
     }
 
-    @Override
-    public Object visit(Return _return, Object param) {
-        /*
-         * execute[[Return: statement -> statement]]() =
-         *      value[[expression]]()
-         *      <ret> expression.type.numberOfByte()<,>funcDef.bytesLocalSum<,>funcDef.type.bytesParamsSum
-         */
-        return null;
-    }
 
     @Override
     public Object visit(IfElse ifElse, Object param) {
@@ -219,18 +251,24 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
          */
         cg.lineDirective(ifElse.getExpresion().getLine());
         cg.comment("If");
+
         int labelCondition = cg.getLabel();
-        ifElse.getExpresion().accept(valueCGVisitor, null);
+
+        ifElse.getExpresion().accept(valueCGVisitor, param);
+        cg.convert(ifElse.getExpresion().getType(), IntType.getInstance());
         cg.jz("else" + labelCondition);
 
+        cg.comment("if body");
         for (Statement st2 : ifElse.getIfs()) {
-            st2.accept(this, null);
+            st2.accept(this, param);
         }
-        cg.jmp("end_else" + labelCondition);
+        cg.jmp("end_if" + labelCondition);
+
 
         cg.label("else" + labelCondition);
+        cg.comment("else body");
         for (Statement st3 : ifElse.getElses()) {
-            st3.accept(this, null);
+            st3.accept(this, param);
         }
         cg.label("end_else" + labelCondition);
 
@@ -242,32 +280,30 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         /*
          * execute[[While: statement -> expression statement*]]() =
          *      int labelCondition = cg.getLabel();
-         *      int labelEnd = cg.getLabel();
          *      <label> labelCondition <:>
          *      value[[expression]]()
-         *      <jz> <label> labelEnd
+         *      <jz> <label> labelCondition
          *      for(Statement st: statement*)
          *          execute[[st]]()
          *      <jmp label> labelCondition
-         *      <label> labelEnd <:>
+         *      <label> labelCondition <:>
          */
         cg.lineDirective(_while.getLine());
         cg.comment("While");
 
         int labelCondition = cg.getLabel();
-        int labelEnd = cg.getLabel();
 
         cg.label("while" + labelCondition);
-        _while.getExpresion().accept(valueCGVisitor, null);
+        _while.getExpresion().accept(valueCGVisitor, param);
         cg.convert(_while.getExpresion().getType(), IntType.getInstance());
-        cg.jz("while_end" + labelEnd);
+        cg.jz("while_end" + labelCondition);
 
-        cg.comment("Body");
+        cg.comment("while body");
         for (Statement st : _while.getStatements()) {
             st.accept(this, param);
         }
         cg.jmp("while" + labelCondition);
-        cg.label("while_end" + labelEnd);
+        cg.label("while_end" + labelCondition);
 
         return null;
     }
