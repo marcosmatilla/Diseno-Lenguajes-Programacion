@@ -256,7 +256,7 @@ public class CodeGenerator {
     }
 
     public void principalDirective(String inputFileName) {
-        println("\n#source " + "\" + inputFileName + \"" + "\n");
+        println("\n#source " + "\"" + inputFileName + "\"" + "\n");
     }
 
     public void lineDirective(int line) {

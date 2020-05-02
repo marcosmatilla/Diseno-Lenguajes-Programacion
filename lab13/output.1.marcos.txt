@@ -1,5 +1,5 @@
 
-#source " + inputFileName + "
+#source "input.1.txt"
 
 	' * ArrayType{type=double, size=10} v (offset 0)
 
