@@ -262,7 +262,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         for (Statement st2 : ifElse.getIfs()) {
             st2.accept(this, param);
         }
-        cg.jmp("end_if" + labelCondition);
+        cg.jmp("end_else" + labelCondition);
 
 
         cg.label("else" + labelCondition);
