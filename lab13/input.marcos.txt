@@ -1,0 +1,15 @@
+
+pair:struct {
+	integer:int;
+	character:char;
+};
+
+def f(r:double, e:int):int {
+	real:double;
+
+	real = (double)(pair.character)+(double)(pair.integer)+r+(double)e;
+}
+def main(): {
+    f(1.3, 2); # Invocation (function) as statement
+
+}
