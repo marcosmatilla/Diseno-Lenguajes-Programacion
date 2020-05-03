@@ -170,12 +170,16 @@ halt
 	pushi -2
 	addi
 	loadi
+	dupi
+	jz end_logical3
 	push bp
 	pushi -4
 	addi
 	loadi
 	call check
 	and
+
+ end_logical3:
 	jz else2
 	' * if body
 
@@ -247,13 +251,17 @@ halt
 	addi
 	loadi
 	not
+	dupi
+	jz end_logical5
 	push bp
 	pushi -4
 	addi
 	loadi
 	call check
 	and
-	jz else3
+
+ end_logical5:
+	jz else4
 	' * if body
 
 #line 22
@@ -280,9 +288,9 @@ halt
 	' * Write
 	pushb 10
 	outb
-	jmp end_else3
+	jmp end_else4
 
- else3:
+ else4:
 	' * else body
 
 #line 24
@@ -315,7 +323,7 @@ halt
 	pushb 10
 	outb
 
- end_else3:
+ end_else4:
 	ret	0, 4, 0
 
 #line 36

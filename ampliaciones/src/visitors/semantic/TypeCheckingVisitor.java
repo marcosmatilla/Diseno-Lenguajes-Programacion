@@ -6,8 +6,6 @@ import ast.statements.*;
 import ast.types.*;
 import visitors.AbstratVisitor;
 
-import javax.sound.midi.VoiceStatus;
-
 public class TypeCheckingVisitor extends AbstratVisitor {
     @Override
     public Object visit(IfElse ifElse, Object param) {
@@ -136,7 +134,6 @@ public class TypeCheckingVisitor extends AbstratVisitor {
 
     @Override
     public Object visit(Logic logic, Object param) {
-        //super.visit(logic, param);
         logic.getExpresion1().accept(this, param);
         logic.getExpresion2().accept(this, param);
 

@@ -111,8 +111,8 @@ public class CodeGenerator {
         println_tab("or");
     }
 
-    public void dup() {
-        println_tab("dup");
+    public void dup(Type type) {
+        println_tab("dup" + type.suffix());
     }
 
     public void ret(int numerOfBytesReturnType, int numberOfBytesLocal, int numberOfBytesParam) {
@@ -265,6 +265,10 @@ public class CodeGenerator {
         println_tab("jz " + jump);
     }
 
+    public void jnz(String jump) {
+        println_tab("jnz " + jump);
+    }
+
     public void label(String name) {
         println("\n " + name + ":");
     }
@@ -292,4 +296,6 @@ public class CodeGenerator {
                 break;
         }
     }
+
+
 }

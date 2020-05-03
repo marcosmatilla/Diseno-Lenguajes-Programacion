@@ -209,14 +209,24 @@ public class ValueCGVisitor extends AbstractCGVisitor {
             cg.or();
 
         } else {
+            int label = cg.getLabel();
             logic.getExpresion1().accept(this, param);
             cg.convert(logic.getExpresion1().getType(), logic.getType());
+            if(logic.getOperador().equals("&&")){
+                cg.dup(logic.getType());
+                cg.jz("end_logical" + label);
+            }
+            else if(logic.getOperador().equals("||")){
+                cg.dup(logic.getType());
+                cg.jnz("end_logical" + label);
 
-
+            }
             logic.getExpresion2().accept(this, param);
             cg.convert(logic.getExpresion2().getType(), logic.getType());
 
             cg.logical(logic.getOperador());
+
+            cg.label("end_logical" + label);
         }
 
 
