@@ -75,7 +75,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          */
         unaryMinus.getExpresion().accept(this, param);
         cg.push(-1);
-        cg.convert(IntType.getInstance(), unaryMinus.getType());
+        //cg.convert(IntType.getInstance(), unaryMinus.getType());
         cg.mul(unaryMinus.getType());
 
         return null;
@@ -90,7 +90,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          */
         negation.getExpresion().accept(this, param);
 
-        cg.convert(negation.getExpresion().getType(), negation.getType());
+        //cg.convert(negation.getExpresion().getType(), negation.getType());
         cg.not();
 
         return null;
@@ -116,8 +116,8 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          *      address[[expression]]()
          *      <load> expression.type.suffix()
          */
-        indexer.accept(addressCGVisitor, param);
-        cg.load(indexer.getType());
+        indexer.accept(addressCGVisitor, param); //devolveria el 4 a la pila
+        cg.load(indexer.getType()); // devolveria en la pila w[2]
 
         return null;
     }
@@ -156,10 +156,10 @@ public class ValueCGVisitor extends AbstractCGVisitor {
                 store*/
 
         arithmetic.getExpresion1().accept(this, param);
-        cg.convert(arithmetic.getExpresion1().getType(), arithmetic.getType());
+        //cg.convert(arithmetic.getExpresion1().getType(), arithmetic.getType());
 
         arithmetic.getExpresion2().accept(this, param);
-        cg.convert(arithmetic.getExpresion2().getType(), arithmetic.getType());
+        //cg.convert(arithmetic.getExpresion2().getType(), arithmetic.getType());
 
         cg.arithmetic(arithmetic.getType(), arithmetic.getOperador());
 
@@ -181,10 +181,10 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          *          case("!="): <e> expresssion.type.suffix()
          */
         comparation.getExpresion1().accept(this, param);
-        cg.convert(comparation.getExpresion1().getType(), comparation.getExpresion2().getType());
+        //cg.convert(comparation.getExpresion1().getType(), comparation.getExpresion2().getType());
 
         comparation.getExpresion2().accept(this, param);
-        cg.convert(comparation.getExpresion2().getType(), comparation.getExpresion2().getType());
+        //cg.convert(comparation.getExpresion2().getType(), comparation.getExpresion2().getType());
 
         cg.comparasion(comparation.getType(), comparation.getOperador());
 
@@ -218,7 +218,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
         } else {
             int label = cg.getLabel();
             logic.getExpresion1().accept(this, param);
-            cg.convert(logic.getExpresion1().getType(), logic.getType());
+            //cg.convert(logic.getExpresion1().getType(), logic.getType());
             if(logic.getOperador().equals("&&")){
                 cg.dup(logic.getType());
                 cg.jz("end_logical" + label);
@@ -229,7 +229,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
 
             }
             logic.getExpresion2().accept(this, param);
-            cg.convert(logic.getExpresion2().getType(), logic.getType());
+            //cg.convert(logic.getExpresion2().getType(), logic.getType());
 
             cg.logical(logic.getOperador());
 
@@ -279,7 +279,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
             cg.convert(CharType.getInstance(), IntType.getInstance());
 
         cg.push(1);
-        cg.convert(IntType.getInstance(), type);
+        //cg.convert(IntType.getInstance(), type);
 
         cg.arth(type, postArithmetic.getOperador());
 

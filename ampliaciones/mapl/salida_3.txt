@@ -1,0 +1,338 @@
+
+#source "input.ampliaciones.xor.1.txt"
+
+
+' Invocation to the main function
+call main
+halt
+
+#line 1
+
+ check:
+	' * Parametros
+	' * int i (offset 4)
+	' * Variables Locales
+	enter 0
+
+#line 3
+	' * Write
+	pushb 67
+	outb
+
+#line 3
+	' * Write
+	pushb 104
+	outb
+
+#line 3
+	' * Write
+	pushb 101
+	outb
+
+#line 3
+	' * Write
+	pushb 99
+	outb
+
+#line 3
+	' * Write
+	pushb 107
+	outb
+
+#line 3
+	' * Write
+	pushb 10
+	outb
+
+#line 4
+	' * Return
+	push bp
+	pushi 4
+	addi
+	loadi
+	ret	2, 0, 2
+
+#line 7
+
+ right:
+	' * Parametros
+	' * Variables Locales
+	' * int a (offset -2)
+	' * int b (offset -4)
+	enter 4
+
+#line 9
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 1
+	storei
+
+#line 10
+	' * Assignment
+	push bp
+	pushi -4
+	addi
+	pushi 1
+	storei
+
+#line 11
+	' * If
+	push bp
+	pushi -2
+	addi
+	loadi
+	push bp
+	pushi -4
+	addi
+	loadi
+	not
+	and
+	push bp
+	pushi -4
+	addi
+	loadi
+	push bp
+	pushi -2
+	addi
+	loadi
+	not
+	and
+	or
+	jz else1
+	' * if body
+
+#line 12
+	' * Write
+	pushb 84
+	outb
+
+#line 12
+	' * Write
+	pushb 114
+	outb
+
+#line 12
+	' * Write
+	pushb 117
+	outb
+
+#line 12
+	' * Write
+	pushb 101
+	outb
+
+#line 12
+	' * Write
+	pushb 10
+	outb
+	jmp end_else1
+
+ else1:
+	' * else body
+
+#line 14
+	' * Write
+	pushb 70
+	outb
+
+#line 14
+	' * Write
+	pushb 97
+	outb
+
+#line 14
+	' * Write
+	pushb 108
+	outb
+
+#line 14
+	' * Write
+	pushb 115
+	outb
+
+#line 14
+	' * Write
+	pushb 101
+	outb
+
+#line 14
+	' * Write
+	pushb 10
+	outb
+
+ end_else1:
+
+#line 16
+	' * If
+	push bp
+	pushi -2
+	addi
+	loadi
+	dupi
+	jz end_logical3
+	push bp
+	pushi -4
+	addi
+	loadi
+	call check
+	and
+
+ end_logical3:
+	jz else2
+	' * if body
+
+#line 17
+	' * Write
+	pushb 84
+	outb
+
+#line 17
+	' * Write
+	pushb 114
+	outb
+
+#line 17
+	' * Write
+	pushb 117
+	outb
+
+#line 17
+	' * Write
+	pushb 101
+	outb
+
+#line 17
+	' * Write
+	pushb 10
+	outb
+	jmp end_else2
+
+ else2:
+	' * else body
+
+#line 19
+	' * Write
+	pushb 70
+	outb
+
+#line 19
+	' * Write
+	pushb 97
+	outb
+
+#line 19
+	' * Write
+	pushb 108
+	outb
+
+#line 19
+	' * Write
+	pushb 115
+	outb
+
+#line 19
+	' * Write
+	pushb 101
+	outb
+
+#line 19
+	' * Write
+	pushb 10
+	outb
+
+ end_else2:
+
+#line 21
+	' * If
+	push bp
+	pushi -2
+	addi
+	loadi
+	not
+	dupi
+	jz end_logical5
+	push bp
+	pushi -4
+	addi
+	loadi
+	call check
+	and
+
+ end_logical5:
+	jz else4
+	' * if body
+
+#line 22
+	' * Write
+	pushb 84
+	outb
+
+#line 22
+	' * Write
+	pushb 114
+	outb
+
+#line 22
+	' * Write
+	pushb 117
+	outb
+
+#line 22
+	' * Write
+	pushb 101
+	outb
+
+#line 22
+	' * Write
+	pushb 10
+	outb
+	jmp end_else4
+
+ else4:
+	' * else body
+
+#line 24
+	' * Write
+	pushb 70
+	outb
+
+#line 24
+	' * Write
+	pushb 97
+	outb
+
+#line 24
+	' * Write
+	pushb 108
+	outb
+
+#line 24
+	' * Write
+	pushb 115
+	outb
+
+#line 24
+	' * Write
+	pushb 101
+	outb
+
+#line 24
+	' * Write
+	pushb 10
+	outb
+
+ end_else4:
+	ret	0, 4, 0
+
+#line 36
+
+ main:
+	' * Parametros
+	' * Variables Locales
+	enter 0
+
+#line 37
+	call right
+	ret	0, 0, 0

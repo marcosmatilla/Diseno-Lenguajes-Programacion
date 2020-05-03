@@ -113,14 +113,12 @@ assigment returns [Assigment ast]: e1=expression '=' e2=expression';' {$ast = ne
         ;
 
 
-
 ifElse returns [IfElse ast]: op='if' e=expression ':' s1=statement {$ast = new IfElse($op.getLine(), $op.getCharPositionInLine() + 1, $e.ast, $s1.ast);}
         | op='if' e=expression ':' s1=statement 'else' '{' ss2=statements '}' {$ast = new IfElse($op.getLine(), $op.getCharPositionInLine() + 1, $e.ast, $s1.ast, $ss2.ast);}
         | op='if' e=expression ':' s1=statement 'else' s2=statement {$ast = new IfElse($op.getLine(), $op.getCharPositionInLine() + 1, $e.ast, $s1.ast, $s2.ast);}
         | op='if' e=expression ':' '{' ss1=statements '}' {$ast = new IfElse($op.getLine(), $op.getCharPositionInLine() + 1, $e.ast, $ss1.ast);}
         | op='if' e=expression ':' '{' ss1=statements '}' 'else' s2=statement {$ast = new IfElse($op.getLine(), $op.getCharPositionInLine() + 1, $e.ast, $ss1.ast, $s2.ast );}
         | op='if' e=expression ':' '{' ss1=statements '}' 'else' '{' ss2=statements '}' {$ast = new IfElse($op.getLine(), $op.getCharPositionInLine() + 1, $e.ast, $ss1.ast, $ss2.ast );}
-
         ;
 
 while_statement returns [While ast]: op='while' expression ':' '{' statements '}' {$ast = new While($op.getLine(), $op.getCharPositionInLine() + 1, $expression.ast, $statements.ast );}

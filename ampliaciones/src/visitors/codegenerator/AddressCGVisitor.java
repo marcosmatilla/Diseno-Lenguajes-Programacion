@@ -65,15 +65,16 @@ public class AddressCGVisitor extends AbstractCGVisitor {
          *      <push> expression.type.numBytes()
          *      <mul>
          *      <add>
+         w[9]:int; -> [0,2,(5),8] queremos w[2]
          */
-        indexer.getExpresion1().accept(this, param);
-        indexer.getExpresion2().accept(valueCGVisitor, param);
+        indexer.getExpresion1().accept(this, param); //dirección de w   [0]
+        indexer.getExpresion2().accept(valueCGVisitor, param); //valor de la posicion [0,2] (el 2 es la posicion a la que queremos acceder)
 
-        cg.convert(indexer.getExpresion2().getType(), IntType.getInstance());
+        //cg.convert(indexer.getExpresion2().getType(), IntType.getInstance());
 
-        cg.push(indexer.getType().numberOfBytes());
-        cg.mul(IntType.getInstance());
-        cg.add(IntType.getInstance());
+        cg.push(indexer.getType().numberOfBytes()); //[0,2,2] -> ultimo 2 pr lo q ocupan los enteros
+        cg.mul(IntType.getInstance()); // [0,4]
+        cg.add(IntType.getInstance()); // [4] direccion del segunda posiocion
 
         return null;
     }
