@@ -35,4 +35,6 @@ public interface Type extends ASTNode {
     StructureField get(String string);
 
     char suffix();
+
+    Type pArithmetic();
 }

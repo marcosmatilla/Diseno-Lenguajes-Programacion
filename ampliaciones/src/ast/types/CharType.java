@@ -50,6 +50,11 @@ public class CharType extends AbstractType {
     }
 
     @Override
+    public Type pArithmetic() {
+        return this;
+    }
+
+    @Override
     public int numberOfBytes() {
         return 1;
     }

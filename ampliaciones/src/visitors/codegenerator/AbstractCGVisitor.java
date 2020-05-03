@@ -76,6 +76,16 @@ public class AbstractCGVisitor implements Visitor {
     }
 
     @Override
+    public Object visit(PostArithmetic postArithmetic, Object param) {
+        throw new IllegalStateException("Error");
+    }
+
+    @Override
+    public Object visit(PreArithmetic preArithmetic, Object param) {
+        throw new IllegalStateException("Error");
+    }
+
+    @Override
     public Object visit(Assigment assigment, Object param) {
         throw new IllegalStateException("Error");
     }

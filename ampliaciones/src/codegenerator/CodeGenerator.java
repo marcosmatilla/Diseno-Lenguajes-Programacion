@@ -5,6 +5,7 @@ import ast.types.Type;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.UnrecoverableEntryException;
 
 public class CodeGenerator {
     protected FileWriter fileWriter;
@@ -268,4 +269,14 @@ public class CodeGenerator {
     }
 
 
+    public void arth(Type type, String operador) {
+        switch (operador){
+            case "++":
+                add(type);
+                break;
+            case "--":
+                subtract(type);
+                break;
+        }
+    }
 }

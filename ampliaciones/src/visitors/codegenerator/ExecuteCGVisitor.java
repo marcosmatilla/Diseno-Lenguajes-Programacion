@@ -5,6 +5,8 @@ import ast.definitions.Definition;
 import ast.definitions.FunctionDefinition;
 import ast.definitions.VariableDefinition;
 import ast.expresions.InvokeFunction;
+import ast.expresions.PostArithmetic;
+import ast.expresions.PreArithmetic;
 import ast.statements.*;
 import ast.types.FunctionType;
 import ast.types.IntType;
@@ -305,6 +307,34 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         cg.jmp("while" + labelCondition);
         cg.label("while_end" + labelCondition);
 
+        return null;
+    }
+
+    @Override
+    public Object visit(PostArithmetic postArithmetic, Object param) {
+        /*
+         * execute[[postArithmetic: statement, expression -> expression operador:string]]() =
+         *      value[[postArithmetic]]()
+         */
+        cg.lineDirective(postArithmetic.getLine());
+        cg.comment("PostArithmetic");
+
+        postArithmetic.accept(valueCGVisitor, param);
+        cg.pop(postArithmetic.getType());
+        return null;
+    }
+
+    @Override
+    public Object visit(PreArithmetic preArithmetic, Object param) {
+        /*
+         *
+         *
+         */
+        cg.lineDirective(preArithmetic.getLine());
+        cg.comment("PreArithmetic");
+        preArithmetic.accept(valueCGVisitor, param);		// VALUE[[preArithmetic]]
+
+        cg.pop(preArithmetic.getType());
         return null;
     }
 }

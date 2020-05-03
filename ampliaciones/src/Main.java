@@ -1,4 +1,6 @@
 import ast.Program;
+import introspector.model.IntrospectorModel;
+import introspector.view.IntrospectorTree;
 import visitors.codegenerator.OffSetVisitor;
 import errorhandler.ErrorHandler;
 import org.antlr.v4.runtime.CharStream;

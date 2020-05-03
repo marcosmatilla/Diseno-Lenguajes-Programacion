@@ -91,6 +91,18 @@ public abstract class AbstratVisitor implements Visitor {
     }
 
     @Override
+    public Object visit(PostArithmetic postArithmetic, Object param) {
+        postArithmetic.getExpression().accept(this, param);
+        return null;
+    }
+
+    @Override
+    public Object visit(PreArithmetic preArithmetic, Object param) {
+        preArithmetic.getExpression().accept(this, param);
+        return null;
+    }
+
+    @Override
     public Object visit(Assigment assigment, Object param) {
         assigment.getExpresion1().accept(this, param);
         assigment.getExpresion2().accept(this, param);

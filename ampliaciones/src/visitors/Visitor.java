@@ -37,6 +37,10 @@ public interface Visitor {
     /* Statement-Expression */
     Object visit(InvokeFunction invokeFunction, Object param);
 
+    Object visit(PostArithmetic postArithmetic, Object param);
+
+    Object visit(PreArithmetic preArithmetic, Object param);
+
     /* Statement */
     Object visit(Assigment assigment, Object param);
 

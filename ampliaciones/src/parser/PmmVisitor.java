@@ -1,4 +1,4 @@
-// Generated from C:/Users/Marcos/Desktop/INFORMATICA/TERCERO/2/DLP/lab/Diseno-Lenguajes-Programacion/lab12/src/parser\Pmm.g4 by ANTLR 4.8
+// Generated from C:/Users/Marcos/Desktop/INFORMATICA/TERCERO/2/DLP/lab/Diseno-Lenguajes-Programacion/ampliaciones/src/parser\Pmm.g4 by ANTLR 4.8
 package parser;
 
     import ast.*;
@@ -159,17 +159,29 @@ public interface PmmVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhile_statement(PmmParser.While_statementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PmmParser#expression}.
+	 * Visit a parse tree produced by {@link PmmParser#post_arithmetic}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpression(PmmParser.ExpressionContext ctx);
+	T visitPost_arithmetic(PmmParser.Post_arithmeticContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PmmParser#pre_arithmetic}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPre_arithmetic(PmmParser.Pre_arithmeticContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PmmParser#invokeFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitInvokeFunction(PmmParser.InvokeFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PmmParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpression(PmmParser.ExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PmmParser#expressions}.
 	 * @param ctx the parse tree

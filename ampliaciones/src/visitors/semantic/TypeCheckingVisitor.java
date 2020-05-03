@@ -6,6 +6,8 @@ import ast.statements.*;
 import ast.types.*;
 import visitors.AbstratVisitor;
 
+import javax.sound.midi.VoiceStatus;
+
 public class TypeCheckingVisitor extends AbstratVisitor {
     @Override
     public Object visit(IfElse ifElse, Object param) {
@@ -174,7 +176,7 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     @Override
     public Object visit(Variable variable, Object param) {
         variable.setLValue(true);
-        if (variable.definition.getType() != null)
+        if (variable.definition.getType() != null) //enlace variable y tipo
             variable.setType(variable.definition.getType());
         return null;
     }
@@ -189,6 +191,34 @@ public class TypeCheckingVisitor extends AbstratVisitor {
         if (invokeFunction.getType() == null) {
             invokeFunction.setType(new ErrorType(invokeFunction.getLine(), invokeFunction.getColumn(), "Wrong parameters in the invocation"));
         }
+        return null;
+    }
+
+    @Override
+    public Object visit(PostArithmetic postArithmetic, Object param) {
+        postArithmetic.getExpression().accept(this, param);
+
+        postArithmetic.setLValue(false);
+
+        postArithmetic.setType(postArithmetic.getExpression().getType().pArithmetic());
+        if(postArithmetic.getType() == null){
+            postArithmetic.setType(new ErrorType(postArithmetic.getLine(), postArithmetic.getColumn(), "Type for post arithmetic must be int or char"));
+        }
+
+        return null;
+    }
+
+    @Override
+    public Object visit(PreArithmetic preArithmetic, Object param) {
+        preArithmetic.getExpression().accept(this, param);
+
+        preArithmetic.setLValue(false);
+
+        preArithmetic.setType(preArithmetic.getExpression().getType().pArithmetic());
+        if(preArithmetic.getType() == null){
+            preArithmetic.setType(new ErrorType(preArithmetic.getLine(), preArithmetic.getColumn(), "Type for pre arithmetic must be int or char"));
+        }
+
         return null;
     }
 

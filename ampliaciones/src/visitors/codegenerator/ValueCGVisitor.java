@@ -1,7 +1,9 @@
 package visitors.codegenerator;
 
 import ast.expresions.*;
+import ast.types.CharType;
 import ast.types.IntType;
+import ast.types.Type;
 import codegenerator.CodeGenerator;
 
 public class ValueCGVisitor extends AbstractCGVisitor {
@@ -215,6 +217,75 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          */
         invokeFunction.getExpresions().forEach(expr -> expr.accept(this, null));
         cg.call(invokeFunction.getVariable().getName());
+
+        return null;
+    }
+
+    @Override
+    public Object visit(PostArithmetic postArithmetic, Object param) {
+        /*
+         * value[[PostArithmetic: statement, expression -> expr2 operador]]() =
+         *      if(type instanceof CharType)
+         *          convert(char,int)
+         *      <push> 1
+         *      switch(expression.operator):
+         *          case '--' <sub> postAr.type.suffix
+                    case '++' <add> postAr.type.suffix
+         *      if(type instanceof CharType)
+         *          convert(int, char)
+         *       <store> postAr.type
+         */
+        Type type = postArithmetic.getExpression().getType() instanceof CharType ? IntType.getInstance() : postArithmetic.getType();
+
+        postArithmetic.getExpression().accept(this, param);				// VALUE[[expr]]
+        postArithmetic.getExpression().accept(addressCGVisitor, param);	// ADDRESS[[expr]]
+        postArithmetic.getExpression().accept(this, param);				// VALUE[[expr]]
+
+        // Si la expresion es char, hay que convertirla a entero primero, para sumarle 1
+        if(postArithmetic.getExpression().getType() instanceof CharType)
+            cg.convert(CharType.getInstance(), IntType.getInstance());
+
+        cg.push(1);
+        cg.convert(IntType.getInstance(), type);
+
+        cg.arth(type, postArithmetic.getOperador());
+
+        // Si la expresion es char, despues de convertirla en entero y sumarle 1, la volvemos a convertir en char
+        if(postArithmetic.getExpression().getType() instanceof CharType)
+            cg.convert(IntType.getInstance(), CharType.getInstance());
+
+        cg.store(postArithmetic.getType());
+
+        return null;
+    }
+
+    @Override
+    public Object visit(PreArithmetic preArithmetic, Object param) {
+        /*
+         *
+         *
+         */
+        Type type = preArithmetic.getExpression().getType() instanceof CharType ? IntType.getInstance() : preArithmetic.getType();
+
+        preArithmetic.getExpression().accept(addressCGVisitor, param);		// ADDRESS[[expr]]
+        preArithmetic.getExpression().accept(this, param);				// VALUE[[expr]]
+
+        // Si la expresion es char, hay que convertirla a entero primero, para sumarle 1
+        if(preArithmetic.getExpression().getType() instanceof CharType)
+            cg.convert(CharType.getInstance(), IntType.getInstance());
+
+        cg.push(1);
+        cg.convert(IntType.getInstance(), type);
+
+        cg.arth(type, preArithmetic.getOperador());
+
+        // Si la expresion es char, despues de convertirla en entero y sumarle 1, la volvemos a convertir en char
+        if(preArithmetic.getExpression().getType() instanceof CharType)
+            cg.convert(IntType.getInstance(), CharType.getInstance());
+
+        cg.store(preArithmetic.getType());
+
+        preArithmetic.getExpression().accept(this, param);				// VALUE[[expr]]
 
         return null;
     }

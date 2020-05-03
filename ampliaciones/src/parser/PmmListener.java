@@ -1,4 +1,4 @@
-// Generated from C:/Users/Marcos/Desktop/INFORMATICA/TERCERO/2/DLP/lab/Diseno-Lenguajes-Programacion/lab12/src/parser\Pmm.g4 by ANTLR 4.8
+// Generated from C:/Users/Marcos/Desktop/INFORMATICA/TERCERO/2/DLP/lab/Diseno-Lenguajes-Programacion/ampliaciones/src/parser\Pmm.g4 by ANTLR 4.8
 package parser;
 
     import ast.*;
@@ -248,15 +248,25 @@ public interface PmmListener extends ParseTreeListener {
 	 */
 	void exitWhile_statement(PmmParser.While_statementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PmmParser#expression}.
+	 * Enter a parse tree produced by {@link PmmParser#post_arithmetic}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression(PmmParser.ExpressionContext ctx);
+	void enterPost_arithmetic(PmmParser.Post_arithmeticContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PmmParser#expression}.
+	 * Exit a parse tree produced by {@link PmmParser#post_arithmetic}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression(PmmParser.ExpressionContext ctx);
+	void exitPost_arithmetic(PmmParser.Post_arithmeticContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PmmParser#pre_arithmetic}.
+	 * @param ctx the parse tree
+	 */
+	void enterPre_arithmetic(PmmParser.Pre_arithmeticContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PmmParser#pre_arithmetic}.
+	 * @param ctx the parse tree
+	 */
+	void exitPre_arithmetic(PmmParser.Pre_arithmeticContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PmmParser#invokeFunction}.
 	 * @param ctx the parse tree
@@ -267,6 +277,16 @@ public interface PmmListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitInvokeFunction(PmmParser.InvokeFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PmmParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpression(PmmParser.ExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PmmParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpression(PmmParser.ExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PmmParser#expressions}.
 	 * @param ctx the parse tree

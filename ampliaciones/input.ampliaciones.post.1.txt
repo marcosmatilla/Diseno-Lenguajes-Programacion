@@ -1,0 +1,16 @@
+
+# Main program
+def main(): {
+	i,j:int;
+	k:char;
+	i = 0;
+	j=10;
+	i++;
+	j--;
+	k = 'c';
+	k++;
+	print i;
+    print j;
+    print k;
+}
+	
