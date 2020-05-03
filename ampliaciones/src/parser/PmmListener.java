@@ -248,26 +248,6 @@ public interface PmmListener extends ParseTreeListener {
 	 */
 	void exitWhile_statement(PmmParser.While_statementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PmmParser#post_arithmetic}.
-	 * @param ctx the parse tree
-	 */
-	void enterPost_arithmetic(PmmParser.Post_arithmeticContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PmmParser#post_arithmetic}.
-	 * @param ctx the parse tree
-	 */
-	void exitPost_arithmetic(PmmParser.Post_arithmeticContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PmmParser#pre_arithmetic}.
-	 * @param ctx the parse tree
-	 */
-	void enterPre_arithmetic(PmmParser.Pre_arithmeticContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PmmParser#pre_arithmetic}.
-	 * @param ctx the parse tree
-	 */
-	void exitPre_arithmetic(PmmParser.Pre_arithmeticContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link PmmParser#invokeFunction}.
 	 * @param ctx the parse tree
 	 */

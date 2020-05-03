@@ -217,6 +217,7 @@ public class CodeGenerator {
             case "%":
                 mod(type);
                 break;
+
         }
     }
 
@@ -297,5 +298,21 @@ public class CodeGenerator {
         }
     }
 
+    public void assigmentWith(Type type, String operador) {
+        switch(operador){
+            case "+=":
+                add(type);
+                break;
+            case "-=":
+                subtract(type);
+                break;
+            case "*=":
+                mul(type);
+                break;
+            case "/=":
+                div(type);
+                break;
 
+        }
+    }
 }

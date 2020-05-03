@@ -1,0 +1,11 @@
+# Main program
+def main(): {
+	j:int;
+	j=0;
+	print j,'\n';
+	j+=10;
+	print j,'\n';
+	j+=2;
+	print j,'\n';
+}
+

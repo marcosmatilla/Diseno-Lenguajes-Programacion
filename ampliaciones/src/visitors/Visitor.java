@@ -44,6 +44,8 @@ public interface Visitor {
     /* Statement */
     Object visit(Assigment assigment, Object param);
 
+    Object visit(AssigmentWith assigmentWith, Object param);
+
     Object visit(IfElse ifElse, Object param);
 
     Object visit(Input input, Object param);

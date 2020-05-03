@@ -1,0 +1,89 @@
+
+#source "input.ampliaciones.masigual.1.txt"
+
+
+' Invocation to the main function
+call main
+halt
+
+#line 2
+
+ main:
+	' * Parametros
+	' * Variables Locales
+	' * int j (offset -2)
+	enter 2
+
+#line 4
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 0
+	storei
+
+#line 5
+	' * Write
+	push bp
+	pushi -2
+	addi
+	loadi
+	outi
+
+#line 5
+	' * Write
+	pushb 10
+	outb
+
+#line 6
+	' * Assignment with operator +=
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 10
+	addi
+	storei
+
+#line 7
+	' * Write
+	push bp
+	pushi -2
+	addi
+	loadi
+	outi
+
+#line 7
+	' * Write
+	pushb 10
+	outb
+
+#line 8
+	' * Assignment with operator +=
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 2
+	addi
+	storei
+
+#line 9
+	' * Write
+	push bp
+	pushi -2
+	addi
+	loadi
+	outi
+
+#line 9
+	' * Write
+	pushb 10
+	outb
+	ret	0, 2, 0

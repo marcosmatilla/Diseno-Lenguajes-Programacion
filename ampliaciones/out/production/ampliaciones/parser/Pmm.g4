@@ -82,8 +82,10 @@ field returns [ArrayList<StructureField> ast = new ArrayList<StructureField>()]:
                    ;
 
 /*Statement*/
-statement returns [ArrayList<Statement> ast = new ArrayList<Statement>()]: assigment {$ast.add($assigment.ast);}
+statement returns [ArrayList<Statement> ast = new ArrayList<Statement>()]:
+          assigment {$ast.add($assigment.ast);}
         | invokeFunction ';' {$ast.add($invokeFunction.ast);}
+        | e1=expression op=('+='|'-='|'*='|'/=') e2=expression ';' {$ast.add(new AssigmentWith($e1.start.getLine(), $e1.start.getCharPositionInLine() + 1, $e1.ast, $e2.ast, $op.text));}
         | e=expression op=('--'|'++') {$ast.add(new PostArithmetic($e.start.getLine(), $e.start.getCharPositionInLine() + 1, $e.ast, $op.text));} ';'
         | op=('--'|'++') e=expression  {$ast.add(new PreArithmetic($op.getLine(), $op.getCharPositionInLine() + 1, $e.ast, $op.text));} ';'
         | return_statement {$ast.add($return_statement.ast);}
@@ -93,8 +95,7 @@ statement returns [ArrayList<Statement> ast = new ArrayList<Statement>()]: assig
         | print {$ast.addAll($print.ast);}
         ;
 
-statements returns [ArrayList<Statement> ast = new ArrayList<Statement>()]:
- (statement{$ast.addAll($statement.ast);})+
+statements returns [ArrayList<Statement> ast = new ArrayList<Statement>()]: (statement{$ast.addAll($statement.ast);})+
           ;
 
 print returns [List<Print> ast = new ArrayList<Print>()]: p='print' e1=expression{$ast.add(new Print($p.getLine(), $p.getCharPositionInLine() + 1, $e1.ast)); }
@@ -111,6 +112,8 @@ return_statement returns [Return ast]: r='return' e=expression';' {$ast = new Re
 assigment returns [Assigment ast]: e1=expression '=' e2=expression';' {$ast = new Assigment($e1.start.getLine(), $e1.start.getCharPositionInLine() + 1, $e1.ast, $e2.ast);}
         ;
 
+
+
 ifElse returns [IfElse ast]: op='if' e=expression ':' s1=statement {$ast = new IfElse($op.getLine(), $op.getCharPositionInLine() + 1, $e.ast, $s1.ast);}
         | op='if' e=expression ':' s1=statement 'else' '{' ss2=statements '}' {$ast = new IfElse($op.getLine(), $op.getCharPositionInLine() + 1, $e.ast, $s1.ast, $ss2.ast);}
         | op='if' e=expression ':' s1=statement 'else' s2=statement {$ast = new IfElse($op.getLine(), $op.getCharPositionInLine() + 1, $e.ast, $s1.ast, $s2.ast);}
@@ -123,12 +126,6 @@ ifElse returns [IfElse ast]: op='if' e=expression ':' s1=statement {$ast = new I
 while_statement returns [While ast]: op='while' expression ':' '{' statements '}' {$ast = new While($op.getLine(), $op.getCharPositionInLine() + 1, $expression.ast, $statements.ast );}
         | op='while' expression ':' statement {$ast = new While($op.getLine(), $op.getCharPositionInLine() + 1, $expression.ast, $statement.ast );}
         ;
-
-post_arithmetic returns [PostArithmetic ast]: e=expression op=('--'|'++') {$ast = new PostArithmetic($e.start.getLine(), $e.start.getCharPositionInLine() + 1, $e.ast, $op.text);}
-            ;
-
-pre_arithmetic returns [PostArithmetic ast]: e=expression op=('--'|'++') {$ast = new PostArithmetic($e.start.getLine(), $e.start.getCharPositionInLine() + 1, $e.ast, $op.text);}
-            ;
 
 invokeFunction returns [InvokeFunction ast]: variable'(' expressions ')' {$ast = new InvokeFunction($variable.start.getLine(), $variable.start.getCharPositionInLine() + 1, $expressions.ast, $variable.ast);}
             ;
@@ -155,11 +152,9 @@ expression returns [Expresion ast]: ID {$ast = new Variable($ID.getLine(), $ID.g
             ;
 
 
-
 expressions returns [ArrayList<Expresion> ast = new ArrayList<Expresion>()]:
             | e1=expression{$ast.add($e1.ast); } (',' e2=expression{$ast.add($e2.ast); })*
 		;
-
 
 
 /* Reglas Lexico*/

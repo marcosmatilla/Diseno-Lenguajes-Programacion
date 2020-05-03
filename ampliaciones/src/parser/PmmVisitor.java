@@ -159,18 +159,6 @@ public interface PmmVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhile_statement(PmmParser.While_statementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PmmParser#post_arithmetic}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPost_arithmetic(PmmParser.Post_arithmeticContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link PmmParser#pre_arithmetic}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPre_arithmetic(PmmParser.Pre_arithmeticContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link PmmParser#invokeFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

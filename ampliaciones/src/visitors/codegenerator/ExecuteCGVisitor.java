@@ -179,6 +179,36 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
     }
 
     @Override
+    public Object visit(AssigmentWith assigmentWith, Object param) {
+        /*
+         *  execute[[Assigment: statement -> expressionL expressionR]]() =
+         *      address[[expressionL]]
+         *      value[[expressionR]]
+         *      <store> expressionL.type.suffix()
+         */
+        //a+=2
+        //address[[expression1]] cojo direccion de a -> supongo q a es 1 [0]
+        //value[[expresion1]] cojo el valor de a [0,1]
+        //value[[expression2]] cojo el valor de la expression2 (el 2) [0,1,2]
+        //add [0,3]
+        //store
+        cg.lineDirective(assigmentWith.getLine());
+        cg.comment("Assignment with operator " + assigmentWith.getOperador());
+
+        assigmentWith.getExpresion1().accept(addressCGVisitor, param);
+        assigmentWith.getExpresion1().accept(valueCGVisitor, param);
+        assigmentWith.getExpresion2().accept(valueCGVisitor, param);
+
+        cg.assigmentWith(assigmentWith.getExpresion1().getType(), assigmentWith.getOperador());
+
+        cg.store(assigmentWith.getExpresion1().getType());
+
+        return null;
+    }
+
+
+
+    @Override
     public Object visit(Input input, Object param) {
         /*
          * execute[[Input: statement -> expression]]() =

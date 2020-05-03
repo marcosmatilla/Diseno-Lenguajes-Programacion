@@ -148,6 +148,13 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          *          case("/"): <div> expresssion.type.suffix()
          *          case("&"): <mod> expression.type.suffix()
          */
+         /*ar -> exp1 op exp2
+                adres(exp1)
+                value exp1
+                value exp2
+                depende del op
+                store*/
+
         arithmetic.getExpresion1().accept(this, param);
         cg.convert(arithmetic.getExpresion1().getType(), arithmetic.getType());
 
@@ -315,4 +322,5 @@ public class ValueCGVisitor extends AbstractCGVisitor {
 
         return null;
     }
+
 }
