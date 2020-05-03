@@ -134,7 +134,10 @@ public class TypeCheckingVisitor extends AbstratVisitor {
 
     @Override
     public Object visit(Logic logic, Object param) {
-        super.visit(logic, param);
+        //super.visit(logic, param);
+        logic.getExpresion1().accept(this, param);
+        logic.getExpresion2().accept(this, param);
+
         logic.setLValue(false);
         logic.setType(logic.getExpresion1().getType().logic(logic.getExpresion2().getType()));
         if (logic.getExpresion1().getType() == null) {
