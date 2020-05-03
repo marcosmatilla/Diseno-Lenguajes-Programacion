@@ -168,9 +168,6 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
 
         assigment.getExpresion1().accept(addressCGVisitor, param);
         assigment.getExpresion2().accept(valueCGVisitor, param);
-
-        cg.convert(assigment.getExpresion2().getType(), assigment.getExpresion1().getType());
-
         cg.store(assigment.getExpresion1().getType());
 
         return null;

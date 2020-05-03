@@ -1,5 +1,5 @@
 
-#source 'big.input.txt'
+#source "big.input.txt"
 
 	' * StructureType{structureFields=[StructureField{line=2, column=3, name='integer', type=int}, StructureField{line=3, column=3, name='character', type=char}]} pair (offset 0)
 	' * ArrayType{type=StructureType{structureFields=[StructureField{line=7, column=3, name='employees', type=ArrayType{type=StructureType{structureFields=[StructureField{line=7, column=26, name='age', type=int}]}, size=2}}]}, size=2} acme (offset 3)
@@ -84,7 +84,7 @@ halt
 	loadb
 	b2i
 	storei
-	jmp end_if1
+	jmp end_else1
 
  else1:
 	' * else body

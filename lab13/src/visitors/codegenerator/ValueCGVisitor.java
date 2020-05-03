@@ -73,7 +73,6 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          */
         unaryMinus.getExpresion().accept(this, param);
         cg.push(-1);
-        cg.convert(IntType.getInstance(), unaryMinus.getType());
         cg.mul(unaryMinus.getType());
 
         return null;
@@ -87,8 +86,6 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          *      <not>
          */
         negation.getExpresion().accept(this, param);
-
-        cg.convert(negation.getExpresion().getType(), negation.getType());
         cg.not();
 
         return null;
@@ -147,11 +144,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          *          case("&"): <mod> expression.type.suffix()
          */
         arithmetic.getExpresion1().accept(this, param);
-        cg.convert(arithmetic.getExpresion1().getType(), arithmetic.getType());
-
         arithmetic.getExpresion2().accept(this, param);
-        cg.convert(arithmetic.getExpresion2().getType(), arithmetic.getType());
-
         cg.arithmetic(arithmetic.getType(), arithmetic.getOperador());
 
         return null;
@@ -172,11 +165,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          *          case("!="): <e> expresssion.type.suffix()
          */
         comparation.getExpresion1().accept(this, param);
-        cg.convert(comparation.getExpresion1().getType(), comparation.getExpresion2().getType());
-
         comparation.getExpresion2().accept(this, param);
-        cg.convert(comparation.getExpresion2().getType(), comparation.getExpresion2().getType());
-
         cg.comparasion(comparation.getType(), comparation.getOperador());
 
         return null;
@@ -193,13 +182,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          *          case("||"): or
          */
         logic.getExpresion1().accept(this, param);
-
-        cg.convert(logic.getExpresion1().getType(), logic.getType());
-
-
         logic.getExpresion2().accept(this, param);
-        cg.convert(logic.getExpresion2().getType(), logic.getType());
-
         cg.logical(logic.getOperador());
 
         return null;
