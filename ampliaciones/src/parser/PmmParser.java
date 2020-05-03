@@ -32,9 +32,9 @@ public class PmmParser extends Parser {
 		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, T__22=23, T__23=24, 
 		T__24=25, T__25=26, T__26=27, T__27=28, T__28=29, T__29=30, T__30=31, 
 		T__31=32, T__32=33, T__33=34, T__34=35, T__35=36, T__36=37, T__37=38, 
-		T__38=39, T__39=40, INT_CONSTANT=41, REAL_CONSTANT=42, REAL=43, ID=44, 
-		CHAR_CONSTANT=45, COMMENT=46, MULTIPLE_COMMENT=47, WHITE_SPACE=48, TAB=49, 
-		NEW_LINE=50, RET=51;
+		T__38=39, T__39=40, T__40=41, INT_CONSTANT=42, REAL_CONSTANT=43, REAL=44, 
+		ID=45, CHAR_CONSTANT=46, COMMENT=47, MULTIPLE_COMMENT=48, WHITE_SPACE=49, 
+		TAB=50, NEW_LINE=51, RET=52;
 	public static final int
 		RULE_program = 0, RULE_main = 1, RULE_function_definition = 2, RULE_function_type = 3, 
 		RULE_variable = 4, RULE_parameters = 5, RULE_variable_definition = 6, 
@@ -62,8 +62,8 @@ public class PmmParser extends Parser {
 			"'int'", "'double'", "'char'", "'void'", "'['", "']'", "'struct'", "'--'", 
 			"'++'", "'print'", "'input'", "'return'", "'='", "'if'", "'else'", "'while'", 
 			"'!'", "'.'", "'*'", "'/'", "'%'", "'+'", "'-'", "'>'", "'>='", "'<'", 
-			"'<='", "'!='", "'=='", "'&&'", "'||'", null, null, null, null, null, 
-			null, null, "' '", "'\t'", "'\n'", "'\r'"
+			"'<='", "'!='", "'=='", "'&&'", "'||'", "'^'", null, null, null, null, 
+			null, null, null, "' '", "'\t'", "'\n'", "'\r'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -72,8 +72,8 @@ public class PmmParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, "INT_CONSTANT", "REAL_CONSTANT", "REAL", 
-			"ID", "CHAR_CONSTANT", "COMMENT", "MULTIPLE_COMMENT", "WHITE_SPACE", 
+			null, null, null, null, null, null, "INT_CONSTANT", "REAL_CONSTANT", 
+			"REAL", "ID", "CHAR_CONSTANT", "COMMENT", "MULTIPLE_COMMENT", "WHITE_SPACE", 
 			"TAB", "NEW_LINE", "RET"
 		};
 	}
@@ -2469,7 +2469,7 @@ public class PmmParser extends Parser {
 						setState(459);
 						((ExpressionContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
-						if ( !(_la==T__38 || _la==T__39) ) {
+						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__38) | (1L << T__39) | (1L << T__40))) != 0)) ) {
 							((ExpressionContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						else {
@@ -2674,7 +2674,7 @@ public class PmmParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\65\u01f2\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\66\u01f2\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -2712,7 +2712,7 @@ public class PmmParser extends Parser {
 		"\3\34\7\34\u01df\n\34\f\34\16\34\u01e2\13\34\3\35\3\35\3\35\3\35\3\35"+
 		"\3\35\3\35\7\35\u01eb\n\35\f\35\16\35\u01ee\13\35\5\35\u01f0\n\35\3\35"+
 		"\2\3\66\36\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\66"+
-		"8\2\7\3\2\23\24\3\2\36 \3\2!\"\3\2#(\3\2)*\2\u020b\2:\3\2\2\2\4L\3\2\2"+
+		"8\2\7\3\2\23\24\3\2\36 \3\2!\"\3\2#(\3\2)+\2\u020b\2:\3\2\2\2\4L\3\2\2"+
 		"\2\6s\3\2\2\2\bu\3\2\2\2\n|\3\2\2\2\f\u008a\3\2\2\2\16\u008c\3\2\2\2\20"+
 		"\u00b1\3\2\2\2\22\u00bc\3\2\2\2\24\u00c4\3\2\2\2\26\u00cb\3\2\2\2\30\u00cd"+
 		"\3\2\2\2\32\u00d3\3\2\2\2\34\u00d9\3\2\2\2\36\u00e3\3\2\2\2 \u0112\3\2"+
@@ -2723,18 +2723,18 @@ public class PmmParser extends Parser {
 		"\2\2B>\3\2\2\2CF\3\2\2\2DB\3\2\2\2DE\3\2\2\2EG\3\2\2\2FD\3\2\2\2GH\5\4"+
 		"\3\2HI\b\2\1\2IJ\7\2\2\3JK\b\2\1\2K\3\3\2\2\2LM\7\4\2\2MN\7\5\2\2NO\7"+
 		"\6\2\2OP\7\7\2\2PQ\7\b\2\2QR\7\t\2\2RS\5\20\t\2ST\7\n\2\2TU\b\3\1\2U\5"+
-		"\3\2\2\2VW\7\4\2\2WX\7.\2\2XY\7\6\2\2YZ\7\7\2\2Z[\7\b\2\2[\\\7\t\2\2\\"+
-		"]\5\20\t\2]^\7\n\2\2^_\b\4\1\2_t\3\2\2\2`a\7\4\2\2ab\7.\2\2bc\7\6\2\2"+
+		"\3\2\2\2VW\7\4\2\2WX\7/\2\2XY\7\6\2\2YZ\7\7\2\2Z[\7\b\2\2[\\\7\t\2\2\\"+
+		"]\5\20\t\2]^\7\n\2\2^_\b\4\1\2_t\3\2\2\2`a\7\4\2\2ab\7/\2\2bc\7\6\2\2"+
 		"cd\5\f\7\2de\7\7\2\2ef\7\b\2\2fg\7\t\2\2gh\5\20\t\2hi\7\n\2\2ij\b\4\1"+
-		"\2jt\3\2\2\2kl\7\4\2\2lm\7.\2\2mn\5\b\5\2no\7\t\2\2op\5\20\t\2pq\7\n\2"+
+		"\2jt\3\2\2\2kl\7\4\2\2lm\7/\2\2mn\5\b\5\2no\7\t\2\2op\5\20\t\2pq\7\n\2"+
 		"\2qr\b\4\1\2rt\3\2\2\2sV\3\2\2\2s`\3\2\2\2sk\3\2\2\2t\7\3\2\2\2uv\7\6"+
 		"\2\2vw\5\f\7\2wx\7\7\2\2xy\7\b\2\2yz\5\26\f\2z{\b\5\1\2{\t\3\2\2\2|}\7"+
-		".\2\2}~\b\6\1\2~\13\3\2\2\2\177\u0080\5\16\b\2\u0080\u0087\b\7\1\2\u0081"+
+		"/\2\2}~\b\6\1\2~\13\3\2\2\2\177\u0080\5\16\b\2\u0080\u0087\b\7\1\2\u0081"+
 		"\u0082\7\13\2\2\u0082\u0083\5\16\b\2\u0083\u0084\b\7\1\2\u0084\u0086\3"+
 		"\2\2\2\u0085\u0081\3\2\2\2\u0086\u0089\3\2\2\2\u0087\u0085\3\2\2\2\u0087"+
 		"\u0088\3\2\2\2\u0088\u008b\3\2\2\2\u0089\u0087\3\2\2\2\u008a\177\3\2\2"+
-		"\2\u008a\u008b\3\2\2\2\u008b\r\3\2\2\2\u008c\u008d\7.\2\2\u008d\u0093"+
-		"\b\b\1\2\u008e\u008f\7\13\2\2\u008f\u0090\7.\2\2\u0090\u0092\b\b\1\2\u0091"+
+		"\2\u008a\u008b\3\2\2\2\u008b\r\3\2\2\2\u008c\u008d\7/\2\2\u008d\u0093"+
+		"\b\b\1\2\u008e\u008f\7\13\2\2\u008f\u0090\7/\2\2\u0090\u0092\b\b\1\2\u0091"+
 		"\u008e\3\2\2\2\u0092\u0095\3\2\2\2\u0093\u0091\3\2\2\2\u0093\u0094\3\2"+
 		"\2\2\u0094\u0096\3\2\2\2\u0095\u0093\3\2\2\2\u0096\u0097\7\b\2\2\u0097"+
 		"\u0098\5\22\n\2\u0098\u0099\b\b\1\2\u0099\17\3\2\2\2\u009a\u00b2\3\2\2"+
@@ -2755,14 +2755,14 @@ public class PmmParser extends Parser {
 		"\3\2\2\2\u00c4\u00c0\3\2\2\2\u00c4\u00c2\3\2\2\2\u00c5\25\3\2\2\2\u00c6"+
 		"\u00c7\5\24\13\2\u00c7\u00c8\b\f\1\2\u00c8\u00cc\3\2\2\2\u00c9\u00ca\7"+
 		"\17\2\2\u00ca\u00cc\b\f\1\2\u00cb\u00c6\3\2\2\2\u00cb\u00c9\3\2\2\2\u00cc"+
-		"\27\3\2\2\2\u00cd\u00ce\7\20\2\2\u00ce\u00cf\7+\2\2\u00cf\u00d0\7\21\2"+
+		"\27\3\2\2\2\u00cd\u00ce\7\20\2\2\u00ce\u00cf\7,\2\2\u00cf\u00d0\7\21\2"+
 		"\2\u00d0\u00d1\5\22\n\2\u00d1\u00d2\b\r\1\2\u00d2\31\3\2\2\2\u00d3\u00d4"+
 		"\7\22\2\2\u00d4\u00d5\7\t\2\2\u00d5\u00d6\5\34\17\2\u00d6\u00d7\7\n\2"+
 		"\2\u00d7\u00d8\b\16\1\2\u00d8\33\3\2\2\2\u00d9\u00da\5\36\20\2\u00da\u00e0"+
 		"\b\17\1\2\u00db\u00dc\5\36\20\2\u00dc\u00dd\b\17\1\2\u00dd\u00df\3\2\2"+
 		"\2\u00de\u00db\3\2\2\2\u00df\u00e2\3\2\2\2\u00e0\u00de\3\2\2\2\u00e0\u00e1"+
-		"\3\2\2\2\u00e1\35\3\2\2\2\u00e2\u00e0\3\2\2\2\u00e3\u00e4\7.\2\2\u00e4"+
-		"\u00ea\b\20\1\2\u00e5\u00e6\7\13\2\2\u00e6\u00e7\7.\2\2\u00e7\u00e9\b"+
+		"\3\2\2\2\u00e1\35\3\2\2\2\u00e2\u00e0\3\2\2\2\u00e3\u00e4\7/\2\2\u00e4"+
+		"\u00ea\b\20\1\2\u00e5\u00e6\7\13\2\2\u00e6\u00e7\7/\2\2\u00e7\u00e9\b"+
 		"\20\1\2\u00e8\u00e5\3\2\2\2\u00e9\u00ec\3\2\2\2\u00ea\u00e8\3\2\2\2\u00ea"+
 		"\u00eb\3\2\2\2\u00eb\u00ed\3\2\2\2\u00ec\u00ea\3\2\2\2\u00ed\u00ee\7\b"+
 		"\2\2\u00ee\u00ef\5\22\n\2\u00ef\u00f0\b\20\1\2\u00f0\u00f1\7\3\2\2\u00f1"+
@@ -2819,8 +2819,8 @@ public class PmmParser extends Parser {
 		"\34\2\u018f\u0190\t\2\2\2\u0190\u0191\b\32\1\2\u0191\63\3\2\2\2\u0192"+
 		"\u0193\5\n\6\2\u0193\u0194\7\6\2\2\u0194\u0195\58\35\2\u0195\u0196\7\7"+
 		"\2\2\u0196\u0197\b\33\1\2\u0197\65\3\2\2\2\u0198\u0199\b\34\1\2\u0199"+
-		"\u019a\7.\2\2\u019a\u01bc\b\34\1\2\u019b\u019c\7+\2\2\u019c\u01bc\b\34"+
-		"\1\2\u019d\u019e\7/\2\2\u019e\u01bc\b\34\1\2\u019f\u01a0\7,\2\2\u01a0"+
+		"\u019a\7/\2\2\u019a\u01bc\b\34\1\2\u019b\u019c\7,\2\2\u019c\u01bc\b\34"+
+		"\1\2\u019d\u019e\7\60\2\2\u019e\u01bc\b\34\1\2\u019f\u01a0\7-\2\2\u01a0"+
 		"\u01bc\b\34\1\2\u01a1\u01a2\7\6\2\2\u01a2\u01a3\5\66\34\2\u01a3\u01a4"+
 		"\7\7\2\2\u01a4\u01a5\b\34\1\2\u01a5\u01bc\3\2\2\2\u01a6\u01a7\t\2\2\2"+
 		"\u01a7\u01a8\5\66\34\r\u01a8\u01a9\b\34\1\2\u01a9\u01bc\3\2\2\2\u01aa"+
@@ -2841,7 +2841,7 @@ public class PmmParser extends Parser {
 		"\u01d2\f\16\2\2\u01d2\u01d3\t\2\2\2\u01d3\u01df\b\34\1\2\u01d4\u01d5\f"+
 		"\13\2\2\u01d5\u01d6\7\20\2\2\u01d6\u01d7\5\66\34\2\u01d7\u01d8\7\21\2"+
 		"\2\u01d8\u01d9\b\34\1\2\u01d9\u01df\3\2\2\2\u01da\u01db\f\t\2\2\u01db"+
-		"\u01dc\7\35\2\2\u01dc\u01dd\7.\2\2\u01dd\u01df\b\34\1\2\u01de\u01bd\3"+
+		"\u01dc\7\35\2\2\u01dc\u01dd\7/\2\2\u01dd\u01df\b\34\1\2\u01de\u01bd\3"+
 		"\2\2\2\u01de\u01c2\3\2\2\2\u01de\u01c7\3\2\2\2\u01de\u01cc\3\2\2\2\u01de"+
 		"\u01d1\3\2\2\2\u01de\u01d4\3\2\2\2\u01de\u01da\3\2\2\2\u01df\u01e2\3\2"+
 		"\2\2\u01e0\u01de\3\2\2\2\u01e0\u01e1\3\2\2\2\u01e1\67\3\2\2\2\u01e2\u01e0"+

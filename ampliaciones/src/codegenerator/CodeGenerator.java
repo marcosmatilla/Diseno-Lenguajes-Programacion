@@ -5,7 +5,6 @@ import ast.types.Type;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.security.UnrecoverableEntryException;
 
 public class CodeGenerator {
     protected FileWriter fileWriter;
@@ -102,6 +101,18 @@ public class CodeGenerator {
 
     public void not() {
         println_tab("not");
+    }
+
+    public void and() {
+        println_tab("and");
+    }
+
+    public void or() {
+        println_tab("or");
+    }
+
+    public void dup() {
+        println_tab("dup");
     }
 
     public void ret(int numerOfBytesReturnType, int numberOfBytesLocal, int numberOfBytesParam) {
@@ -233,15 +244,17 @@ public class CodeGenerator {
 
     }
 
+
     public void logical(String operator) {
         switch (operator) {
             case "&&":
-                println_tab("and");
+                and();
                 break;
             case "||":
-                println_tab("or");
+                or();
                 break;
         }
+
     }
 
     public void jmp(String jump) {
@@ -270,7 +283,7 @@ public class CodeGenerator {
 
 
     public void arth(Type type, String operador) {
-        switch (operador){
+        switch (operador) {
             case "++":
                 add(type);
                 break;

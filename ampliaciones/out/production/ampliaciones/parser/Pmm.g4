@@ -149,7 +149,7 @@ expression returns [Expresion ast]: ID {$ast = new Variable($ID.getLine(), $ID.g
             | e1=expression op=('*'|'/'|'%') e2=expression {$ast = new Arithmetic($e1.start.getLine(), $e1.start.getCharPositionInLine() + 1, $e1.ast, $e2.ast, $op.text);}
             | e1=expression op=('+'|'-') e2=expression {$ast = new Arithmetic($e1.start.getLine(), $e1.start.getCharPositionInLine() + 1, $e1.ast, $e2.ast, $op.text);}
             | e1=expression op=('>'|'>='|'<'|'<='|'!='|'==') e2=expression {$ast = new Comparation($e1.start.getLine(), $e1.start.getCharPositionInLine() + 1, $e1.ast, $e2.ast, $op.text);}
-            | e1=expression op=('&&'|'||') e2=expression {$ast = new Logic($e1.start.getLine(), $e1.start.getCharPositionInLine() + 1, $e1.ast, $e2.ast, $op.text);}
+            | e1=expression op=('&&'|'||'|'^') e2=expression {$ast = new Logic($e1.start.getLine(), $e1.start.getCharPositionInLine() + 1, $e1.ast, $e2.ast, $op.text);}
             | op='-' expression {$ast = new UnaryMinus($op.getLine(), $op.getCharPositionInLine() + 1, $expression.ast);}
             | invokeFunction {$ast = $invokeFunction.ast;}
             ;

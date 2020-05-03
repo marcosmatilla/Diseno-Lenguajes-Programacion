@@ -194,15 +194,31 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          *          case("&&"): and
          *          case("||"): or
          */
-        logic.getExpresion1().accept(this, param);
 
-        cg.convert(logic.getExpresion1().getType(), logic.getType());
+        // a ^ 23
+        if (logic.getOperador().equals("^")) {
+            logic.getExpresion1().accept(this, param); //A
+            logic.getExpresion2().accept(this, param); //B
+            cg.not();
+            cg.and();
+
+            logic.getExpresion2().accept(this, param); //B
+            logic.getExpresion1().accept(this, param); //A
+            cg.not();
+            cg.and();
+            cg.or();
+
+        } else {
+            logic.getExpresion1().accept(this, param);
+            cg.convert(logic.getExpresion1().getType(), logic.getType());
 
 
-        logic.getExpresion2().accept(this, param);
-        cg.convert(logic.getExpresion2().getType(), logic.getType());
+            logic.getExpresion2().accept(this, param);
+            cg.convert(logic.getExpresion2().getType(), logic.getType());
 
-        cg.logical(logic.getOperador());
+            cg.logical(logic.getOperador());
+        }
+
 
         return null;
     }
@@ -237,12 +253,12 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          */
         Type type = postArithmetic.getExpression().getType() instanceof CharType ? IntType.getInstance() : postArithmetic.getType();
 
-        postArithmetic.getExpression().accept(this, param);				// VALUE[[expr]]
-        postArithmetic.getExpression().accept(addressCGVisitor, param);	// ADDRESS[[expr]]
-        postArithmetic.getExpression().accept(this, param);				// VALUE[[expr]]
+        postArithmetic.getExpression().accept(this, param);                // VALUE[[expr]]
+        postArithmetic.getExpression().accept(addressCGVisitor, param);    // ADDRESS[[expr]]
+        postArithmetic.getExpression().accept(this, param);                // VALUE[[expr]]
 
         // Si la expresion es char, hay que convertirla a entero primero, para sumarle 1
-        if(postArithmetic.getExpression().getType() instanceof CharType)
+        if (postArithmetic.getExpression().getType() instanceof CharType)
             cg.convert(CharType.getInstance(), IntType.getInstance());
 
         cg.push(1);
@@ -251,7 +267,7 @@ public class ValueCGVisitor extends AbstractCGVisitor {
         cg.arth(type, postArithmetic.getOperador());
 
         // Si la expresion es char, despues de convertirla en entero y sumarle 1, la volvemos a convertir en char
-        if(postArithmetic.getExpression().getType() instanceof CharType)
+        if (postArithmetic.getExpression().getType() instanceof CharType)
             cg.convert(IntType.getInstance(), CharType.getInstance());
 
         cg.store(postArithmetic.getType());
@@ -267,11 +283,11 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          */
         Type type = preArithmetic.getExpression().getType() instanceof CharType ? IntType.getInstance() : preArithmetic.getType();
 
-        preArithmetic.getExpression().accept(addressCGVisitor, param);		// ADDRESS[[expr]]
-        preArithmetic.getExpression().accept(this, param);				// VALUE[[expr]]
+        preArithmetic.getExpression().accept(addressCGVisitor, param);        // ADDRESS[[expr]]
+        preArithmetic.getExpression().accept(this, param);                // VALUE[[expr]]
 
         // Si la expresion es char, hay que convertirla a entero primero, para sumarle 1
-        if(preArithmetic.getExpression().getType() instanceof CharType)
+        if (preArithmetic.getExpression().getType() instanceof CharType)
             cg.convert(CharType.getInstance(), IntType.getInstance());
 
         cg.push(1);
@@ -280,12 +296,12 @@ public class ValueCGVisitor extends AbstractCGVisitor {
         cg.arth(type, preArithmetic.getOperador());
 
         // Si la expresion es char, despues de convertirla en entero y sumarle 1, la volvemos a convertir en char
-        if(preArithmetic.getExpression().getType() instanceof CharType)
+        if (preArithmetic.getExpression().getType() instanceof CharType)
             cg.convert(IntType.getInstance(), CharType.getInstance());
 
         cg.store(preArithmetic.getType());
 
-        preArithmetic.getExpression().accept(this, param);				// VALUE[[expr]]
+        preArithmetic.getExpression().accept(this, param);                // VALUE[[expr]]
 
         return null;
     }
