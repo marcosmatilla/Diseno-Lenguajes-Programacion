@@ -77,7 +77,12 @@ public class AbstractCGVisitor implements Visitor {
 
     @Override
     public Object visit(Assigment assigment, Object param) {
-        throw new IllegalStateException("Error");
+        throw new IllegalStateException("Error"+this);
+    }
+
+    @Override
+    public Object visit(AssigmentWith assigmentWith, Object param) {
+        throw new IllegalStateException("Error"+this);
     }
 
     @Override

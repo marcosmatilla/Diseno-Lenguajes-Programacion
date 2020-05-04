@@ -1,0 +1,144 @@
+
+#source "input.1.examen.txt"
+
+	' * double g (offset 0)
+
+' Invocation to the main function
+call main
+halt
+
+#line 9
+
+ right:
+	' * Parametros
+	' * Variables Locales
+	' * int i (offset -2)
+	enter 2
+
+#line 11
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 0
+	storei
+
+#line 12
+	' * Assignment
+	pusha 0
+	pushf 1.5
+	storef
+
+#line 13
+	' * While
+
+ while1:
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 1
+	addi
+	storei
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 10
+	lti
+	jz while_end1
+	' * while body
+
+#line 14
+	' * Write
+	push bp
+	pushi -2
+	addi
+	loadi
+	outi
+	jmp while1
+
+ while_end1:
+
+#line 15
+	' * Write
+	pushb 10
+	outb
+
+#line 16
+	' * While
+
+ while2:
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 1
+	subi
+	storei
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 0
+	gti
+	jz while_end2
+	' * while body
+
+#line 17
+	' * Write
+	push bp
+	pushi -2
+	addi
+	loadi
+	outi
+	jmp while2
+
+ while_end2:
+
+#line 18
+	' * Write
+	pushb 10
+	outb
+
+#line 19
+	' * Assignment with operator +=
+	pusha 0
+	pusha 0
+	loadf
+	pushf 10.0
+	addf
+	storef
+
+#line 20
+	' * Write
+	pusha 0
+	loadf
+	outf
+
+#line 21
+	' * Write
+	pusha 0
+	loadf
+	pusha 0
+	loadf
+	addf
+	outf
+	ret	0, 2, 0
+
+#line 37
+
+ main:
+	' * Parametros
+	' * Variables Locales
+	enter 0
+
+#line 38
+	call right
+	ret	0, 0, 0

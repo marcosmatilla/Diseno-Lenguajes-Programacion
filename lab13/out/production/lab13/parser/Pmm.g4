@@ -84,6 +84,7 @@ field returns [ArrayList<StructureField> ast = new ArrayList<StructureField>()]:
 /*Statement*/
 statement returns [ArrayList<Statement> ast = new ArrayList<Statement>()]: assigment {$ast.add($assigment.ast);}
         | invokeFunction ';' {$ast.add($invokeFunction.ast);}
+        | e1=expression op=('+='|'-='|'*='|'/=') e2=expression ';' {$ast.add(new AssigmentWith($e1.start.getLine(), $e1.start.getCharPositionInLine() + 1, $e1.ast, $e2.ast, $op.text));}
         | return_statement {$ast.add($return_statement.ast);}
         | while_statement {$ast.add($while_statement.ast);}
         | ifElse {$ast.add($ifElse.ast);}
@@ -128,6 +129,7 @@ expression returns [Expresion ast]: ID {$ast = new Variable($ID.getLine(), $ID.g
             | CHAR_CONSTANT {$ast = new CharLiteral($CHAR_CONSTANT.getLine(),$CHAR_CONSTANT.getCharPositionInLine() + 1, LexerHelper.lexemeToChar($CHAR_CONSTANT.text));}
             | REAL_CONSTANT {$ast = new RealLiteral($REAL_CONSTANT.getLine(), $REAL_CONSTANT.getCharPositionInLine() + 1, LexerHelper.lexemeToReal($REAL_CONSTANT.text));}
             | '(' expression ')' {$ast = $expression.ast;}
+            | e1=expression op=('+='|'-='|'*='|'/=') e2=expression {$ast = new AssigmentWith($e1.start.getLine(), $e1.start.getCharPositionInLine() + 1, $e1.ast, $e2.ast, $op.text);}
             | op='!' expression {$ast = new Negation($op.getLine(), $op.getCharPositionInLine() + 1, $expression.ast);}
             | e1=expression '['e2=expression']' {$ast = new Indexer($e1.start.getLine(), $e1.start.getCharPositionInLine() + 1,$e1.ast, $e2.ast);}
             | op='('simple_type')' expression {$ast = new Cast($op.getLine(), $op.getCharPositionInLine() + 1, $expression.ast, $simple_type.ast);}

@@ -74,4 +74,10 @@ public class AddressCGVisitor extends AbstractCGVisitor {
 
         return null;
     }
+
+    @Override
+    public Object visit(AssigmentWith assigmentWith, Object param) {
+        assigmentWith.getExpresion1().accept(this, null);
+        return null;
+    }
 }

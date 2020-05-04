@@ -164,8 +164,10 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          *          case("=="): <ne> expresssion.type.suffix()
          *          case("!="): <e> expresssion.type.suffix()
          */
-        comparation.getExpresion1().accept(this, param);
+        comparation.getExpresion1().accept(this, comparation);
+        cg.convert(comparation.getExpresion1().getType(), comparation.getExpresion2().getType());
         comparation.getExpresion2().accept(this, param);
+        cg.convert(comparation.getExpresion2().getType(), comparation.getExpresion2().getType());
         cg.comparasion(comparation.getType(), comparation.getOperador());
 
         return null;
@@ -198,6 +200,29 @@ public class ValueCGVisitor extends AbstractCGVisitor {
          */
         invokeFunction.getExpresions().forEach(expr -> expr.accept(this, null));
         cg.call(invokeFunction.getVariable().getName());
+
+        return null;
+    }
+
+    @Override
+    public Object visit(AssigmentWith assigmentWith, Object param) {
+        if(param instanceof Comparation){
+
+            assigmentWith.accept(addressCGVisitor, null);
+            assigmentWith.getExpresion1().accept(this, null);
+            assigmentWith.getExpresion2().accept(this, null);
+            cg.assigmentWith(assigmentWith.getExpresion1().getType(), assigmentWith.getOperador());
+
+            cg.store(assigmentWith.getExpresion1().getType());
+            assigmentWith.getExpresion1().accept(this, null);
+        } else {
+            assigmentWith.getExpresion1().accept(this, null);
+            assigmentWith.getExpresion2().accept(this, null);
+            cg.assigmentWith(assigmentWith.getExpresion1().getType(), assigmentWith.getOperador());
+        }
+
+
+
 
         return null;
     }

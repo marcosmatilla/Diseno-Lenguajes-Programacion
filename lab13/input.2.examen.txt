@@ -1,0 +1,56 @@
+"""
+Modificar el compilador de Pmm para añadir la asignacion entre Registros
+    - Para cada campo del registro a la derecha de la asignacion debe haber un campo con nombre, tipo y desplazamiento iguales en el registro de la izquierda.
+"""
+
+def right():{
+    a,b:struct { i:int; c:char; r:double; };
+    x:struct { i:int; c:char; };
+    y:struct { i:int; };
+
+    a.i = 1;
+    a.c = 'c';
+    a.r = 1.0;
+
+    x.i = 2;
+    x.c = 'C';
+
+    y.i = 3;
+
+    b = a;
+    print b.i, ' ', b.c, ' ', b.r;      # 1 c 1
+    print '\n';
+
+    b = x;
+    print b.i, ' ', b.c, ' ', b.r;      # 2 C 1
+    print '\n';
+
+    b = y;
+    print b.i, ' ', b.c, ' ', b.r;      # 3 C 1
+    print '\n';
+}
+
+"""
+def wrong():{
+    a:struct { i:int; c:char; r:double; };
+    x:struct { c:char; };
+    y:struct { i:char; };
+    z:struct { i:[1]int; };
+
+    a.i = 1;
+    a.c = 'c';
+    a.r = 1.0;
+
+    x.c = 'C';
+    y.i = 'C';
+    z.i[0] = 2;
+
+    a = x;          # Compilation error
+    a = y;          # Compilation error
+    a = z;          # Compilation error
+}
+"""
+
+def main(): {
+    right();
+}

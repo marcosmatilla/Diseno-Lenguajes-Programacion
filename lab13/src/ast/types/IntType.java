@@ -94,4 +94,13 @@ public class IntType extends AbstractType {
         return v.visit(this, param);
     }
 
+    @Override
+    public Type assignWith(Type type) {
+        if(type instanceof IntType){
+            return this;
+        } else if(type instanceof ErrorType){
+            return type;
+        }
+        return null;
+    }
 }

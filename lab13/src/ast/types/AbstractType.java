@@ -80,4 +80,9 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     public char suffix() {
         return  ' ';
     }
+
+    @Override
+    public Type assignWith(Type type) {
+        return null;
+    }
 }

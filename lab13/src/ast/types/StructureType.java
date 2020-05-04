@@ -33,6 +33,25 @@ public class StructureType extends AbstractType {
     }
 
     @Override
+    public Type promotesTo(Type type) { //para input2
+        if(type instanceof StructureType){
+            return checkFieldsOk((StructureType) type);
+        } else if(type instanceof ErrorType){
+            return type;
+        }
+        return null;
+    }
+
+    public Type checkFieldsOk(StructureType st){ //para input2
+        for(int i = 0 ; i < this.getStructureFields().size()-1 ; i++) {
+            if(!st.getStructureFields().get(i).getType().equals(this.getStructureFields().get(i).getType())){
+                return new ErrorType(this.getLine(), this.getColumn(), "El tipo del parametro "+i+" no coincide");
+            }
+        }
+        return this;
+    }
+
+    @Override
     public Type dot(String campo) {
         for(StructureField sf: structureFields) {
             if(sf.getName().equals(campo)){

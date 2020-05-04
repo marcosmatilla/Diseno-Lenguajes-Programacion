@@ -201,4 +201,11 @@ public abstract class AbstratVisitor implements Visitor {
             d.accept(this, param);
         return null;
     }
+
+    @Override
+    public Object visit(AssigmentWith assigmentWith, Object param) {
+        assigmentWith.getExpresion1().accept(this, param);
+        assigmentWith.getExpresion2().accept(this, param);
+        return null;
+    }
 }

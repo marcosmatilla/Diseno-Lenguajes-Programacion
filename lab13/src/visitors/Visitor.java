@@ -37,6 +37,8 @@ public interface Visitor {
     /* Statement-Expression */
     Object visit(InvokeFunction invokeFunction, Object param);
 
+    Object visit (AssigmentWith assigmentWith, Object param);
+
     /* Statement */
     Object visit(Assigment assigment, Object param);
 

@@ -64,6 +64,25 @@ public class TypeCheckingVisitor extends AbstratVisitor {
     }
 
     @Override
+    public Object visit(AssigmentWith assigmentWith, Object param) {
+        assigmentWith.getExpresion1().accept(this, param);
+        assigmentWith.getExpresion2().accept(this, param);
+
+        assigmentWith.setLValue(false);
+
+        if(!assigmentWith.getExpresion1().getLValue()){
+            new ErrorType(assigmentWith.getLine(), assigmentWith.getColumn(), "Expression " + assigmentWith.getExpresion1().toString() + " is not lvalue");
+        }
+
+
+        assigmentWith.setType(assigmentWith.getExpresion2().getType().promotesTo(assigmentWith.getExpresion1().getType()));
+        if (assigmentWith.getExpresion1().getType().assignWith(assigmentWith.getExpresion2().getType()) == null) {
+            assigmentWith.setType(new ErrorType(assigmentWith.getLine(), assigmentWith.getColumn(), "Cannot use this operator in non-numeric types"));
+        }
+        return null;
+    }
+
+    @Override
     public Object visit(Input input, Object param) {
         super.visit(input, param);
         if (!input.getExpresion().getLValue()) {
@@ -92,8 +111,11 @@ public class TypeCheckingVisitor extends AbstratVisitor {
 
     @Override
     public Object visit(Comparation comparation, Object param) {
-        super.visit(comparation, param);
+        comparation.getExpresion1().accept(this, param);
+        comparation.getExpresion2().accept(this, param);
+
         comparation.setLValue(false);
+
         comparation.setType(comparation.getExpresion1().getType().comparasion(comparation.getExpresion2().getType()));
         if (comparation.getExpresion1().getType() == null)
             comparation.setType(new ErrorType(comparation.getLine(), comparation.getColumn(), "Incompatible types for comparation"));

@@ -243,6 +243,17 @@ public class CodeGenerator {
         }
     }
 
+    public void assigmentWith(Type type, String operador) {
+        switch (operador) {
+            case "+=":
+                add(type);
+                break;
+            case "-=":
+                subtract(type);
+                break;
+        }
+    }
+
     public void jmp(String jump) {
         println_tab("jmp " + jump);
     }
@@ -266,6 +277,7 @@ public class CodeGenerator {
     public void comment(String str) {
         println_tab("' * " + str);
     }
+
 
 
 }

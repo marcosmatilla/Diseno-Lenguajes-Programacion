@@ -4,6 +4,7 @@ import ast.Program;
 import ast.definitions.Definition;
 import ast.definitions.FunctionDefinition;
 import ast.definitions.VariableDefinition;
+import ast.expresions.AssigmentWith;
 import ast.expresions.InvokeFunction;
 import ast.statements.*;
 import ast.types.FunctionType;
@@ -28,6 +29,7 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         valueCGVisitor.setAddressCGVisitor(addressCGVisitor);
         addressCGVisitor.setValueCGVisitor(valueCGVisitor);
     }
+
 
     @Override
     public Object visit(Program program, Object param) {
@@ -163,6 +165,9 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
          *      value[[expressionR]]
          *      <store> expressionL.type.suffix()
          */
+
+        //para struct asignar 1 a 1
+
         cg.lineDirective(assigment.getLine());
         cg.comment("Assignment");
 
@@ -302,6 +307,18 @@ public class ExecuteCGVisitor extends AbstractCGVisitor {
         cg.jmp("while" + labelCondition);
         cg.label("while_end" + labelCondition);
 
+        return null;
+    }
+
+    @Override
+    public Object visit(AssigmentWith assigmentWith, Object param) {
+        cg.lineDirective(assigmentWith.getLine());
+        cg.comment("Assignment with operator " + assigmentWith.getOperador());
+
+        assigmentWith.accept(addressCGVisitor, param);
+        assigmentWith.accept(valueCGVisitor, param);
+
+        cg.store(assigmentWith.getExpresion1().getType());
         return null;
     }
 }

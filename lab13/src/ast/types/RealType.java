@@ -80,4 +80,14 @@ public class RealType extends AbstractType {
     public Object accept(Visitor v, Object param) {
         return v.visit(this, param);
     }
+
+    @Override
+    public Type assignWith(Type type) {
+        if(type instanceof RealType){
+            return this;
+        } else if(type instanceof ErrorType){
+            return type;
+        }
+        return null;
+    }
 }
